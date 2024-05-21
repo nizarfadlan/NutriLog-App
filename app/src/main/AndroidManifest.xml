@@ -19,6 +19,9 @@
         android:theme="@style/Theme.NutriLog"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.welcome.WelcomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -27,7 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!--
             Prompt Google Play services to install the backported photo picker module
             https://developer.android.com/training/data-storage/shared/photopicker#device-availability
