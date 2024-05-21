@@ -2,21 +2,6 @@
 <MotionScene 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
-
-    <Transition
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@id/start"
-        motion:duration="1000"
-        motion:motionInterpolator="easeIn"
-        motion:autoTransition="none">
-       <KeyFrameSet>
-       </KeyFrameSet>
-        <OnSwipe motion:dragDirection="dragLeft" />
-        <OnClick
-            motion:clickAction="toggle"
-            motion:targetId="@+id/startNow" />
-    </Transition>
-
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/container_icon_1"
@@ -113,10 +98,10 @@
             android:layout_marginEnd="@dimen/dimen_18dp"
             android:layout_marginStart="@dimen/dimen_18dp"
             motion:layout_constraintStart_toEndOf="@id/back2"
-            motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
             motion:layout_constraintTop_toBottomOf="parent"
-            android:alpha="0" />
+            android:alpha="0"
+            android:visibility="gone" />
         <Constraint
             android:id="@+id/back2"
             android:layout_width="wrap_content"
@@ -126,10 +111,10 @@
             android:layout_marginStart="@dimen/dimen_18dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toStartOf="@id/next2"
-            motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
             motion:layout_constraintTop_toBottomOf="parent"
-            android:alpha="0" />
+            android:alpha="0"
+            android:visibility="gone" />
         <Constraint
             android:id="@+id/background_view"
             android:layout_width="match_parent"
@@ -257,7 +242,8 @@
             android:layout_marginEnd="@dimen/dimen_18dp"
             android:layout_marginStart="@dimen/dimen_18dp"
             motion:layout_constraintStart_toStartOf="parent"
-            android:alpha="1" />
+            android:alpha="0"
+            android:visibility="gone" />
         <Constraint
             android:id="@+id/next2"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -269,7 +255,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
             motion:layout_constraintTop_toBottomOf="@id/guideline_horizontal_2"
-            android:alpha="1" />
+            android:alpha="1"
+            android:visibility="visible" />
         <Constraint
             android:id="@+id/back2"
             android:layout_width="wrap_content"
@@ -282,7 +269,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
             motion:layout_constraintTop_toBottomOf="@id/guideline_horizontal_2"
-            android:alpha="1" />
+            android:alpha="1"
+            android:visibility="visible"/>
         <Constraint
             android:id="@+id/container_icon_2"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -310,14 +298,6 @@
                 motion:customColorValue="?attr/colorOnBackground" />
         </Constraint>
     </ConstraintSet>
-    <Transition
-        motion:constraintSetStart="@+id/end"
-        motion:constraintSetEnd="@+id/start" >
-        <OnSwipe motion:dragDirection="dragRight" />
-        <OnClick
-            motion:clickAction="jumpToStart"
-            motion:targetId="@+id/back2" />
-    </Transition>
     <ConstraintSet
         android:id="@+id/finish"
         motion:deriveConstraintsFrom="@+id/end" >
@@ -447,10 +427,10 @@
             android:layout_marginEnd="@dimen/dimen_18dp"
             android:layout_marginStart="@dimen/dimen_18dp"
             motion:layout_constraintStart_toEndOf="@id/back2"
-            motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
-            motion:layout_constraintTop_toBottomOf="@id/guideline_horizontal_2"
-            android:alpha="0" />
+            motion:layout_constraintTop_toBottomOf="parent"
+            android:alpha="0"
+            android:visibility="gone" />
         <Constraint
             android:id="@+id/back2"
             android:layout_width="wrap_content"
@@ -460,10 +440,10 @@
             android:layout_marginStart="@dimen/dimen_18dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toStartOf="@id/next2"
-            motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
-            motion:layout_constraintTop_toBottomOf="@id/guideline_horizontal_2"
-            android:alpha="0" />
+            motion:layout_constraintTop_toBottomOf="parent"
+            android:alpha="0"
+            android:visibility="gone" />
         <Constraint
             android:id="@+id/next3"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -475,7 +455,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
             motion:layout_constraintTop_toBottomOf="@id/guideline_horizontal_2"
-            android:alpha="1" />
+            android:alpha="1"
+            android:visibility="visible" />
         <Constraint
             android:id="@+id/back3"
             android:layout_width="wrap_content"
@@ -488,20 +469,40 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dimen_20dp"
             motion:layout_constraintTop_toBottomOf="@id/guideline_horizontal_2"
-            android:alpha="1" />
+            android:alpha="1"
+            android:visibility="visible" />
     </ConstraintSet>
+
     <Transition
-        motion:constraintSetStart="@+id/end"
-        motion:constraintSetEnd="@+id/finish" >
-        <OnSwipe motion:dragDirection="dragLeft" />
-        <OnClick motion:targetId="@id/next2"
-            motion:clickAction="toggle" />
+        android:id="@+id/nextToEnd"
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:motionInterpolator="easeIn"
+        motion:autoTransition="none"
+        motion:duration="1000">
     </Transition>
     <Transition
+        android:id="@+id/backToStart"
+        motion:constraintSetStart="@+id/end"
+        motion:constraintSetEnd="@+id/start"
+        motion:motionInterpolator="easeIn"
+        motion:autoTransition="none"
+        motion:duration="1000">
+    </Transition>
+    <Transition
+        android:id="@+id/nextToFinish"
+        motion:constraintSetStart="@+id/end"
+        motion:constraintSetEnd="@+id/finish"
+        motion:motionInterpolator="easeIn"
+        motion:autoTransition="none"
+        motion:duration="1000">
+    </Transition>
+    <Transition
+        android:id="@+id/backToEnd"
         motion:constraintSetStart="@+id/finish"
-        motion:constraintSetEnd="@+id/end" >
-        <OnSwipe motion:dragDirection="dragRight" />
-        <OnClick motion:targetId="@id/back3"
-            motion:clickAction="jumpToEnd" />
+        motion:constraintSetEnd="@+id/end"
+        motion:motionInterpolator="easeIn"
+        motion:autoTransition="none"
+        motion:duration="1000">
     </Transition>
 </MotionScene>
