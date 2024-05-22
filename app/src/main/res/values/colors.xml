@@ -2,6 +2,7 @@
 <resources>
     <color name="md_theme_primary_100">#FFF0F0</color>
     <color name="md_theme_primary_600">#D92929</color>
+    <color name="md_theme_placeholder">#747474</color>
 
     <color name="md_theme_primary">#9C1C24</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>

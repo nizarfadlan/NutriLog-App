@@ -1,5 +1,6 @@
 package com.nutrilog.app.presentation.ui.welcome
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.ActivityWelcomeBinding
+import com.nutrilog.app.presentation.ui.auth.AuthActivity
 import com.nutrilog.app.presentation.ui.base.BaseActivity
 
 class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>() {
@@ -52,7 +54,9 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>() {
     }
 
     private fun moveToLogin() {
-        // Move to login activity
+        val intent = Intent(this, AuthActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     public override fun onResume() {
