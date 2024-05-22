@@ -10,7 +10,7 @@
         android:id="@+id/tv_signup_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/text_h5_bold"
+        style="@style/Text.H5.Bold"
         android:text="@string/header_signup_title"
         android:layout_marginHorizontal="@dimen/dimen_24dp"
         app:layout_constraintBottom_toTopOf="@id/tv_signup_subtitle"
@@ -23,7 +23,7 @@
         android:id="@+id/tv_signup_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/text_subtitle_1_semibold"
+        style="@style/Text.Subtitle1.Semibold"
         android:layout_marginHorizontal="@dimen/dimen_24dp"
         android:text="@string/header_signup_subtitle"
         app:layout_constraintBottom_toTopOf="@id/layout_register_name"
@@ -97,7 +97,7 @@
 
     <Button
         android:id="@+id/btn_signup"
-        style="@style/button_primary"
+        style="@style/Button.Primary"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_18dp"
@@ -111,7 +111,7 @@
 
     <TextView
         android:id="@+id/tv_signin_here"
-        style="@style/text_subtitle_1_regular"
+        style="@style/Text.Subtitle1.Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_signin_here"
@@ -124,7 +124,7 @@
     <TextView
         android:id="@+id/tv_signin"
         android:paddingHorizontal="@dimen/dimen_10dp"
-        style="@style/text_subtitle_1_bold"
+        style="@style/Text.Subtitle1.Bold"
         android:textColor="?attr/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="button_on_primary" parent="Widget.Material3.Button">
-        <item name="shapeAppearance">?attr/shapeAppearanceCornerLarge</item>
-        <item name="android:paddingHorizontal" tools:targetApi="o">28dp</item>
-        <item name="android:paddingVertical" tools:targetApi="o">18dp</item>
-        <item name="android:buttonStyle">@style/text_button_regular</item>
-        <item name="backgroundTint">@color/material_dynamic_neutral100</item>
-        <item name="android:textColor">@color/material_dynamic_neutral20</item>
-    </style>
-
-    <style name="button_icon_on_primary" parent="Widget.Material3.Button.IconButton.Filled">
-        <item name="shapeAppearance">?attr/shapeAppearanceCornerLarge</item>
-        <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
-        <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
-        <item name="backgroundTint">@color/material_dynamic_neutral100</item>
-        <item name="android:buttonStyle">@style/text_button_regular</item>
-        <item name="iconTint">@color/material_dynamic_neutral20</item>
-    </style>
-
-    <style name="button_primary" parent="Widget.Material3.Button">
+    <style name="Button.Primary" parent="Widget.Material3.Button">
         <item name="shapeAppearance">?attr/shapeAppearanceCornerLarge</item>
         <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
         <item name="backgroundTint">@color/md_theme_primary_600</item>
-        <item name="android:buttonStyle">@style/text_button_regular</item>
+        <item name="android:buttonStyle">@style/Text.Button.Regular</item>
         <item name="android:textColor">@color/material_dynamic_neutral100</item>
     </style>
-    <style name="button_icon_primary_2" parent="Widget.Material3.Button.IconButton.Filled">
+
+    <style name="Button.Primary.Elevated" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerLarge</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">28dp</item>
+        <item name="android:paddingVertical" tools:targetApi="o">18dp</item>
+        <item name="android:buttonStyle">@style/Text.Button.Regular</item>
+        <item name="backgroundTint">@color/material_dynamic_neutral100</item>
+        <item name="android:textColor">@color/material_dynamic_neutral20</item>
+    </style>
+
+    <style name="Button.Icon.Primary.Elevated" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerLarge</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
+        <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
+        <item name="backgroundTint">@color/material_dynamic_neutral100</item>
+        <item name="android:buttonStyle">@style/Text.Button.Regular</item>
+        <item name="iconTint">@color/material_dynamic_neutral20</item>
+    </style>
+
+    <style name="Button.Icon.Primary.Unelevated" parent="Widget.Material3.Button.IconButton.Filled">
         <item name="shapeAppearance">?attr/shapeAppearanceCornerLarge</item>
         <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
         <item name="backgroundTint">@color/md_theme_primary_100</item>
-        <item name="android:buttonStyle">@style/text_button_regular</item>
+        <item name="android:buttonStyle">@style/Text.Button.Regular</item>
         <item name="iconTint">@color/material_dynamic_neutral20</item>
     </style>
 </resources>

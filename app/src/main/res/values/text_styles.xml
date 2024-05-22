@@ -1,66 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Overline Text Styles -->
-
-    <!-- Caption Text Styles -->
-    <style name="text_caption_regular" parent="TextAppearance.AppCompat.Caption">
+    <style name="Text.Overline.Regular" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/sailec_regular</item>
-        <item name="android:textSize">@dimen/font_caption</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:textSize">@dimen/font_overline</item>
+    </style>
+    <style name="Text.Overline.Semibold" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_overline</item>
+    </style>
+    <style name="Text.Overline.Bold" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textSize">@dimen/font_overline</item>
     </style>
 
+    <!-- Caption Text Styles -->
+    <style name="Text.Caption.Regular" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/sailec_regular</item>
+        <item name="android:textSize">@dimen/font_caption</item>
+    </style>
+    <style name="Text.Caption.Semibold" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_caption</item>
+    </style>
+    <style name="Text.Caption.Bold" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textSize">@dimen/font_caption</item>
+    </style>
+
+
     <!-- Button Text Styles -->
-    <style name="text_button_regular" parent="TextAppearance.AppCompat.Button">
+    <style name="Text.Button.Regular" parent="TextAppearance.AppCompat.Button">
         <item name="android:fontFamily">@font/sailec_regular</item>
         <item name="android:textSize">@dimen/font_button</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+    <style name="Text.Button.Semibold" parent="TextAppearance.AppCompat.Button">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_button</item>
+    </style>
+    <style name="Text.Button.Bold" parent="TextAppearance.AppCompat.Button">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textSize">@dimen/font_button</item>
     </style>
 
     <!-- Body 2 Text Styles -->
-    <style name="text_body_2_regular" parent="TextAppearance.AppCompat.Body2">
+    <style name="Text.Body2.Regular" parent="TextAppearance.AppCompat.Body2">
         <item name="android:fontFamily">@font/sailec_regular</item>
         <item name="android:textSize">@dimen/font_body_2</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
-
-    <style name="text_body_2_bold" parent="TextAppearance.AppCompat.Body2">
+    <style name="Text.Body2.Semibold" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_body_2</item>
+    </style>
+    <style name="Text.Body2.Bold" parent="TextAppearance.AppCompat.Body2">
         <item name="android:fontFamily">@font/sailec_bold</item>
         <item name="android:textSize">@dimen/font_body_2</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
     <!-- Body 1 Text Styles -->
-    <style name="text_body_1_regular" parent="TextAppearance.AppCompat.Body1">
+    <style name="Text.Body1.Regular" parent="TextAppearance.AppCompat.Body1">
         <item name="android:fontFamily">@font/sailec_regular</item>
         <item name="android:textSize">@dimen/font_body_1</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+    <style name="Text.Body1.Semibold" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_body_1</item>
+    </style>
+    <style name="Text.Body1.Bold" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textSize">@dimen/font_body_1</item>
     </style>
 
     <!-- Subtitle 2 Text Styles -->
+    <style name="Text.Subtitle2.Regular" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:fontFamily">@font/sailec_regular</item>
+        <item name="android:textSize">@dimen/font_subtitle_2</item>
+    </style>
+    <style name="Text.Subtitle2.Semibold" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_subtitle_2</item>
+    </style>
+    <style name="Text.Subtitle2.Bold" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textSize">@dimen/font_subtitle_2</item>
+    </style>
+
 
     <!-- Subtitle 1 Text Styles -->
-    <style name="text_subtitle_1_regular" parent="TextAppearance.AppCompat.Subhead">
+    <style name="Text.Subtitle1.Regular" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:fontFamily">@font/sailec_regular</item>
         <item name="android:textSize">@dimen/font_subtitle_1</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
-    <style name="text_subtitle_1_semibold" parent="TextAppearance.AppCompat.Subhead">
+    <style name="Text.Subtitle1.Semibold" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:fontFamily">@font/sailec_medium</item>
         <item name="android:textSize">@dimen/font_subtitle_1</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
-    <style name="text_subtitle_1_bold" parent="TextAppearance.AppCompat.Subhead">
+    <style name="Text.Subtitle1.Bold" parent="TextAppearance.AppCompat.Subhead">
         <item name="android:fontFamily">@font/sailec_bold</item>
         <item name="android:textSize">@dimen/font_subtitle_1</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
     <!-- H6 Text Styles -->
+    <style name="Text.H6.Regular" parent="TextAppearance.AppCompat.Display2">
+        <item name="android:fontFamily">@font/sailec_regular</item>
+        <item name="android:textSize">@dimen/font_h6</item>
+    </style>
+    <style name="Text.H6.Semibold" parent="TextAppearance.AppCompat.Display2">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_h6</item>
+    </style>
+    <style name="Text.H6.Bold" parent="TextAppearance.AppCompat.Display2">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textSize">@dimen/font_h6</item>
+    </style>
 
     <!-- H5 Text Styles -->
-    <style name="text_h5_bold" parent="TextAppearance.AppCompat.Display1">
+    <style name="Text.H5.Regular" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:fontFamily">@font/sailec_regular</item>
+        <item name="android:textSize">@dimen/font_h5</item>
+    </style>
+    <style name="Text.H5.Semibold" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:fontFamily">@font/sailec_medium</item>
+        <item name="android:textSize">@dimen/font_h5</item>
+    </style>
+    <style name="Text.H5.Bold" parent="TextAppearance.AppCompat.Display1">
         <item name="android:fontFamily">@font/sailec_bold</item>
         <item name="android:textSize">@dimen/font_h5</item>
-        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 </resources>

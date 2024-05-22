@@ -20,32 +20,47 @@ class PasswordInputEditText : TextInputEditText {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr
+        defStyleAttr,
     ) {
         init()
     }
 
     private fun init() {
-        addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                //Do Nothing
-            }
+        addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    // Do Nothing
+                }
 
-            override fun onTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                error = if (s.isNotEmpty() && !s.toString().isLengthPasswordCorrect)
-                    String.format(
-                        context.getString(R.string.validation_password),
-                        PASSWORD_LENGTH
-                    )
-                else null
-            }
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    error =
+                        if (s.isNotEmpty() && !s.toString().isLengthPasswordCorrect) {
+                            String.format(
+                                context.getString(R.string.validation_password),
+                                PASSWORD_LENGTH,
+                            )
+                        } else {
+                            null
+                        }
+                }
 
-            override fun afterTextChanged(edt: Editable?) {
-                //Do Nothing
-            }
-        })
+                override fun afterTextChanged(edt: Editable?) {
+                    // Do Nothing
+                }
+            },
+        )
 
-        setTextAppearance(R.style.text_body_1_regular)
+        setTextAppearance(R.style.Text_Body1_Regular)
         setSingleLine()
         inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
     }

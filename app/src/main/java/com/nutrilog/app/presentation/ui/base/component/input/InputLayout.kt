@@ -15,7 +15,7 @@ class InputLayout : TextInputLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr
+        defStyleAttr,
     )
 
     override fun onDraw(canvas: Canvas) {
@@ -24,17 +24,17 @@ class InputLayout : TextInputLayout {
         isExpandedHintEnabled = false
 
         val corner = CORNER_RADIUS.dpToPx(context)
-        val shapeAppearanceModel = ShapeAppearanceModel.builder()
-            .setAllCorners(CornerFamily.ROUNDED, corner)
-            .build()
+        val shapeAppearanceModel =
+            ShapeAppearanceModel.builder()
+                .setAllCorners(CornerFamily.ROUNDED, corner)
+                .build()
         setShapeAppearanceModel(shapeAppearanceModel)
 
-
-        setHintTextAppearance(R.style.text_body_2_bold)
-        setHelperTextTextAppearance(R.style.text_body_2_bold)
-        setCounterOverflowTextAppearance(R.style.text_body_2_bold)
-        setCounterTextAppearance(R.style.text_body_2_bold)
-        placeholderTextAppearance = R.style.text_caption_regular
+        setHintTextAppearance(R.style.Text_Body2_Bold)
+        setHelperTextTextAppearance(R.style.Text_Body2_Bold)
+        setCounterOverflowTextAppearance(R.style.Text_Body2_Bold)
+        setCounterTextAppearance(R.style.Text_Body2_Bold)
+        placeholderTextAppearance = R.style.Text_Caption_Regular
         placeholderTextColor = context.resources.getColorStateList(R.color.placeholder_colors, null)
     }
 

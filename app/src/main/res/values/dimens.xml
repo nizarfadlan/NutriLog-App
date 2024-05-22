@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="font_overline">10sp</dimen>
     <dimen name="font_caption">12sp</dimen>
     <dimen name="font_button">14sp</dimen>
     <dimen name="font_body_2">14sp</dimen>
     <dimen name="font_body_1">16sp</dimen>
+    <dimen name="font_subtitle_2">14sp</dimen>
     <dimen name="font_subtitle_1">16sp</dimen>
+    <dimen name="font_h6">20sp</dimen>
     <dimen name="font_h5">24sp</dimen>
+    <dimen name="font_title_widget">34sp</dimen>
+    <dimen name="font_card_dashboard">48sp</dimen>
 
     <dimen name="corner_40dp">40dp</dimen>
 

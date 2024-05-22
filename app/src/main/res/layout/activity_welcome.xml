@@ -149,7 +149,7 @@
 
     <TextView
         android:id="@+id/titleWelcome1"
-        style="@style/text_h5_bold"
+        style="@style/Text.H5.Bold"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_20dp"
@@ -166,7 +166,7 @@
 
     <TextView
         android:id="@+id/subWelcome1"
-        style="@style/text_body_2_regular"
+        style="@style/Text.Body2.Regular"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -181,7 +181,7 @@
 
     <TextView
         android:id="@+id/titleWelcome2"
-        style="@style/text_h5_bold"
+        style="@style/Text.H5.Bold"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_20dp"
@@ -197,7 +197,7 @@
 
     <TextView
         android:id="@+id/subWelcome2"
-        style="@style/text_body_2_regular"
+        style="@style/Text.Body2.Regular"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -212,7 +212,7 @@
 
     <TextView
         android:id="@+id/titleWelcome3"
-        style="@style/text_h5_bold"
+        style="@style/Text.H5.Bold"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_20dp"
@@ -228,7 +228,7 @@
 
     <TextView
         android:id="@+id/subWelcome3"
-        style="@style/text_body_2_regular"
+        style="@style/Text.Body2.Regular"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -250,7 +250,7 @@
 
     <Button
         android:id="@+id/startNow"
-        style="@style/button_on_primary"
+        style="@style/Button.Primary.Elevated"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_18dp"
@@ -264,7 +264,7 @@
 
     <Button
         android:id="@+id/next2"
-        style="@style/button_primary"
+        style="@style/Button.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_18dp"
@@ -279,7 +279,7 @@
 
     <Button
         android:id="@+id/back2"
-        style="@style/button_icon_primary_2"
+        style="@style/Button.Icon.Primary.Unelevated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_18dp"
@@ -295,7 +295,7 @@
 
     <Button
         android:id="@+id/next3"
-        style="@style/button_on_primary"
+        style="@style/Button.Primary.Elevated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_18dp"
@@ -310,7 +310,7 @@
 
     <Button
         android:id="@+id/back3"
-        style="@style/button_icon_on_primary"
+        style="@style/Button.Icon.Primary.Elevated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_18dp"
