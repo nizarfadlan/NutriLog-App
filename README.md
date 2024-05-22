@@ -1,4 +1,4 @@
-![GitHub Cards Preview](https://github.com/nizarfadlan/NutriLog-App/blob/master/art/nutrilog-cover.png?raw=true)
+![GitHub Cards Preview](https://github.com/nizarfadlan/NutriLog-App/blob/main/art/nutrilog-cover.png?raw=true)
 
 ![Build (Android)](https://github.com/nizarfadlan/NutriLog-App/workflows/Android%20CI/badge.svg)
 
@@ -8,7 +8,7 @@
 
 # NutriLog
 
-![NutriLog Logo](https://github.com/nizarfadlan/NutriLog-App/blob/master/art/logo.png?raw=true)
+![NutriLog Logo](https://github.com/nizarfadlan/NutriLog-App/blob/main/art/logo.png?raw=true)
 
 A Nutrition Tracking App That Empowers Users to Effortlessly Monitor their Daily Food and Drink Intake, Providing Insights for Healthier Dietary Choices.
 
@@ -21,13 +21,6 @@ com.nutrilog.app
 // Progress
 
 ```
-
-## Architecture
-
-This app uses [***MVVM (Model View
-View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
-
-![](https://github.com/TheCodeMonks/Notes-App/blob/master/screenshots/ANDROID%20ROOM%20DB%20DIAGRAM.jpg)
 
 ## 🤗 Credits
 
