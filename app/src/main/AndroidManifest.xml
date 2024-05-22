@@ -37,7 +37,7 @@
             Prompt Google Play services to install the backported photo picker module
             https://developer.android.com/training/data-storage/shared/photopicker#device-availability
         -->
-        <!-- suppress AndroidDomInspection -->
+        <!--suppress AndroidDomInspection -->
         <service
             android:name="com.google.android.gms.metadata.ModuleDependencies"
             android:enabled="false"

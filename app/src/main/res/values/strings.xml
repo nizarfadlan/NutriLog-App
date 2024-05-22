@@ -5,9 +5,12 @@
     <string name="text_button_next">Next</string>
     <string name="text_start_welcome">Let\'s get started</string>
     <string name="text_title_welcome_1">WELCOME ONBOARD!</string>
-    <string name="text_subtitle_welcome_1"><![CDATA[Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.]]></string>
+    <string name="text_subtitle_welcome_1">Lorem Ipsum simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
     <string name="text_title_welcome_2">SIMPLIFY YOUR WELL-BEING JOURNEY</string>
+    <string name="text_subtitle_welcome_2">Lorem Ipsum simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
     <string name="text_title_welcome_3">TRACKING YOUR CONSUMPTION</string>
+    <string name="text_subtitle_welcome_3">Lorem Ipsum simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.</string>
+
 
     <!-- Auth -->
     <string name="hint_full_name">Enter your full name</string>
@@ -33,5 +36,4 @@
     <string name="validation_password">Minimum of %d characters</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
