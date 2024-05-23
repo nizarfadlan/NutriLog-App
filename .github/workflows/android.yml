@@ -109,7 +109,7 @@ jobs:
           DATE=$(date +'%d.%m.%Y')
           BRANCH_NAME=${GITHUB_REF##*/}
           MESSAGE=$(cat << EOF
-          AppName-release-${VERSION_NAME}-${BRANCH_NAME}-${DATE}
+          NutriLog-release-${VERSION_NAME}-${BRANCH_NAME}-${DATE}
           EOF)
           echo OUTPUT_NAME=$MESSAGE >> $GITHUB_ENV
 
@@ -121,9 +121,6 @@ jobs:
 
       - name: Build APK
         run: bash ./gradlew assembleRelease --stacktrace
-
-      - name: Rename APK
-        run: mv "./app/build/outputs/apk/release/app-release.apk" "./app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk"
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
@@ -145,9 +142,6 @@ jobs:
 
       - name: Build release AAB
         run: bash ./gradlew bundleRelease --stacktrace
-
-      - name: Rename AAB
-        run: mv "./app/build/outputs/bundle/release/app-release.aab" "./app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab"
 
       - name: Sign Bundle
         uses: r0adkll/sign-android-release@v1
