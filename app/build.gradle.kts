@@ -14,9 +14,17 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "v1.0.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    tasks.register("printVersionName") {
+        doLast {
+            val versionName = android.defaultConfig.versionName
+            val versionCode = android.defaultConfig.versionCode
+            println("v$versionName($versionCode)")
+        }
     }
 
     lint {
