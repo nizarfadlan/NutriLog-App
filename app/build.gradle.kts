@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.androidx.activity.activity.ktx)
     implementation(libs.androidx.fragment.fragment.ktx)
+    implementation("com.github.ismaeldivita:chip-navigation-bar:1.4.0")
 
     // Kotlin
     implementation(libs.androidx.core.ktx)

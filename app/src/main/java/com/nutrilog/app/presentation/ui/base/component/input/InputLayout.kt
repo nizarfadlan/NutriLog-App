@@ -39,6 +39,6 @@ class InputLayout : TextInputLayout {
     }
 
     companion object {
-        private const val CORNER_RADIUS = 16
+        private const val CORNER_RADIUS = 12
     }
 }

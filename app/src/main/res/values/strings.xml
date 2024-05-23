@@ -35,5 +35,11 @@
     <string name="validation_email">Your email format is not correct</string>
     <string name="validation_password">Minimum of %d characters</string>
 
+    <!-- Navigation -->
+    <string name="label_nav_home">Home</string>
+    <string name="label_nav_history">History</string>
+    <string name="label_nav_analysis">Analysis</string>
+    <string name="label_nav_profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
