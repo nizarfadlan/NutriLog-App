@@ -166,7 +166,7 @@
 
     <TextView
         android:id="@+id/subWelcome1"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -197,14 +197,14 @@
 
     <TextView
         android:id="@+id/subWelcome2"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:layout_marginBottom="@dimen/dimen_18dp"
         android:lineSpacingExtra="@dimen/dimen_8dp"
         android:text="@string/text_subtitle_welcome_2"
-        android:textColor="@color/md_theme_onPrimary_80"
+        android:textColor="@color/md_theme_onPrimary_40"
         app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_2"
         app:layout_constraintEnd_toEndOf="@+id/titleWelcome2"
         app:layout_constraintStart_toStartOf="@+id/titleWelcome2"
@@ -228,7 +228,7 @@
 
     <TextView
         android:id="@+id/subWelcome3"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"

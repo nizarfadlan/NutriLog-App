@@ -92,7 +92,7 @@
 
     <TextView
         android:id="@+id/tv_signup_here"
-        style="@style/Text.Subtitle1.Regular"
+        style="@style/Text.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_signup_here"

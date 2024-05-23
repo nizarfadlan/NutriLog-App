@@ -60,7 +60,7 @@ class PasswordInputEditText : TextInputEditText {
             },
         )
 
-        setTextAppearance(R.style.Text_Body1_Regular)
+        setTextAppearance(R.style.Text_Body1)
         setSingleLine()
         inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
     }

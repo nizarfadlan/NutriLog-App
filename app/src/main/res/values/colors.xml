@@ -6,6 +6,7 @@
     <color name="md_theme_primary_600">#D92929</color>
     <color name="md_theme_placeholder">#747474</color>
     <color name="md_theme_onPrimary_80">#E1E3E5</color>
+    <color name="md_theme_onPrimary_40">#5C5F61</color>
     <color name="md_theme_dark">#2E3133</color>
 
     <color name="md_theme_primary">#9C1C24</color>

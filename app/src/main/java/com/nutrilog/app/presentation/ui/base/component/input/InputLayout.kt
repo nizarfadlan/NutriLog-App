@@ -34,7 +34,7 @@ class InputLayout : TextInputLayout {
         setHelperTextTextAppearance(R.style.Text_Body2_Bold)
         setCounterOverflowTextAppearance(R.style.Text_Body2_Bold)
         setCounterTextAppearance(R.style.Text_Body2_Bold)
-        placeholderTextAppearance = R.style.Text_Caption_Regular
+        placeholderTextAppearance = R.style.Text_Caption
         placeholderTextColor = context.resources.getColorStateList(R.color.placeholder_colors, null)
     }
 

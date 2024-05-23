@@ -55,7 +55,7 @@ class FullNameInputEditText : TextInputEditText {
             },
         )
 
-        setTextAppearance(R.style.Text_Body1_Regular)
+        setTextAppearance(R.style.Text_Body1)
         setSingleLine()
     }
 }
