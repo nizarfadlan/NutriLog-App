@@ -78,7 +78,7 @@ jobs:
           name: app-debug
           path: app/build/outputs/apk/debug/app-debug.apk
 
-  release:
+  build-release:
     needs: [ lint ]
     name: Build Release signed APK and Bundle
     runs-on: ubuntu-latest
@@ -106,10 +106,8 @@ jobs:
       - name: Generate file name env var
         run: |
           VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
-          DATE=$(date +'%d.%m.%Y')
-          BRANCH_NAME=${GITHUB_REF##*/}
           MESSAGE=$(cat << EOF
-          NutriLog-release-${VERSION_NAME}-${BRANCH_NAME}-${DATE}
+          NutriLog-release-${VERSION_NAME}
           EOF)
           echo OUTPUT_NAME=$MESSAGE >> $GITHUB_ENV
 
@@ -132,7 +130,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "34.0.0"
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
@@ -153,10 +151,52 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "34.0.0"
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload Signed AAB
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.OUTPUT_NAME }}
           path: ${{steps.sign_app_bundle.outputs.signedReleaseFile}}
+
+  release:
+    name: Create Release
+    needs: [ build-release ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate tag name and release name env var
+        run: |
+          VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
+          RELEASE_MESSAGE=$(cat << EOF
+          Release v${{ VERSION_NAME }}
+          EOF)
+          TAG_MESSAGE=$(cat << EOF
+          release-${{ VERSION_NAME }}
+          EOF)
+          echo TAG_NAME=TAG_MESSAGE >> $GITHUB_ENV
+          echo RELEASE_NAME=RELEASE_MESSAGE >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.RELEASE_NAME }}
+
+      - name: Upload Release APK and Bundle
+        uses: meeDamian/github-release@2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.TAG_NAME }}
+          name: ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: false
+          files: |
+            ${{ steps.sign_app_bundle.outputs.signedReleaseFile }}
+            ${{ steps.sign_app_apk.outputs.signedReleaseFile }}
+          allow_override: true
