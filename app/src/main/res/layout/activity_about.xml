@@ -136,7 +136,7 @@
         style="@style/Text.Body2.Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nickname"
+        android:text="@string/label_nickname"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoFour"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoFour"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoFour" />
@@ -157,7 +157,7 @@
         style="@style/Text.Body2.Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nickname"
+        android:text="@string/label_nickname"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoFive"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoFive"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoFive" />
@@ -178,7 +178,7 @@
         style="@style/Text.Body2.Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nickname"
+        android:text="@string/label_nickname"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoSix"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoSix"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoSix" />
@@ -200,7 +200,7 @@
         style="@style/Text.Body2.Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nickname"
+        android:text="@string/label_nickname"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoSeven"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoSeven"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoSeven" />
