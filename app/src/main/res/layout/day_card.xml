@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:minWidth="@dimen/dimen_50dp"
     android:layout_gravity="center_vertical"
     android:background="@drawable/bg_day_card"
+    android:layout_marginHorizontal="@dimen/dimen_4dp"
+    android:layout_marginVertical="@dimen/dimen_2dp"
     android:padding="@dimen/dimen_10dp">
 
     <TextView
@@ -18,6 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="Wed" />
 
     <TextView
@@ -25,11 +30,13 @@
         style="@style/Text.Subtitle1.Semibold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="2dp"
+        android:paddingTop="@dimen/dimen_2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tv_day"
         app:layout_constraintStart_toStartOf="@id/tv_day"
         app:layout_constraintTop_toBottomOf="@id/tv_day"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="29" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

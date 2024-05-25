@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.nutrilog.app.presentation.ui.main.HistoryFragment"
+        android:name="com.nutrilog.app.presentation.ui.main.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment

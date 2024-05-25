@@ -35,8 +35,8 @@ fun Date.getCalender(locale: Locale): Triple<Int, Int, Int> {
  * @return list of [DayInfo]
  */
 fun getDaysInMonth(
-    year: Int,
     month: Int,
+    year: Int,
 ): List<DayInfo> {
     val calendar = Calendar.getInstance()
     calendar.set(year, month, 1)
