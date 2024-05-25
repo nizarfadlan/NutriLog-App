@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.about.AboutActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:contentDescription="@string/content_desc_app_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/appNameLabel"
+        style="@style/Text.Body1.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+    <TextView
+        android:id="@+id/aboutUsDescTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_about_us_description"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="12dp"
+        android:textAlignment="center"
+        style="@style/Text.Body1.Regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appNameLabel" />
+
+    <TextView
+        android:id="@+id/madeByLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/label_made_by"
+        style="@style/Text.Subtitle2.Bold"
+        app:layout_constraintStart_toStartOf="@id/appNameLabel"
+        app:layout_constraintEnd_toEndOf="@id/appNameLabel"
+        app:layout_constraintTop_toBottomOf="@id/aboutUsDescTv"
+        />
+
+    <ImageView
+        android:id="@+id/authorPhotoOne"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/content_desc_photo_member"
+        app:layout_constraintEnd_toStartOf="@+id/authorPhotoTwo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/madeByLabel"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameOne"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoOne"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoOne"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoOne" />
+
+    <ImageView
+        android:id="@+id/authorPhotoTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:contentDescription="@string/content_desc_photo_member"
+        app:layout_constraintBottom_toBottomOf="@id/authorPhotoOne"
+        app:layout_constraintEnd_toStartOf="@+id/authorPhotoThree"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/authorPhotoOne"
+        app:layout_constraintTop_toTopOf="@id/authorPhotoOne"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameTwo"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoTwo"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoTwo"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoTwo" />
+
+    <ImageView
+        android:id="@+id/authorPhotoThree"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:contentDescription="@string/content_desc_photo_member"
+        app:layout_constraintBottom_toBottomOf="@id/authorPhotoTwo"
+        app:layout_constraintEnd_toStartOf="@+id/authorPhotoFour"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/authorPhotoTwo"
+        app:layout_constraintTop_toTopOf="@id/authorPhotoTwo"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameThree"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoThree"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoThree"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoThree" />
+
+    <ImageView
+        android:id="@+id/authorPhotoFour"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:contentDescription="@string/content_desc_app_logo"
+        app:layout_constraintBottom_toBottomOf="@id/authorPhotoThree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/authorPhotoThree"
+        app:layout_constraintTop_toTopOf="@id/authorPhotoThree"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameFour"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoFour"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoFour"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoFour" />
+
+    <ImageView
+        android:id="@+id/authorPhotoFive"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/content_desc_app_logo"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoTwo"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoOne"
+        app:layout_constraintTop_toBottomOf="@id/authorNameOne"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameFive"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoFive"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoFive"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoFive" />
+
+    <ImageView
+        android:id="@+id/authorPhotoSix"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:contentDescription="@string/content_desc_app_logo"
+        app:layout_constraintBottom_toBottomOf="@id/authorPhotoFive"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoThree"
+        app:layout_constraintStart_toEndOf="@+id/authorPhotoOne"
+        app:layout_constraintTop_toTopOf="@id/authorPhotoFive"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameSix"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoSix"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoSix"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoSix" />
+
+    <ImageView
+        android:id="@+id/authorPhotoSeven"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:contentDescription="@string/content_desc_app_logo"
+        app:layout_constraintBottom_toBottomOf="@id/authorPhotoSix"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoFour"
+
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoThree"
+        app:layout_constraintTop_toTopOf="@id/authorPhotoSix"
+        app:srcCompat="@drawable/welcome_icon_3" />
+
+    <TextView
+        android:id="@+id/authorNameSeven"
+        style="@style/Text.Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nickname"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhotoSeven"
+        app:layout_constraintStart_toStartOf="@+id/authorPhotoSeven"
+        app:layout_constraintTop_toBottomOf="@id/authorPhotoSeven" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
