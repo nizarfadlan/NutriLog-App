@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/nutritionCardOne"
@@ -37,7 +36,7 @@
                     android:textColor="?attr/colorOnPrimary" />
 
                 <TextView
-                    style="@style/Text.Body2.Regular"
+                    style="@style/Text.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_nutrition_level"
@@ -50,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/dimen_36dp"
-                android:gravity="end||center"
+                android:gravity="end|center"
                 android:text="@string/label_amount_of_nutrition"
                 android:textColor="?attr/colorOnPrimary" />
 

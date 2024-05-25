@@ -14,6 +14,7 @@ constraintlayout = "2.1.4"
 navigationSafeArgsGradlePlugin = "2.7.7"
 ksp = "1.9.22-1.0.17"
 koinCore = "3.2.0"
+powerspinner = "1.2.7"
 smoothbottombar = "1.7.9"
 timber = "5.0.1"
 glide = "4.16.0"
@@ -38,6 +39,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationSafeArgsGradlePlugin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+powerspinner = { module = "com.github.skydoves:powerspinner", version.ref = "powerspinner" }
 smoothbottombar = { module = "com.github.ibrahimsn98:SmoothBottomBar", version.ref = "smoothbottombar" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }

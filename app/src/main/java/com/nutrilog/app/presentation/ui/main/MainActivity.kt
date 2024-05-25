@@ -26,7 +26,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         binding.apply {
             bottomNavigation.setOnItemSelectedListener { item ->
-                println(item)
+                when (item) {
+                    R.id.homeFragment -> navController.navigate(R.id.homeFragment)
+                    R.id.historyFragment -> navController.navigate(R.id.historyFragment)
+                    R.id.profileFragment -> navController.navigate(R.id.profileFragment)
+                }
             }
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 bottomNavigation.setItemSelected(destination.id)

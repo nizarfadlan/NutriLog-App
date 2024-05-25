@@ -121,7 +121,6 @@
 
     <style name="Text.H6.Semibold">
         <item name="android:fontFamily">@font/sailec_medium</item>
-        <item name="android:textSize">@dimen/font_h6</item>
     </style>
 
     <style name="Text.H6.Bold">

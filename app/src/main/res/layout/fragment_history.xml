@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.ui.main.HistoryFragment">
+
+    <TextView
+        android:id="@+id/tv_title_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Text.H6.Bold"
+        android:text="@string/label_nav_history"
+        android:paddingVertical="@dimen/dimen_24dp"
+        android:paddingHorizontal="@dimen/dimen_20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/select_month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/select_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_spinner"
+        android:gravity="center"
+        android:hint="@string/label_select_month"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:paddingHorizontal="@dimen/dimen_16dp"
+        android:paddingVertical="@dimen/dimen_12dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textColorHint="?attr/colorOnBackground"
+        android:textSize="@dimen/font_caption"
+        android:fontFamily="@font/sailec_bold"
+        app:spinner_arrow_drawable="@drawable/ic_chevron_down_24"
+        app:spinner_arrow_animate="true"
+        app:spinner_arrow_animate_duration="100"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="@dimen/dimen_2dp"
+        app:spinner_arrow_show="true"
+        app:spinner_item_array="@array/Months"
+        app:spinner_item_height="46dp"
+        app:spinner_selected_item_background="@drawable/bg_selected_item"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_max_height="@dimen/dimen_230dp"
+        app:spinner_popup_width="@dimen/dimen_170dp"
+        app:spinner_popup_background="@drawable/bg_popup_spinner"
+        app:spinner_popup_padding="5dp"
+        app:spinner_popup_elevation="@dimen/dimen_14dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_calender" />
+
+    <Button
+        android:id="@+id/btn_calender"
+        style="@style/Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_calender_check_24"
+        app:iconSize="@dimen/dimen_24dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@id/select_month"
+        app:layout_constraintBottom_toBottomOf="@id/select_month"
+        app:layout_constraintStart_toEndOf="@id/select_month"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

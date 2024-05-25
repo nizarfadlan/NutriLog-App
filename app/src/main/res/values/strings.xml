@@ -49,4 +49,33 @@
     <string name="label_nutrition_level">Nutrition Level</string>
     <string name="label_amount_of_nutrition">%d gr</string>
 
+    <!-- Navigation -->
+    <string name="label_nav_home">Home</string>
+    <string name="label_nav_history">History</string>
+    <string name="label_nav_analysis">Analysis</string>
+    <string name="label_nav_profile">Profile</string>
+
+    <!-- History -->
+    <string name="label_select_month">Month</string>
+
+    <!-- Month -->
+    <string-array name="Months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <!-- Common -->
+    <string name="label_month">MONTH</string>
+    <string name="label_year">YEAR</string>
+
 </resources>

@@ -36,7 +36,7 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginVertical="12dp"
         android:textAlignment="center"
-        style="@style/Text.Body1.Regular"
+        style="@style/Text.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appNameLabel" />
@@ -67,7 +67,7 @@
 
     <TextView
         android:id="@+id/authorNameOne"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -89,7 +89,7 @@
 
     <TextView
         android:id="@+id/authorNameTwo"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -111,7 +111,7 @@
 
     <TextView
         android:id="@+id/authorNameThree"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -133,7 +133,7 @@
 
     <TextView
         android:id="@+id/authorNameFour"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -154,7 +154,7 @@
 
     <TextView
         android:id="@+id/authorNameFive"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -175,7 +175,7 @@
 
     <TextView
         android:id="@+id/authorNameSix"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -190,14 +190,13 @@
         android:contentDescription="@string/content_desc_app_logo"
         app:layout_constraintBottom_toBottomOf="@id/authorPhotoSix"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoFour"
-
         app:layout_constraintStart_toStartOf="@+id/authorPhotoThree"
         app:layout_constraintTop_toTopOf="@id/authorPhotoSix"
         app:srcCompat="@drawable/welcome_icon_3" />
 
     <TextView
         android:id="@+id/authorNameSeven"
-        style="@style/Text.Body2.Regular"
+        style="@style/Text.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
