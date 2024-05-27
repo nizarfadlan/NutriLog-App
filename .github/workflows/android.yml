@@ -8,6 +8,14 @@ on:
 permissions:
   contents: write
 
+env:
+  JAVA_VERSION: '17'
+  JAVA_DIST: 'zulu'
+  BUILD_TOOLS_VERSION: '34.0.0'
+  GRADLE_CACHE_PATHS: |
+    ~/.gradle/caches
+    ~/.gradle/wrapper
+
 jobs:
   lint:
     name: Perform Lint
@@ -15,19 +23,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set Up JDK 17
+      - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DIST }}
           cache: 'gradle'
 
       - uses: actions/cache@v3
         name: Caching Gradle
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+          path: ${{ env.GRADLE_CACHE_PATHS }}
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
@@ -49,19 +55,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set Up JDK 17
+      - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DIST }}
           cache: 'gradle'
 
       - uses: actions/cache@v3
         name: Caching Gradle
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+          path: ${{ env.GRADLE_CACHE_PATHS }}
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
@@ -89,19 +93,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set Up JDK 17
+      - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DIST }}
           cache: 'gradle'
 
       - uses: actions/cache@v3
         name: Caching Gradle
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+          path: ${{ env.GRADLE_CACHE_PATHS }}
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
@@ -110,10 +112,10 @@ jobs:
       - name: Generate file name env var
         run: |
           VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
-          MESSAGE=$(cat << EOF
-          NutriLog-release-${VERSION_NAME}
-          EOF)
-          echo OUTPUT_NAME=$MESSAGE >> $GITHUB_ENV
+          echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
+          OUTPUT_NAME="NutriLog-release-${VERSION_NAME}"
+          echo "OUTPUT_NAME=${OUTPUT_NAME}" >> $GITHUB_ENV
+          echo "::set-output name=output_name::${OUTPUT_NAME}"
 
       - name: Run gradle tests
         run: ./gradlew test
@@ -134,13 +136,15 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "34.0.0"
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload APK
+        run: |
+          mv ${{steps.sign_app_apk.outputs.signedReleaseFile}} app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.OUTPUT_NAME }}
-          path: ${{steps.sign_app_apk.outputs.signedReleaseFile}}
+          name: ${{ steps.generate_version.outputs.output_name }}
+          path: ${{ steps.sign_app_apk.outputs.signedReleaseFile }}
 
       - name: Build release AAB
         run: bash ./gradlew bundleRelease --stacktrace
@@ -155,13 +159,15 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "34.0.0"
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload Signed AAB
+        run: |
+          mv ${{steps.sign_app_bundle.outputs.signedReleaseFile}} app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.OUTPUT_NAME }}
-          path: ${{steps.sign_app_bundle.outputs.signedReleaseFile}}
+          name: ${{ steps.generate_version.outputs.output_name }}
+          path: ${{ steps.sign_app_bundle.outputs.signedReleaseFile }}
 
   release:
     name: Create Release
@@ -171,19 +177,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set Up JDK 17
+      - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DIST }}
           cache: 'gradle'
 
       - uses: actions/cache@v3
         name: Caching Gradle
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+          path: ${{ env.GRADLE_CACHE_PATHS }}
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
@@ -192,18 +196,12 @@ jobs:
       - name: Generate tag name and release name env var
         run: |
           VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
-          RELEASE_MESSAGE=$(cat << EOF
-          Release v${VERSION_NAME}
-          EOF)
-          TAG_MESSAGE=$(cat << EOF
-          release-${VERSION_NAME}
-          EOF)
-          MESSAGE=$(cat << EOF
-          NutriLog-release-${VERSION_NAME}
-          EOF)
-          echo TAG_NAME=TAG_MESSAGE >> $GITHUB_ENV
-          echo RELEASE_NAME=RELEASE_MESSAGE >> $GITHUB_ENV
-          echo OUTPUT_NAME=$MESSAGE >> $GITHUB_ENV
+          RELEASE_MESSAGE="Release v${VERSION_NAME}"
+          TAG_MESSAGE="release-${VERSION_NAME}"
+          OUTPUT_NAME="NutriLog-release-${VERSION_NAME}"
+          echo "TAG_NAME=${TAG_MESSAGE}" >> $GITHUB_ENV
+          echo "RELEASE_NAME=${RELEASE_MESSAGE}" >> $GITHUB_ENV
+          echo "OUTPUT_NAME=${OUTPUT_NAME}" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
