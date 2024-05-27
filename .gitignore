@@ -15,4 +15,4 @@
 local.properties
 apikey.properties
 keystore.properties
-keystore.jks
+nutrilog-release.keystore
