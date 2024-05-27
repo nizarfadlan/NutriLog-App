@@ -198,8 +198,12 @@ jobs:
           TAG_MESSAGE=$(cat << EOF
           release-${VERSION_NAME}
           EOF)
+          MESSAGE=$(cat << EOF
+          NutriLog-release-${VERSION_NAME}
+          EOF)
           echo TAG_NAME=TAG_MESSAGE >> $GITHUB_ENV
           echo RELEASE_NAME=RELEASE_MESSAGE >> $GITHUB_ENV
+          echo OUTPUT_NAME=$MESSAGE >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -209,6 +213,15 @@ jobs:
         with:
           tag_name: ${{ env.TAG_NAME }}
           release_name: ${{ env.RELEASE_NAME }}
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.OUTPUT_NAME }}
+          path: ./artifacts
+
+      - name: Unzip Artifact
+        run: unzip ./artifacts/${{ env.OUTPUT_NAME }}.zip -d ./artifacts
 
       - name: Upload Release APK and Bundle
         uses: meeDamian/github-release@2.0
@@ -221,6 +234,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ${{ steps.sign_app_bundle.outputs.signedReleaseFile }}
-            ${{ steps.sign_app_apk.outputs.signedReleaseFile }}
+            ./artifacts/*.apk
+            ./artifacts/*.aab
           allow_override: true
