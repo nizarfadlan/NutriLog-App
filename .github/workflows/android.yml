@@ -57,8 +57,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ needs.setup.outputs.gradle_cache_key }}
-
+          key: ${{ needs.setup.outputs.gradle_cache_key || runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
@@ -89,7 +88,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ needs.setup.outputs.gradle_cache_key }}
+          key: ${{ needs.setup.outputs.gradle_cache_key || runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
@@ -116,7 +115,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
 
   build-release:
-    needs: [ lint ]
+    needs: [ lint, setup ]
     name: Build Release signed APK and Bundle
     runs-on: ubuntu-latest
     steps:
@@ -126,7 +125,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ needs.setup.outputs.gradle_cache_key }}
+          key: ${{ needs.setup.outputs.gradle_cache_key || runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
@@ -140,10 +139,8 @@ jobs:
       - name: Generate file name env var
         run: |
           VERSION_NAME=${{ needs.setup.outputs.version_name }}
-          echo "VERSION_NAME=${VERSION_NAME}" >> $GITHUB_ENV
-          OUTPUT_NAME="NutriLog-release-${VERSION_NAME}"
-          echo "OUTPUT_NAME=${OUTPUT_NAME}" >> $GITHUB_ENV
-          echo "::set-output name=output_name::${OUTPUT_NAME}"
+          MESSAGE="NutriLog-release-${VERSION_NAME}"
+          echo "OUTPUT_NAME=${MESSAGE}" >> $GITHUB_ENV
 
       - name: Run gradle tests
         run: ./gradlew test
@@ -172,7 +169,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.generate_version.outputs.output_name }}
+          name: ${{ env.OUTPUT_NAME }}
           path: app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
 
       - name: Build release AAB
@@ -196,12 +193,12 @@ jobs:
       - name: Upload Signed AAB
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.generate_version.outputs.output_name }}
+          name: ${{ env.OUTPUT_NAME }}
           path: app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
 
   release:
     name: Create Release
-    needs: [ build-release ]
+    needs: [ build-release, lint, setup ]
     runs-on: ubuntu-latest
 
     steps:
@@ -211,7 +208,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ needs.setup.outputs.gradle_cache_key }}
+          key: ${{ needs.setup.outputs.gradle_cache_key || runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
