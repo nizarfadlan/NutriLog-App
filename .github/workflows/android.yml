@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version_name: ${{ steps.get_version_name.outputs.VERSION_NAME }}
+      gradle_cache_key: ${{ steps.cache_gradle.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v3
 
@@ -31,8 +32,9 @@ jobs:
           distribution: ${{ env.JAVA_DIST }}
           cache: 'gradle'
 
-      - uses: actions/cache@v3
-        name: Caching Gradle
+      - name: Cache Gradle
+        id: cache_gradle
+        uses: actions/cache@v3
         with:
           path: ${{ env.GRADLE_CACHE_PATHS }}
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
@@ -51,18 +53,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Restore Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.GRADLE_CACHE_PATHS }}
+          key: ${{ needs.setup.outputs.gradle_cache_key }}
+
+
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DIST }}
-          cache: 'gradle'
-
-      - uses: actions/cache@v3
-        name: Caching Gradle
-        with:
-          path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -83,18 +85,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Restore Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.GRADLE_CACHE_PATHS }}
+          key: ${{ needs.setup.outputs.gradle_cache_key }}
+
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DIST }}
-          cache: 'gradle'
-
-      - uses: actions/cache@v3
-        name: Caching Gradle
-        with:
-          path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -121,18 +122,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Restore Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.GRADLE_CACHE_PATHS }}
+          key: ${{ needs.setup.outputs.gradle_cache_key }}
+
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DIST }}
-          cache: 'gradle'
-
-      - uses: actions/cache@v3
-        name: Caching Gradle
-        with:
-          path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -205,18 +205,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Restore Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.GRADLE_CACHE_PATHS }}
+          key: ${{ needs.setup.outputs.gradle_cache_key }}
+
       - name: Set Up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DIST }}
-          cache: 'gradle'
-
-      - uses: actions/cache@v3
-        name: Caching Gradle
-        with:
-          path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
