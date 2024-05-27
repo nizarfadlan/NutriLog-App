@@ -8,9 +8,9 @@ class WeekForMonthAndYear {
     @Test
     fun `given dates in month`() {
         val year = 2024
-        val month = 5
+        val month = 4
 
-        val daysInMay2024 = getDaysInMonth(year, month)
+        val daysInMay2024 = getDaysInMonth(month, year)
         assertEquals(31, daysInMay2024.size)
 
         assertEquals("Wednesday", daysInMay2024[0].dayOfWeek)
