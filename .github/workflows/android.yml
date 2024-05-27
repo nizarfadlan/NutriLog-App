@@ -166,13 +166,14 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
+      - name: Move Signed APK
+        run: mv ${{steps.sign_app_apk.outputs.signedReleaseFile}} app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
+
       - name: Upload APK
-        run: |
-          mv ${{steps.sign_app_apk.outputs.signedReleaseFile}} app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.generate_version.outputs.output_name }}
-          path: ${{ steps.sign_app_apk.outputs.signedReleaseFile }}
+          path: app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
 
       - name: Build release AAB
         run: bash ./gradlew bundleRelease --stacktrace
@@ -189,13 +190,14 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
+      - name: Move Signed Bundle
+        run: mv ${{steps.sign_app_bundle.outputs.signedReleaseFile}} app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
+
       - name: Upload Signed AAB
-        run: |
-          mv ${{steps.sign_app_bundle.outputs.signedReleaseFile}} app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.generate_version.outputs.output_name }}
-          path: ${{ steps.sign_app_bundle.outputs.signedReleaseFile }}
+          path: app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
 
   release:
     name: Create Release
