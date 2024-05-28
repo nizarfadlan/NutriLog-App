@@ -23,8 +23,7 @@ android {
     tasks.register("printVersionName") {
         doLast {
             val versionName = android.defaultConfig.versionName
-            val versionCode = android.defaultConfig.versionCode
-            println("v$versionName($versionCode)")
+            println("v$versionName")
         }
     }
 

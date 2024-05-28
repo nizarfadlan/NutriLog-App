@@ -103,7 +103,7 @@ jobs:
 
       - name: Generate file name env var
         run: |
-          VERSION_NAME=${{ needs.setup.outputs.version_name }}
+          VERSION_NAME="${{ needs.setup.outputs.version_name }}"
           MESSAGE="nutriLog-${VERSION_NAME}-debug"
           echo "OUTPUT_NAME=${MESSAGE}" >> $GITHUB_ENV
 
@@ -149,7 +149,7 @@ jobs:
 
       - name: Generate file name env var
         run: |
-          VERSION_NAME=${{ needs.setup.outputs.version_name }}
+          VERSION_NAME="${{ needs.setup.outputs.version_name }}"
           MESSAGE="nutriLog-${VERSION_NAME}-release"
           echo "OUTPUT_NAME=${MESSAGE}" >> $GITHUB_ENV
 
@@ -232,7 +232,7 @@ jobs:
 
       - name: Generate tag name and release name env var
         run: |
-          VERSION_NAME=${{ needs.setup.outputs.version_name }}
+          VERSION_NAME="${{ needs.setup.outputs.version_name }}"
           RELEASE_MESSAGE="Release v${VERSION_NAME}"
           TAG_MESSAGE="release-${VERSION_NAME}"
           OUTPUT_NAME="nutriLog-${VERSION_NAME}-release"
