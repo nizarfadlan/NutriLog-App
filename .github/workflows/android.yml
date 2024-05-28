@@ -235,10 +235,12 @@ jobs:
           VERSION_NAME="${{ needs.setup.outputs.version_name }}"
           RELEASE_MESSAGE="Release v${VERSION_NAME}"
           TAG_MESSAGE="release-${VERSION_NAME}"
-          OUTPUT_NAME="nutriLog-${VERSION_NAME}-release"
+          OUTPUT_NAME_RELEASE="nutriLog-${VERSION_NAME}-release"
+          OUTPUT_NAME_DEBUG="nutriLog-${VERSION_NAME}-debug"
           echo "TAG_NAME=${TAG_MESSAGE}" >> $GITHUB_ENV
           echo "RELEASE_NAME=${RELEASE_MESSAGE}" >> $GITHUB_ENV
-          echo "OUTPUT_NAME=${OUTPUT_NAME}" >> $GITHUB_ENV
+          echo "OUTPUT_NAME_RELEASE=${OUTPUT_NAME_RELEASE}" >> $GITHUB_ENV
+          echo "OUTPUT_NAME_DEBUG=${OUTPUT_NAME_DEBUG}" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -248,15 +250,6 @@ jobs:
         with:
           tag_name: ${{ env.TAG_NAME }}
           release_name: ${{ env.RELEASE_NAME }}
-
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ env.OUTPUT_NAME }}
-          path: ./artifacts
-
-      - name: Unzip Artifact
-        run: unzip ./artifacts/${{ env.OUTPUT_NAME }}.zip -d ./artifacts
 
       - name: Upload Release APK and Bundle
         uses: meeDamian/github-release@2.0
@@ -269,6 +262,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ./artifacts/*.apk
-            ./artifacts/*.aab
+            app/build/outputs/bundle/release/${{ env.OUTPUT_NAME_RELEASE }}.aab
+            app/build/outputs/apk/release/${{ env.OUTPUT_NAME_RELEASE }}.apk
+            app/build/outputs/apk/debug/${{ env.OUTPUT_NAME_DEBUG }}.apk
           allow_override: true
