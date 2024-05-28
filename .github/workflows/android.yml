@@ -46,7 +46,7 @@ jobs:
         id: get_version_name
         run: |
           VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
-          echo "version_name={VERSION_NAME}" >> $GITHUB_OUTPUT
+          echo "version_name=${VERSION_NAME}" >> $GITHUB_OUTPUT
 
   lint:
     needs: [ setup ]
