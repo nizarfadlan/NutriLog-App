@@ -252,7 +252,7 @@ jobs:
           fi
 
       - name: Create Release
-        if: steps.check_release.outputs.release_exists != "true"
+        if: steps.check_release.outputs.release_exists != 'true'
         id: create_release
         uses: actions/create-release@v1
         env:
