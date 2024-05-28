@@ -261,6 +261,9 @@ jobs:
           tag_name: ${{ env.TAG_NAME }}
           release_name: ${{ env.RELEASE_NAME }}
 
+      - name: List files in the directory
+        run: ls -R app/build/outputs
+
       - name: Upload Release APK and Bundle
         uses: softprops/action-gh-release@v2
         env:
