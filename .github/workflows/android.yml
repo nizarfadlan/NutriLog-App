@@ -267,12 +267,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.TAG_NAME }}
+          tag_name: ${{ env.TAG_NAME }}
           name: ${{ env.RELEASE_NAME }}
+          generate_release_notes: true
           draft: false
           prerelease: false
+          append_body: true
           files: |
             app/build/outputs/bundle/release/${{ env.OUTPUT_NAME_RELEASE }}.aab
             app/build/outputs/apk/release/${{ env.OUTPUT_NAME_RELEASE }}.apk
             app/build/outputs/apk/debug/${{ env.OUTPUT_NAME_DEBUG }}.apk
-          allow_override: true
