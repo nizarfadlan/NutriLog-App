@@ -233,7 +233,7 @@ jobs:
       - name: Generate tag name and release name env var
         run: |
           VERSION_NAME="${{ needs.setup.outputs.version_name }}"
-          RELEASE_MESSAGE="Release v${VERSION_NAME}"
+          RELEASE_MESSAGE="Release ${VERSION_NAME}"
           TAG_MESSAGE="release-${VERSION_NAME}"
           OUTPUT_NAME_RELEASE="nutriLog-${VERSION_NAME}-release"
           OUTPUT_NAME_DEBUG="nutriLog-${VERSION_NAME}-debug"
