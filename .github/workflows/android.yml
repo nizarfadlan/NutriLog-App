@@ -20,7 +20,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      version_name: ${{ steps.get_version_name.outputs.VERSION_NAME }}
+      version_name: ${{ steps.get_version_name.outputs.version_name }}
       gradle_cache_key: ${{ steps.cache_gradle.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v3
@@ -45,8 +45,8 @@ jobs:
       - name: Get Version Name
         id: get_version_name
         run: |
-          echo "VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)" >> $GITHUB_ENV
-          echo "::set-output name=version_name::${VERSION_NAME}"
+          VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
+          echo "version_name={VERSION_NAME}" >> $GITHUB_OUTPUT
 
   lint:
     needs: [ setup ]
@@ -209,7 +209,7 @@ jobs:
 
   release:
     name: Create Release
-    needs: [ build-release, lint, setup ]
+    needs: [ build-release, debug-apk, lint, setup ]
     runs-on: ubuntu-latest
 
     steps:
