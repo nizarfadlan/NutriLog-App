@@ -2,8 +2,6 @@
 ----
 Login to the application
 
-* **URL Params**
-  None
 * **Data Params**
 
   | Name           | Type   | Description                        |
@@ -45,8 +43,6 @@ Login to the application
 ----
 Register to the application
 
-* **URL Params**
-  None
 * **Data Params**
 
   | Name           | Type   | Description                        |
@@ -80,17 +76,14 @@ Register to the application
       }
       ```
 
-**GET /nutrients**
+**GET /nutrients?date=:date**
 ----
 Get nutrients for a daily meal
 
-* **URL Params**
-  None
-* **Data Params**
-
-  | Name           | Type   | Description                        |
-    |----------------|--------|------------------------------------|
-  | date           | string | Date in `YYYY-MM-DD` format        |
+* **Query Params**
+  | Name | Type | Description |
+  |------|--------|------------------------------|
+  | date | string | The date in `YYYY-MM-DD` format |
 * **Headers**
 
   | Name           | Type   | Description                        |
@@ -130,23 +123,15 @@ Get nutrients for a daily meal
       }
       ```
 
-**GET /predict**
+**POST /predict**
 ----
 Predict nutrients for a meal
 
-* **URL Params**
-  None
 * **Data Params**
 
-```
-{
-  image: File
-}
-```
-
-| Name  | Type | Description       |
+  | Name  | Type | Description       |
   |-------|------|-------------------|
-| image | file | Image of the food |
+  | image | file | Image of the food |
 
 * **Headers**
 
