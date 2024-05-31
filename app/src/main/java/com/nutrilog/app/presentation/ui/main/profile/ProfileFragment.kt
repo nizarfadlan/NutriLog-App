@@ -1,4 +1,4 @@
-package com.nutrilog.app.presentation.ui.main
+package com.nutrilog.app.presentation.ui.main.profile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

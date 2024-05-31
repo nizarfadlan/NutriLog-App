@@ -68,3 +68,13 @@ fun getTimeInMillis(
     calendar.set(year, month, day)
     return calendar.timeInMillis
 }
+
+fun String.convertStringToDate(): Date? {
+    return this.let {
+        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)
+    }
+}
+
+fun Date.convertDateToString(): String {
+    return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(this)
+}
