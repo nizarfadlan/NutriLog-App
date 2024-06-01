@@ -14,4 +14,8 @@
     <color name="md_theme_placeholder">#747474</color>
     <color name="md_theme_overlay_background">#FFFFFF</color>
     <color name="md_theme_dark">#2E3133</color>
+
+
+    <color name="black_transparent_8">#CC000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import androidx.navigation.fragment.NavHostFragment
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.ActivityMainBinding
+import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseActivity
 import com.nutrilog.app.presentation.ui.welcome.WelcomeActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+    private val authViewModel: AuthViewModel by viewModel()
+
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding =
         ActivityMainBinding::inflate
 
@@ -34,6 +38,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 bottomNavigation.setItemSelected(destination.id)
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        authViewModel.getSession().observe(this) {
+            if (it.id === "" || it === null) {
+                moveToWelcome()
             }
         }
     }

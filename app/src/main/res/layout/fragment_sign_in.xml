@@ -115,4 +115,9 @@
         app:layout_constraintBottom_toBottomOf="@id/tv_signup_here"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <include
+        android:id="@+id/loading_layout"
+        android:visibility="gone"
+        layout="@layout/layout_loading" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

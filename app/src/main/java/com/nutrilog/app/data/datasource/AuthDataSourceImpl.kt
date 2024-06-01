@@ -9,29 +9,85 @@ import com.nutrilog.app.di.module.remoteModule
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.datasource.AuthDataSource
 import com.nutrilog.app.domain.model.User
+import com.nutrilog.app.utils.helpers.createResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+
+data object User {
+    const val id: String = "1"
+    const val name: String = "nizar"
+    const val email: String = "nizar@email.com"
+    const val password: String = "nizar123"
+    const val token: String = "1234"
+}
 
 class AuthDataSourceImpl(
     private val service: AuthService,
     private val pref: UserSessionPreference,
 ) : AuthDataSource {
-    override suspend fun signUp(request: RegisterRequest): Flow<ResultState<String>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun signUp(request: RegisterRequest): Flow<ResultState<String>> =
+        flow {
+            emit(ResultState.Loading)
+            try {
+                val response = service.register(request)
+                if (response.error) {
+                    emit(ResultState.Error(response.message))
+                    return@flow
+                }
 
-    override suspend fun signIn(request: LoginRequest): Flow<ResultState<String>> {
-        TODO("Not yet implemented")
-    }
+                emit(ResultState.Success(response.message))
+            } catch (e: Exception) {
+                emit(ResultState.Error(e.createResponse()?.message ?: ""))
+            }
+        }
 
-    override suspend fun signOut(): Flow<ResultState<String>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun signIn(request: LoginRequest): Flow<ResultState<String>> =
+        flow {
+            emit(ResultState.Loading)
+            try {
+//            val response = service.login(request)
+//            if (response.error) {
+//                emit(ResultState.Error(response.message))
+//                return@flow
+//            }
+                val user = User
+                if (user.email != request.email && user.password != request.password) {
+                    emit(ResultState.Error("Email or password is incorrect"))
+                    return@flow
+                }
 
-    override fun getSession(): Flow<User> {
-        TODO("Not yet implemented")
-    }
+                val loginResult =
+                    User(
+                        id = user.id,
+                        name = user.name,
+                        email = user.email,
+                        token = user.token,
+                    )
+                pref.saveSession(loginResult)
+                emit(ResultState.Success("Login success"))
+//            pref.saveSession(response.loginResult)
+                reloadModule()
+//            emit(ResultState.Success(response.message))
+            } catch (e: Exception) {
+                emit(ResultState.Error(e.createResponse()?.message ?: ""))
+            }
+        }
+
+    override suspend fun signOut(): Flow<ResultState<String>> =
+        flow {
+            emit(ResultState.Loading)
+            try {
+                pref.logout()
+                reloadModule()
+                emit(ResultState.Success("Logout success"))
+            } catch (e: Exception) {
+                emit(ResultState.Error(e.createResponse()?.message ?: ""))
+            }
+        }
+
+    override fun getSession(): Flow<User> = pref.getSession()
 
     private fun reloadModule() {
         unloadKoinModules(preferenceModule)

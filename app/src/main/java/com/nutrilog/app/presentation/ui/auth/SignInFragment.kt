@@ -6,11 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
+import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentSignInBinding
+import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.presentation.ui.base.BaseFragment
+import com.nutrilog.app.presentation.ui.base.component.snackbar.CustomSnackbar
 import com.nutrilog.app.presentation.ui.main.MainActivity
+import com.nutrilog.app.utils.constant.AppConstant.PASSWORD_LENGTH
+import com.nutrilog.app.utils.helpers.gone
+import com.nutrilog.app.utils.helpers.isLengthPasswordCorrect
+import com.nutrilog.app.utils.helpers.observe
+import com.nutrilog.app.utils.helpers.show
+import com.nutrilog.app.utils.helpers.showSnackBar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>() {
+    private val authViewModel: AuthViewModel by viewModel()
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignInBinding =
         FragmentSignInBinding::inflate
 
@@ -24,8 +38,68 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
             tvSignup.setOnClickListener {
                 moveToSignUp()
             }
+
             btnSignin.setOnClickListener {
-                moveToMain()
+                signInRequest()
+            }
+        }
+    }
+
+    private fun signInRequest() {
+        val email = binding.edLoginEmail.text.toString()
+        val password = binding.edLoginPassword.text.toString()
+        when {
+            email.isEmpty() ->
+                binding.edLoginEmail.error =
+                    getString(R.string.validation_must_not_empty)
+
+            password.isEmpty() ->
+                binding.edLoginPassword.error =
+                    getString(R.string.validation_must_not_empty)
+
+            !password.isLengthPasswordCorrect ->
+                binding.edLoginPassword.error =
+                    String.format(getString(R.string.validation_password), PASSWORD_LENGTH)
+
+            else -> {
+                signInProcess(email, password)
+            }
+        }
+    }
+
+    private fun signInProcess(
+        email: String,
+        password: String,
+    ) {
+        observe(authViewModel.signIn(email, password), ::showResultSignIn)
+    }
+
+    private fun showResultSignIn(result: ResultState<String>) {
+        when (result) {
+            is ResultState.Loading -> showLoading(true)
+
+            is ResultState.Success -> {
+                showLoading(false)
+                binding.root.showSnackBar(
+                    getString(R.string.message_signin_success),
+                    Snackbar.LENGTH_SHORT,
+                ) {
+                    addCallback(
+                        object : BaseTransientBottomBar.BaseCallback<CustomSnackbar>() {
+                            override fun onDismissed(
+                                transientBottomBar: CustomSnackbar?,
+                                event: Int,
+                            ) {
+                                moveToMain()
+                            }
+                        },
+                    )
+                }
+            }
+
+            is ResultState.Error -> {
+                showLoading(false)
+                binding.root.showSnackBar(getString(R.string.message_signin_failed))
             }
         }
     }
@@ -40,5 +114,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
         findNavController().navigate(
             SignInFragmentDirections.actionSignInFragmentToSignUpFragment(),
         )
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.loadingLayout.root.apply {
+            if (isLoading) show() else gone()
+        }
     }
 }
