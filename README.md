@@ -25,3 +25,9 @@ com.nutrilog.app
 ## 🤗 Credits
 
 - 🤓 Icons are from [tablericons.com](https://tablericons.com)   
+
+
+## Todo
+- [ ] Create UI profile activity
+- [ ] Implement datasource, repository and service nutrition
+- [ ] Data dummy nutrition 
