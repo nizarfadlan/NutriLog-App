@@ -35,6 +35,7 @@
     <string name="validation_password">Minimum of %d characters</string>
 
     <!-- About Us -->
+    <string name="header_about_title">About Us</string>
     <string name="content_desc_app_logo">App Logo</string>
     <string name="content_desc_photo_member">team member photo</string>
 
@@ -46,7 +47,7 @@
     <!-- NutritionRepository Card -->
     <string name="label_nutrition">Nutrition</string>
     <string name="label_nutrition_level">Nutrition Level</string>
-    <string name="label_amount_of_nutrition">%d gr</string>
+    <string name="label_amount_of_nutrition">%s gr</string>
 
     <!-- Navigation -->
     <string name="label_nav_home">Home</string>

@@ -1,21 +1,27 @@
 package com.nutrilog.app.presentation.ui.about
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.view.LayoutInflater
 import com.nutrilog.app.R
+import com.nutrilog.app.databinding.ActivityAboutBinding
+import com.nutrilog.app.presentation.ui.base.BaseActivity
 
-class AboutActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_about)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+class AboutActivity : BaseActivity<ActivityAboutBinding>() {
+    override val bindingInflater: (LayoutInflater) -> ActivityAboutBinding =
+        ActivityAboutBinding::inflate
+
+    override fun onViewBindingCreated(savedInstanceState: Bundle?) {
+        super.onViewBindingCreated(savedInstanceState)
+
+        initToolbar()
+    }
+
+    private fun initToolbar() {
+        binding.apply {
+            toolbar.apply {
+                tvPage.text = getString(R.string.header_about_title)
+                backButton.setOnClickListener { finish() }
+            }
         }
     }
 }

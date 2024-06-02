@@ -52,4 +52,13 @@
         <item name="android:buttonStyle">@style/Text.Button</item>
         <item name="iconTint">?attr/colorOnBackground</item>
     </style>
+
+    <style name="Button.Icon.Circle" parent="Widget.Material3.Button.IconButton">
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerExtraLarge</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">@dimen/dimen_10dp</item>
+        <item name="android:paddingVertical" tools:targetApi="o">@dimen/dimen_10dp</item>
+        <item name="android:buttonStyle">@style/Text.Button</item>
+        <item name="iconTint">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorOnPrimary</item>
+    </style>
 </resources>

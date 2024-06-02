@@ -9,7 +9,21 @@
         android:id="@+id/homeFragment"
         android:name="com.nutrilog.app.presentation.ui.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+            <argument
+                android:name="idAccount"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_aboutActivity"
+            app:destination="@id/aboutActivity" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.nutrilog.app.presentation.ui.main.history.HistoryFragment"
@@ -20,4 +34,9 @@
         android:name="com.nutrilog.app.presentation.ui.main.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <activity
+        android:id="@+id/aboutActivity"
+        android:name="com.nutrilog.app.presentation.ui.about.AboutActivity"
+        android:label="activity_about"
+        tools:layout="@layout/activity_about" />
 </navigation>

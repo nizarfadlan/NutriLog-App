@@ -75,6 +75,7 @@ dependencies {
     implementation(libs.androidx.fragment.fragment.ktx)
     implementation(libs.chip.navigation.bar)
     implementation(libs.powerspinner)
+    implementation(libs.circleimageview)
 
     // Kotlin
     implementation(libs.androidx.core.ktx)
