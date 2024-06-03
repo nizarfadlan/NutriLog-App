@@ -57,7 +57,7 @@
             style="@style/Text.H5.Bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"
+            tools:text="Username"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:textColor="?attr/colorPrimary"
             android:textAlignment="center"
@@ -66,9 +66,10 @@
             app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
         <TextView
+            android:id="@+id/tv_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="username@email.com"
+            tools:text="username@email.com"
             style="@style/Text.Body2"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +79,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/languageSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_8dp"
@@ -91,9 +93,11 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_36dp"
             android:layout_marginVertical="@dimen/dimen_16dp"
+            android:contentDescription="@string/language_content_desc"
             android:src="@drawable/ic_translate_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             />
         
@@ -103,49 +107,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             style="@style/Text.Body1"
-            android:text="Language"
+            android:text="@string/label_language"
             app:layout_constraintTop_toTopOf="@id/translateIV"
             app:layout_constraintBottom_toBottomOf="@id/translateIV"
             app:layout_constraintStart_toEndOf="@id/translateIV"
-            app:layout_constraintEnd_toStartOf="@id/moreOptionBtn"
-            />
-
-        <Button
-            android:id="@+id/moreOptionBtn"
-            style="@style/Button.Icon.Primary.Elevated"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:paddingEnd="@dimen/dimen_16dp"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            app:icon="@drawable/ic_arrow_next_24"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/dimen_0dp"
-            app:iconSize="@dimen/dimen_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/translateIV"
-            app:layout_constraintBottom_toBottomOf="@id/translateIV" />
-
-        <ImageView
-            android:id="@+id/themeIv"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_36dp"
-            android:layout_marginVertical="@dimen/dimen_16dp"
-            android:src="@drawable/ic_mode_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/translateIV"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            />
-
-        <TextView
-            android:id="@+id/themeTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            style="@style/Text.Body1"
-            android:text="Theme"
-            app:layout_constraintTop_toTopOf="@id/themeIv"
-            app:layout_constraintBottom_toBottomOf="@id/themeIv"
-            app:layout_constraintStart_toEndOf="@id/themeIv"
             app:layout_constraintEnd_toStartOf="@id/switch_translate"
             />
 
@@ -155,19 +120,32 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/themeIv"
-            app:layout_constraintBottom_toBottomOf="@id/themeIv"
-            app:layout_constraintStart_toEndOf="@id/themeTv"/>
+            app:layout_constraintTop_toTopOf="@id/translateIV"
+            app:layout_constraintBottom_toBottomOf="@id/translateIV"
+            app:layout_constraintStart_toEndOf="@id/languageTV"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logoutSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/languageSection">
 
         <ImageView
             android:id="@+id/logoutIv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_36dp"
             android:layout_marginVertical="@dimen/dimen_16dp"
+            android:contentDescription="@string/logoutbutton_content_desc"
             app:tint="@color/design_default_color_error"
             android:src="@drawable/ic_logout_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/themeIv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             />
 
@@ -178,13 +156,12 @@
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             style="@style/Text.Body1"
             android:textColor="@color/design_default_color_error"
-            android:text="Logout"
+            android:text="@string/label_logout"
             app:layout_constraintTop_toTopOf="@id/logoutIv"
             app:layout_constraintBottom_toBottomOf="@id/logoutIv"
             app:layout_constraintStart_toEndOf="@id/logoutIv"
             app:layout_constraintEnd_toEndOf="parent"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

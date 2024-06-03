@@ -8,13 +8,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutrilog.app.databinding.FragmentHomeBinding
 import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseFragment
+import com.nutrilog.app.presentation.ui.main.home.HomeFragmentDirections
 import com.nutrilog.app.presentation.ui.main.home.adapter.HomeAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.sql.Date
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
+
+    private val authViewModel: AuthViewModel by viewModel()
 
     private val level = 15
     private val date = Date(123456789)
@@ -27,6 +32,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        authViewModel.getSession().observe(viewLifecycleOwner){
+            binding.tvName.text = it.name
+        }
+
         initRecyclerView()
         initAction()
     }
