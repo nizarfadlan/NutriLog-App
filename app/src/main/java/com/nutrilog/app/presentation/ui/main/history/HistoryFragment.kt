@@ -75,7 +75,6 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
     private fun initObserve() {
         observe(historyViewModel.currentFullDate) {
             val (date, month, year) = it
-            println("date: $date month: $month year: $year")
 
             getDays(month, year)
             binding.selectMonth.setMonth(month)

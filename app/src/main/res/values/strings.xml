@@ -47,7 +47,7 @@
     <!-- NutritionRepository Card -->
     <string name="label_nutrition">Nutrition</string>
     <string name="label_nutrition_level">Nutrition Level</string>
-    <string name="label_amount_of_nutrition">%s gr</string>
+    <string name="label_amount_of_nutrition">%s g</string>
 
     <!-- Navigation -->
     <string name="label_nav_home">Home</string>

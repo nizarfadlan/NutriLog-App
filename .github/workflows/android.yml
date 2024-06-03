@@ -126,7 +126,7 @@ jobs:
           path: app/build/outputs/apk/debug/${{ env.OUTPUT_NAME }}.apk
 
   build-release:
-    needs: [ lint, setup ]
+    needs: [ debug-apk, lint, setup ]
     name: Build Release signed APK and Bundle
     runs-on: ubuntu-latest
     steps:
@@ -150,8 +150,14 @@ jobs:
       - name: Generate file name env var
         run: |
           VERSION_NAME="${{ needs.setup.outputs.version_name }}"
-          MESSAGE="nutriLog-${VERSION_NAME}-release"
-          echo "OUTPUT_NAME=${MESSAGE}" >> $GITHUB_ENV
+          RELEASE_MESSAGE="Release ${VERSION_NAME}"
+          TAG_MESSAGE="release-${VERSION_NAME}"
+          OUTPUT_NAME_RELEASE="nutriLog-${VERSION_NAME}-release"
+          OUTPUT_NAME_DEBUG="nutriLog-${VERSION_NAME}-debug"
+          echo "TAG_NAME=${TAG_MESSAGE}" >> $GITHUB_ENV
+          echo "RELEASE_NAME=${RELEASE_MESSAGE}" >> $GITHUB_ENV
+          echo "OUTPUT_NAME_RELEASE=${OUTPUT_NAME_RELEASE}" >> $GITHUB_ENV
+          echo "OUTPUT_NAME_DEBUG=${OUTPUT_NAME_DEBUG}" >> $GITHUB_ENV
 
       - name: Run gradle tests
         run: ./gradlew test
@@ -175,13 +181,13 @@ jobs:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Move Signed APK
-        run: mv ${{steps.sign_app_apk.outputs.signedReleaseFile}} app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
+        run: mv ${{steps.sign_app_apk.outputs.signedReleaseFile}} app/build/outputs/apk/release/${{ env.OUTPUT_NAME_RELEASE }}.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.OUTPUT_NAME }}
-          path: app/build/outputs/apk/release/${{ env.OUTPUT_NAME }}.apk
+          name: ${{ env.OUTPUT_NAME_RELEASE }}
+          path: app/build/outputs/apk/release/${{ env.OUTPUT_NAME_RELEASE }}.apk
 
       - name: Build release AAB
         run: bash ./gradlew bundleRelease --stacktrace
@@ -199,48 +205,13 @@ jobs:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Move Signed Bundle
-        run: mv ${{steps.sign_app_bundle.outputs.signedReleaseFile}} app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
+        run: mv ${{steps.sign_app_bundle.outputs.signedReleaseFile}} app/build/outputs/bundle/release/${{ env.OUTPUT_NAME_RELEASE }}.aab
 
       - name: Upload Signed AAB
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.OUTPUT_NAME }}
-          path: app/build/outputs/bundle/release/${{ env.OUTPUT_NAME }}.aab
-
-  release:
-    name: Create Release
-    needs: [ build-release, debug-apk, lint, setup ]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Restore Gradle cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.GRADLE_CACHE_PATHS }}
-          key: ${{ needs.setup.outputs.gradle_cache_key || runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Set Up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v3
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DIST }}
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Generate tag name and release name env var
-        run: |
-          VERSION_NAME="${{ needs.setup.outputs.version_name }}"
-          RELEASE_MESSAGE="Release ${VERSION_NAME}"
-          TAG_MESSAGE="release-${VERSION_NAME}"
-          OUTPUT_NAME_RELEASE="nutriLog-${VERSION_NAME}-release"
-          OUTPUT_NAME_DEBUG="nutriLog-${VERSION_NAME}-debug"
-          echo "TAG_NAME=${TAG_MESSAGE}" >> $GITHUB_ENV
-          echo "RELEASE_NAME=${RELEASE_MESSAGE}" >> $GITHUB_ENV
-          echo "OUTPUT_NAME_RELEASE=${OUTPUT_NAME_RELEASE}" >> $GITHUB_ENV
-          echo "OUTPUT_NAME_DEBUG=${OUTPUT_NAME_DEBUG}" >> $GITHUB_ENV
+          name: ${{ env.OUTPUT_NAME_RELEASE }}
+          path: app/build/outputs/bundle/release/${{ env.OUTPUT_NAME_RELEASE }}.aab
 
       - name: Check if Release Exists
         id: check_release

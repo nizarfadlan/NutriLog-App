@@ -11,7 +11,7 @@ val authDataSourceModule =
         single<AuthDataSource> { AuthDataSourceImpl(get(), get()) }
     }
 
-val authRepositoryImplModule =
+val authRepositoryModule =
     module {
         factory<AuthRepository> { AuthRepositoryImpl(get()) }
     }

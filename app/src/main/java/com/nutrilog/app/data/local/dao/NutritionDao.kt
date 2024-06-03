@@ -12,6 +12,9 @@ interface NutritionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllNutrition(nutrients: List<Nutrition>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNutrition(nutrient: Nutrition)
+
     @Query("SELECT * FROM nutrition WHERE created_at = :date ORDER BY created_at DESC")
     fun getNutritionByDate(date: Date): List<Nutrition>
 

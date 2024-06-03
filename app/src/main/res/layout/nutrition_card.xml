@@ -1,231 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+    android:id="@+id/nutritionCardOne"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="125dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/nutritionCardOne"
+    <LinearLayout
+        android:id="@+id/cardLayoutOne"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_card_1"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/cardLayoutOne"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_card_1"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dimen_36dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nutritionTypeTV"
-                    style="@style/Text.H6.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition"
-                    android:textColor="?attr/colorOnPrimary" />
-
-                <TextView
-                    android:id="@+id/nutritionLevelTV"
-                    style="@style/Text.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition_level"
-                    android:textColor="?attr/colorOnPrimary" />
-
-            </LinearLayout>
+            android:layout_marginStart="@dimen/dimen_36dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/totalNutritionTV"
-                style="@style/Text.H5.Bold"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dimen_36dp"
-                android:gravity="end|center"
-                android:text="@string/label_amount_of_nutrition"
+                android:id="@+id/nutritionTypeTV"
+                style="@style/Text.H6.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_nutrition"
+                android:textColor="?attr/colorOnPrimary" />
+
+            <TextView
+                android:id="@+id/nutritionLevelTV"
+                style="@style/Text.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_nutrition_level"
                 android:textColor="?attr/colorOnPrimary" />
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/nutritionCardTwo"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nutritionCardOne">
-
-        <LinearLayout
-            android:id="@+id/cardLayoutTwo"
+        <TextView
+            android:id="@+id/totalNutritionTV"
+            style="@style/Text.H5.Bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_card_2"
-            android:orientation="horizontal">
+            android:layout_marginEnd="@dimen/dimen_36dp"
+            android:gravity="end|center"
+            android:text="@string/label_amount_of_nutrition"
+            android:textColor="?attr/colorOnPrimary" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dimen_36dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/nutritionTypeTv2"
-                    style="@style/Text.H6.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition"
-                    android:textColor="?attr/colorOnPrimary" />
-
-                <TextView
-                    android:id="@+id/nutritionLevelTv2"
-                    style="@style/Text.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition_level"
-                    android:textColor="?attr/colorOnPrimary" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/totalNutritionTv2"
-                style="@style/Text.H5.Bold"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dimen_36dp"
-                android:gravity="end|center"
-                android:text="@string/label_amount_of_nutrition"
-                android:textColor="?attr/colorOnPrimary" />
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/nutritionCardThree"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nutritionCardTwo">
-
-        <LinearLayout
-            android:id="@+id/cardLayoutThree"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_card_3"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dimen_36dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nutritionTypeTv3"
-                    style="@style/Text.H6.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition"
-                    android:textColor="?attr/colorOnPrimary" />
-
-                <TextView
-                    android:id="@+id/nutritionLevelTv3"
-                    style="@style/Text.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition_level"
-                    android:textColor="?attr/colorOnPrimary" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/totalNutritionTv3"
-                style="@style/Text.H5.Bold"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dimen_36dp"
-                android:gravity="end|center"
-                android:text="@string/label_amount_of_nutrition"
-                android:textColor="?attr/colorOnPrimary" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/nutritionCardFour"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nutritionCardThree">
-
-        <LinearLayout
-            android:id="@+id/cardLayoutFour"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_card_3"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dimen_36dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nutritionTypeTv4"
-                    style="@style/Text.H6.Bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition"
-                    android:textColor="?attr/colorOnPrimary" />
-
-                <TextView
-                    android:id="@+id/nutritionLevelTv4"
-                    style="@style/Text.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_nutrition_level"
-                    android:textColor="?attr/colorOnPrimary" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/totalNutritionTv4"
-                style="@style/Text.H5.Bold"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dimen_36dp"
-                android:gravity="end|center"
-                android:text="@string/label_amount_of_nutrition"
-                android:textColor="?attr/colorOnPrimary" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

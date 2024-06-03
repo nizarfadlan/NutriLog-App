@@ -7,6 +7,7 @@ import com.nutrilog.app.data.remote.service.AuthService
 import com.nutrilog.app.di.module.preferenceModule
 import com.nutrilog.app.di.module.remoteModule
 import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.common.StatusResponse
 import com.nutrilog.app.domain.datasource.AuthDataSource
 import com.nutrilog.app.domain.model.User
 import com.nutrilog.app.utils.helpers.createResponse
@@ -14,14 +15,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-
-data object User {
-    const val id: String = "1"
-    const val name: String = "nizar"
-    const val email: String = "nizar@email.com"
-    const val password: String = "nizar123"
-    const val token: String = "1234"
-}
 
 class AuthDataSourceImpl(
     private val service: AuthService,
@@ -32,7 +25,7 @@ class AuthDataSourceImpl(
             emit(ResultState.Loading)
             try {
                 val response = service.register(request)
-                if (response.error) {
+                if (response.status === StatusResponse.ERROR) {
                     emit(ResultState.Error(response.message))
                     return@flow
                 }
@@ -48,11 +41,11 @@ class AuthDataSourceImpl(
             emit(ResultState.Loading)
             try {
 //            val response = service.login(request)
-//            if (response.error) {
+//            if (response.status === StatusResponse.ERROR) {
 //                emit(ResultState.Error(response.message))
 //                return@flow
 //            }
-                val user = User
+                val user = DataUser
                 if (user.email != request.email && user.password != request.password) {
                     emit(ResultState.Error("Email or password is incorrect"))
                     return@flow
@@ -95,5 +88,15 @@ class AuthDataSourceImpl(
 
         unloadKoinModules(remoteModule)
         loadKoinModules(remoteModule)
+    }
+
+    companion object {
+        data object DataUser {
+            const val id: String = "1"
+            const val name: String = "nizar"
+            const val email: String = "nizar@email.com"
+            const val password: String = "nizar123"
+            const val token: String = "1234"
+        }
     }
 }

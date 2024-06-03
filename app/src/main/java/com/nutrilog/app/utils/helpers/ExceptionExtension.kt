@@ -2,6 +2,7 @@ package com.nutrilog.app.utils.helpers
 
 import com.google.gson.Gson
 import com.nutrilog.app.data.remote.response.BasicResponse
+import com.nutrilog.app.domain.common.StatusResponse
 import retrofit2.HttpException
 
 fun Exception.createResponse(): BasicResponse? {
@@ -12,8 +13,8 @@ fun Exception.createResponse(): BasicResponse? {
 
         else -> {
             BasicResponse(
+                status = StatusResponse.ERROR,
                 message = this.message ?: "Error",
-                error = true,
             )
         }
     }
