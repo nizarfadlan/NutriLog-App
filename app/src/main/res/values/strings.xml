@@ -56,6 +56,12 @@
 
     <string name="text_about_us_description">Go beyond basic food logging and unlock a deeper understanding of your nutrition with NutriLog. Our app leverages cutting-edge machine learning to analyze your daily intake, providing personalized insights and recommendations that empower you to make informed choices about your health.</string>
 
+    <string name="label_name_nizar">Nizar</string>
+    <string name="label_name_raffi">Raffi</string>
+    <string name="label_name_israk">Israk</string>
+    <string name="label_name_guntur">Guntur</string>
+    <string name="label_name_fauzan">Fauzan</string>
+
     <!-- NutritionRepository Card -->
     <string name="label_nutrition">Nutrition</string>
     <string name="label_nutrition_level">Nutrition Level</string>
