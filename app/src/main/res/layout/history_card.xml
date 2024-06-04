@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/historyCard"
+    android:layout_width="match_parent"
+    android:layout_height="84dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:id="@+id/cardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorOnPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginStart="@dimen/dimen_36dp"
+            android:layout_marginEnd="@dimen/dimen_24dp"
+            android:id="@+id/nutritionTypeTV"
+            style="@style/Text.H6.Bold"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="23:59"
+            android:textColor="?attr/colorOnBackground" />
+
+
+        <TextView
+            android:id="@+id/totalNutritionTV"
+            style="@style/Text.H6.Semibold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dimen_36dp"
+            android:gravity="start|center"
+            android:text="Food Name"
+            android:textColor="?attr/colorOnBackground" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
