@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentProfileBinding
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.model.Language
 import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseFragment
+import com.nutrilog.app.utils.helpers.gone
 import com.nutrilog.app.utils.helpers.observe
+import com.nutrilog.app.utils.helpers.show
+import com.nutrilog.app.utils.helpers.showSnackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
@@ -22,10 +26,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProfileBinding =
         FragmentProfileBinding::inflate
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        authViewModel.getSession().observe(viewLifecycleOwner){
+        authViewModel.getSession().observe(viewLifecycleOwner) {
             binding.tvUsername.text = it.name
             binding.tvEmail.text = it.email
         }
@@ -38,15 +45,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         observe(profileViewModel.getLanguage(), ::handleLanguageChange)
     }
 
-    private fun initUI(){
+    private fun initUI() {
         binding.apply {
             tvTitleProfile.text = getString(R.string.header_about_title)
 
-            switchTranslate.setOnCheckedChangeListener{ _, isChecked ->
+            switchTranslate.setOnCheckedChangeListener { _, isChecked ->
                 applyLanguage(isChecked)
             }
 
-            logoutSection.setOnClickListener{
+            logoutSection.setOnClickListener {
                 observe(authViewModel.signOut, ::onSignOutResult)
             }
         }
@@ -57,9 +64,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         setSwitchLanguage(language)
     }
 
-
     private fun setSwitchLanguage(language: Language) {
-        binding.switchTranslate.isChecked = language == Language.ENGLISH
+        binding.switchTranslate.apply {
+            isChecked = language == Language.ENGLISH
+            trackDrawable =
+                AppCompatResources.getDrawable(
+                    context,
+                    if (language == Language.ENGLISH) R.drawable.flag_gb else R.drawable.flag_id,
+                )
+            thumbIconTintList =
+                AppCompatResources.getColorStateList(
+                    context,
+                    if (language == Language.ENGLISH) R.color.md_theme_onPrimary else R.color.md_theme_onPrimary,
+                )
+        }
     }
 
     private fun applyLanguage(isEnglish: Boolean) {
@@ -76,11 +94,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             is ResultState.Success -> showLoading(false)
             is ResultState.Error -> {
                 showLoading(false)
+                binding.root.showSnackBar(result.message)
             }
         }
     }
 
-    private fun showLoading(status: Boolean){
-
+    private fun showLoading(status: Boolean) {
+        binding.loadingLayout.root.apply {
+            if (status) show() else gone()
+        }
     }
 }

@@ -25,32 +25,20 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_profile"
-        >
+        app:layout_constraintTop_toBottomOf="@id/tv_title_profile">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="@dimen/dimen_24dp"
             android:id="@+id/iv_profile"
             android:layout_width="156dp"
             android:layout_height="150dp"
-            android:src="@drawable/welcome_icon_3"
-            app:civ_border_width="8dp"
-            app:civ_border_color="@color/md_theme_placeholder"
+            android:src="@drawable/ic_profile_default"
+            app:civ_border_overlay="true"
+            app:civ_border_width="6dp"
+            app:civ_border_color="@color/md_theme_backgroundProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <Button
-            style="@style/Button.Icon.Circle"
-            android:layout_width="@dimen/dimen_50dp"
-            android:layout_height="@dimen/dimen_50dp"
-            android:elevation="8dp"
-            android:padding="@dimen/dimen_10dp"
-            app:icon="@drawable/ic_edit_24"
-            app:iconSize="@dimen/dimen_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
-            app:layout_constraintEnd_toEndOf="@+id/iv_profile" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_username"
@@ -94,12 +82,11 @@
             android:layout_height="@dimen/dimen_36dp"
             android:layout_marginVertical="@dimen/dimen_16dp"
             android:contentDescription="@string/language_content_desc"
-            android:src="@drawable/ic_translate_24"
+            android:src="@drawable/ic_language_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            />
+            android:layout_marginHorizontal="@dimen/dimen_16dp" />
         
         <TextView
             android:id="@+id/languageTV"
@@ -111,14 +98,14 @@
             app:layout_constraintTop_toTopOf="@id/translateIV"
             app:layout_constraintBottom_toBottomOf="@id/translateIV"
             app:layout_constraintStart_toEndOf="@id/translateIV"
-            app:layout_constraintEnd_toStartOf="@id/switch_translate"
-            />
+            app:layout_constraintEnd_toStartOf="@id/switch_translate" />
 
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch_translate"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
+            app:trackDecoration="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/translateIV"
             app:layout_constraintBottom_toBottomOf="@id/translateIV"
@@ -146,8 +133,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            />
+            android:layout_marginHorizontal="@dimen/dimen_16dp" />
 
         <TextView
             android:id="@+id/logoutTv"
@@ -160,8 +146,12 @@
             app:layout_constraintTop_toTopOf="@id/logoutIv"
             app:layout_constraintBottom_toBottomOf="@id/logoutIv"
             app:layout_constraintStart_toEndOf="@id/logoutIv"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/loading_layout"
+        android:visibility="gone"
+        layout="@layout/layout_loading" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,9 +37,9 @@
 
             <Button
                 android:id="@+id/closeSnackbar"
-                style="@style/Button.Icon.Primary"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                style="@style/Button.Icon.Primary.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:icon="@drawable/ic_close_24"
                 app:iconSize="@dimen/dimen_24dp"
                 app:iconGravity="textStart"

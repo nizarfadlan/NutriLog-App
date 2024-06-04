@@ -13,16 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginTop="@dimen/dimen_8dp"
         android:contentDescription="@string/content_desc_app_logo"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:srcCompat="@drawable/welcome_icon_3" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/appNameLabel"
@@ -43,6 +44,7 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginVertical="16dp"
         android:textAlignment="center"
+        android:lineSpacingExtra="@dimen/dimen_4dp"
         style="@style/Text.Body2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +76,8 @@
 
     <TextView
         android:id="@+id/authorNameOne"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -96,7 +99,8 @@
 
     <TextView
         android:id="@+id/authorNameTwo"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -118,7 +122,8 @@
 
     <TextView
         android:id="@+id/authorNameThree"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -140,7 +145,8 @@
 
     <TextView
         android:id="@+id/authorNameFour"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -161,7 +167,8 @@
 
     <TextView
         android:id="@+id/authorNameFive"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -182,7 +189,8 @@
 
     <TextView
         android:id="@+id/authorNameSix"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"
@@ -203,7 +211,8 @@
 
     <TextView
         android:id="@+id/authorNameSeven"
-        style="@style/Text.Body2"
+        style="@style/Text.Caption"
+        android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_nickname"

@@ -34,6 +34,18 @@
     <string name="validation_email">Your email format is not correct</string>
     <string name="validation_password">Minimum of %d characters</string>
 
+    <!-- Analysis -->
+    <string name="label_photo">Photo</string>
+    <string name="label_change_photo">Change Photo</string>
+    <string name="header_analysis_title">Analysis</string>
+
+    <string name="hint_photo">Choose your story photo</string>
+
+    <string name="validation_photo_empty">Please choose a photo</string>
+
+    <string name="actions_analysis">Submit</string>
+
+
     <!-- About Us -->
     <string name="header_about_title">About Us</string>
     <string name="content_desc_app_logo">App Logo</string>
@@ -87,5 +99,7 @@
     <string name="label_logout">Logout</string>
     <string name="label_language">Language</string>
     <string name="language_content_desc">language iv</string>
+    <string name="label_icon_gallery">Gallery</string>
+    <string name="label_icon_camera">Camera</string>
 
 </resources>

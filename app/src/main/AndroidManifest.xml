@@ -19,6 +19,12 @@
         android:theme="@style/Theme.NutriLog"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.camera.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.analysis.AnalysisActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.about.AboutActivity"
             android:exported="false" />
         <activity

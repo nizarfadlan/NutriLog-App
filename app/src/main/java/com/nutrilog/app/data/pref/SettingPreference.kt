@@ -12,13 +12,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 val Context.dataStoreSetting: DataStore<Preferences> by preferencesDataStore(name = PREFS_SETTINGS)
+
 class SettingPreference(context: Context) {
     private val dataStore = context.dataStoreSetting
     private val languageKey = stringPreferencesKey("language_setting")
 
     fun getLanguageSetting(): Flow<Language> {
         return dataStore.data.map { preferences ->
-            val languageString = preferences[languageKey] ?: Language.SYSTEM.name
+            val languageString = preferences[languageKey] ?: Language.ENGLISH.name
             Language.valueOf(languageString)
         }
     }
