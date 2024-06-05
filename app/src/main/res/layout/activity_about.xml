@@ -80,7 +80,7 @@
         android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_name_raffi"
+        android:text="@string/label_name_rafi"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoOne"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoOne"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoOne" />
@@ -126,7 +126,7 @@
         android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_nickname"
+        android:text="@string/label_name_gisella"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoThree"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoThree"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoThree" />
@@ -163,7 +163,7 @@
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoTwo"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoOne"
         app:layout_constraintTop_toBottomOf="@id/authorNameOne"
-        android:src="@drawable/welcome_icon_3" />
+        android:src="@drawable/profile_bagja" />
 
     <TextView
         android:id="@+id/authorNameFive"
@@ -171,7 +171,7 @@
         android:layout_marginTop="@dimen/dimen_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_nickname"
+        android:text="@string/label_name_bagja"
         app:layout_constraintEnd_toEndOf="@+id/authorPhotoFive"
         app:layout_constraintStart_toStartOf="@+id/authorPhotoFive"
         app:layout_constraintTop_toBottomOf="@id/authorPhotoFive" />

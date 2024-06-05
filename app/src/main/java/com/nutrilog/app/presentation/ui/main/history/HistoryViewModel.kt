@@ -3,6 +3,13 @@ package com.nutrilog.app.presentation.ui.main.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.domain.repository.NutritionRepository
+import com.nutrilog.app.presentation.common.OperationLiveData
+import kotlinx.coroutines.launch
+import java.util.Date
 
 data class FullDate(
     val date: Int,
@@ -10,7 +17,7 @@ data class FullDate(
     val year: Int,
 )
 
-class HistoryViewModel : ViewModel() {
+class HistoryViewModel(private val repository: NutritionRepository) : ViewModel() {
     private val _currentFullDate = MutableLiveData<FullDate>()
     val currentFullDate: LiveData<FullDate> get() = _currentFullDate
 
@@ -31,4 +38,9 @@ class HistoryViewModel : ViewModel() {
     ) {
         _currentFullDate.value = FullDate(date, month, year)
     }
+
+    fun fetchNutrients(date: Date) =
+        OperationLiveData<ResultState<List<Nutrition>>> {
+            viewModelScope.launch { repository.fetchNutrients(date).collect { postValue(it) } }
+        }
 }

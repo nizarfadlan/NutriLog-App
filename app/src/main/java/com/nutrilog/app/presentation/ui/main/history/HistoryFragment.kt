@@ -8,25 +8,35 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.nutrilog.app.databinding.FragmentHistoryBinding
+import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.model.Nutrition
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.presentation.ui.base.component.CenterSmoothScroller
 import com.nutrilog.app.presentation.ui.main.history.adapter.DatesAdapter
+import com.nutrilog.app.presentation.ui.main.history.adapter.HistoryAdapter
 import com.nutrilog.app.utils.helpers.DayInfo
+import com.nutrilog.app.utils.helpers.convertListToNutritionLevel
 import com.nutrilog.app.utils.helpers.getCalender
 import com.nutrilog.app.utils.helpers.getDaysInMonth
 import com.nutrilog.app.utils.helpers.getTimeInMillis
+import com.nutrilog.app.utils.helpers.getTimeToDate
 import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.setMonth
+import com.nutrilog.app.utils.helpers.showSnackBar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
 
 class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
     private lateinit var dates: List<DayInfo>
     private var dateMilliseconds: Long = MaterialDatePicker.todayInUtcMilliseconds()
-    private val historyViewModel by viewModels<HistoryViewModel>()
+
+    private val historyViewModel: HistoryViewModel by viewModel()
 
     private val listDatesAdapter by lazy {
         DatesAdapter { date -> updateActiveDate(date.dayOfMonth) }
     }
+
+    private val listHistoryAdapter by lazy { HistoryAdapter { nutritionId -> showDetail(nutritionId) } }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHistoryBinding =
         FragmentHistoryBinding::inflate
@@ -49,6 +59,13 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = listDatesAdapter
+                isNestedScrollingEnabled = false
+            }
+
+            rvHistory.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter = listHistoryAdapter
                 isNestedScrollingEnabled = false
             }
         }
@@ -81,6 +98,22 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
             listDatesAdapter.updateActiveDay(date)
             dateMilliseconds = getTimeInMillis(date, month, year)
             smoothScrollToActiveItem(date - 1)
+
+            val selectedDate = getTimeToDate(date, month, year)
+            observe(historyViewModel.fetchNutrients(selectedDate), ::onListHistoryResult)
+        }
+    }
+
+    private fun onListHistoryResult(result: ResultState<List<Nutrition>>) {
+        when (result) {
+            is ResultState.Loading -> {}
+            is ResultState.Success -> {
+                listHistoryAdapter.setHistoryData(result.data)
+            }
+
+            is ResultState.Error -> {
+                binding.root.showSnackBar(result.message)
+            }
         }
     }
 
@@ -127,5 +160,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
     ) {
         dates = getDaysInMonth(month, year)
         listDatesAdapter.listDates = dates
+    }
+
+    private fun showDetail(nutritionId: String){
+        /* Show bottom sheet */
     }
 }

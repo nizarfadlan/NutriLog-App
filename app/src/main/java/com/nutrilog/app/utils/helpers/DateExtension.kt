@@ -69,6 +69,16 @@ fun getTimeInMillis(
     return calendar.timeInMillis
 }
 
+fun getTimeToDate(
+    day: Int,
+    month: Int,
+    year: Int,
+): Date {
+    val calendar = Calendar.getInstance()
+    calendar.set(year, month, day)
+    return calendar.time
+}
+
 fun String.convertStringToDate(): Date? {
     return this.let {
         SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)

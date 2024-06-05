@@ -87,8 +87,7 @@
         tools:listitem="@layout/history_card"
         app:layout_constraintTop_toBottomOf="@id/rv_dates"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
