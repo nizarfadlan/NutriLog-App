@@ -35,21 +35,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.apply {
             bottomNavigation.setOnItemSelectedListener { item ->
                 when (item) {
-                    R.id.homeFragment -> {
-                        navController.popBackStack(R.id.homeFragment, false)
-                        navController.navigate(R.id.homeFragment)
-                    }
-
-                    R.id.historyFragment -> {
-                        navController.popBackStack(R.id.homeFragment, false)
-                        navController.navigate(R.id.historyFragment)
-                    }
-
-                    R.id.profileFragment -> {
-                        navController.popBackStack(R.id.homeFragment, false)
-                        navController.navigate(R.id.profileFragment)
-                    }
-
+                    R.id.homeFragment -> navController.navigate(R.id.homeFragment)
+                    R.id.historyFragment -> navController.navigate(R.id.historyFragment)
+                    R.id.profileFragment -> navController.navigate(R.id.profileFragment)
                     R.id.analysisActivity -> {
                         val intent = Intent(this@MainActivity, AnalysisActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

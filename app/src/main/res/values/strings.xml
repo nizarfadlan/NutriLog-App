@@ -110,4 +110,10 @@
     <string name="label_icon_camera">Camera</string>
     <string name="label_name_bagja">Bagja</string>
 
+    <!-- Bottom Sheet -->
+    <string name="label_food_name">Food Name</string>
+    <string name="label_date">Date</string>
+    <string name="label_button_cancel">Cancel</string>
+    <string name="label_button_save">Save</string>
+
 </resources>

@@ -9,8 +9,7 @@
     <dimen name="font_subtitle_1">16sp</dimen>
     <dimen name="font_h6">20sp</dimen>
     <dimen name="font_h5">24sp</dimen>
-    <dimen name="font_title_widget">34sp</dimen>
-    <dimen name="font_card_dashboard">48sp</dimen>
+    <dimen name="font_card_dashboard">34sp</dimen>
 
     <dimen name="corner_40dp">40dp</dimen>
     <dimen name="corner_36dp">36dp</dimen>

@@ -15,6 +15,10 @@
     <color name="md_theme_overlay_background">#FFFFFF</color>
     <color name="md_theme_dark">#2E3133</color>
     <color name="md_theme_backgroundProfile">#EEE7E7</color>
+    <color name="md_theme_card_dark">#3D3D3D</color>
+    <color name="md_theme_card_onDark">#FFFFFF</color>
+    <color name="md_theme_card_light">#FFFFFF</color>
+    <color name="md_theme_card_onLight">#292929</color>
 
     <color name="black_transparent_8">#CC000000</color>
     <color name="transparent">#00000000</color>

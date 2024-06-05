@@ -1,4 +1,4 @@
-package com.nutrilog.app.presentation.ui.main.home.adapter
+package com.nutrilog.app.presentation.ui.base.component.bottomSheet.nutrition
 
 import android.content.Context
 import android.text.SpannableString
@@ -6,30 +6,29 @@ import android.text.Spanned
 import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nutrilog.app.R
-import com.nutrilog.app.databinding.NutritionCardBinding
-import com.nutrilog.app.domain.model.NutritionLevel
+import com.nutrilog.app.databinding.NutritionCardSquareBinding
 import com.nutrilog.app.domain.model.NutritionOption
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() {
+class NutritionBottomSheetAdapter :
+    RecyclerView.Adapter<NutritionBottomSheetAdapter.NutritionDataViewHolder>() {
     private var nutritionDataList: List<Pair<NutritionOption, Double>> = listOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): NutritionDataViewHolder {
+    ): NutritionBottomSheetAdapter.NutritionDataViewHolder {
         val binding =
-            NutritionCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            NutritionCardSquareBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NutritionDataViewHolder(binding, parent.context)
     }
 
     override fun getItemCount(): Int = nutritionDataList.size
 
     override fun onBindViewHolder(
-        holder: NutritionDataViewHolder,
+        holder: NutritionBottomSheetAdapter.NutritionDataViewHolder,
         position: Int,
     ) {
         val (nutritionOption, amount) = nutritionDataList[position]
@@ -38,13 +37,19 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
 
     fun setNutritionData(data: Map<NutritionOption, Double>) {
         val newList = data.toList()
-        val diffResult = DiffUtil.calculateDiff(NutritionDiffCallback(nutritionDataList, newList))
+        val diffResult =
+            DiffUtil.calculateDiff(
+                NutritionDiffCallback(
+                    nutritionDataList,
+                    newList,
+                ),
+            )
         nutritionDataList = newList
         diffResult.dispatchUpdatesTo(this)
     }
 
     inner class NutritionDataViewHolder(
-        val binding: NutritionCardBinding,
+        val binding: NutritionCardSquareBinding,
         private val context: Context,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
@@ -53,8 +58,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
         ) {
             with(binding) {
                 nutritionTypeTV.text = nutritionOption.label
-                val nutritionLevel = determineNutritionLevel(amount)
-                nutritionLevelTV.text = nutritionLevel.label
 
                 val formattedAmount =
                     context.getString(
@@ -73,41 +76,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
                 )
                 totalNutritionTV.text = spannableString
-
-                setBgCard(nutritionLevel)
             }
-        }
-
-        private fun determineNutritionLevel(amount: Double): NutritionLevel {
-            return when {
-                amount >= 45 -> NutritionLevel.CLOSE
-                amount > 10 && amount < 45 -> NutritionLevel.OPTIMAL
-                else -> NutritionLevel.DEFICIENT
-            }
-        }
-
-        private fun setBgCard(nutritionLevel: NutritionLevel) {
-            val drawable =
-                when (nutritionLevel) {
-                    NutritionLevel.OPTIMAL ->
-                        ContextCompat.getDrawable(
-                            binding.cardLayoutOne.context,
-                            R.drawable.bg_card_2,
-                        )
-
-                    NutritionLevel.CLOSE ->
-                        ContextCompat.getDrawable(
-                            binding.cardLayoutOne.context,
-                            R.drawable.bg_card_3,
-                        )
-
-                    NutritionLevel.DEFICIENT ->
-                        ContextCompat.getDrawable(
-                            binding.cardLayoutOne.context,
-                            R.drawable.bg_card_1,
-                        )
-                }
-            binding.cardLayoutOne.background = drawable
         }
     }
 

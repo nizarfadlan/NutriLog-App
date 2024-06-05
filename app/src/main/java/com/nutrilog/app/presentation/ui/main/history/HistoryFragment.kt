@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.nutrilog.app.databinding.FragmentHistoryBinding
@@ -12,10 +11,10 @@ import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.model.Nutrition
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.presentation.ui.base.component.CenterSmoothScroller
+import com.nutrilog.app.presentation.ui.base.component.bottomSheet.nutrition.NutritionBottomSheet
 import com.nutrilog.app.presentation.ui.main.history.adapter.DatesAdapter
 import com.nutrilog.app.presentation.ui.main.history.adapter.HistoryAdapter
 import com.nutrilog.app.utils.helpers.DayInfo
-import com.nutrilog.app.utils.helpers.convertListToNutritionLevel
 import com.nutrilog.app.utils.helpers.getCalender
 import com.nutrilog.app.utils.helpers.getDaysInMonth
 import com.nutrilog.app.utils.helpers.getTimeInMillis
@@ -36,7 +35,7 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
         DatesAdapter { date -> updateActiveDate(date.dayOfMonth) }
     }
 
-    private val listHistoryAdapter by lazy { HistoryAdapter { nutritionId -> showDetail(nutritionId) } }
+    private val listHistoryAdapter by lazy { HistoryAdapter { nutrition -> showDetail(nutrition) } }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHistoryBinding =
         FragmentHistoryBinding::inflate
@@ -162,7 +161,8 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
         listDatesAdapter.listDates = dates
     }
 
-    private fun showDetail(nutritionId: String){
-        /* Show bottom sheet */
+    private fun showDetail(nutrition: Nutrition) {
+        val bottomSheet = NutritionBottomSheet.newInstance(nutrition, false)
+        bottomSheet.show(parentFragmentManager, NutritionBottomSheet.TAG)
     }
 }

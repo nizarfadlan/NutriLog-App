@@ -142,4 +142,10 @@
         <item name="android:fontFamily">@font/sailec_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="Text.ValueNutrition">
+        <item name="android:fontFamily">@font/sailec_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font_card_dashboard</item>
+    </style>
 </resources>

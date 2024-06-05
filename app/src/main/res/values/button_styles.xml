@@ -23,6 +23,7 @@
         <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
         <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
         <item name="android:buttonStyle">@style/Text.Button</item>
         <item name="iconTint">?attr/colorOnPrimary</item>
     </style>
@@ -32,8 +33,19 @@
         <item name="android:paddingHorizontal" tools:targetApi="o">10dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">10dp</item>
         <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
         <item name="android:buttonStyle">@style/Text.Button</item>
         <item name="iconTint">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Button.Icon.Ghost.Small" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerMedium</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">10dp</item>
+        <item name="android:paddingVertical" tools:targetApi="o">10dp</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
+        <item name="android:buttonStyle">@style/Text.Button</item>
+        <item name="iconTint">?attr/colorOnBackground</item>
     </style>
 
     <style name="Button.Icon.Primary.Elevated" parent="Widget.Material3.Button.IconButton.Filled">
@@ -41,6 +53,7 @@
         <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
         <item name="backgroundTint">?attr/colorOnPrimary</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
         <item name="android:buttonStyle">@style/Text.Button</item>
         <item name="iconTint">@color/md_theme_dark</item>
     </style>
@@ -50,6 +63,7 @@
         <item name="android:paddingHorizontal" tools:targetApi="o">16dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">16dp</item>
         <item name="backgroundTint">@color/md_theme_primary_100</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
         <item name="android:buttonStyle">@style/Text.Button</item>
         <item name="iconTint">@color/md_theme_dark</item>
     </style>
@@ -59,6 +73,7 @@
         <item name="android:paddingHorizontal" tools:targetApi="o">@dimen/dimen_10dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">@dimen/dimen_10dp</item>
         <item name="android:buttonStyle">@style/Text.Button</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
         <item name="iconTint">?attr/colorOnBackground</item>
     </style>
 
@@ -67,6 +82,7 @@
         <item name="android:paddingHorizontal" tools:targetApi="o">@dimen/dimen_10dp</item>
         <item name="android:paddingVertical" tools:targetApi="o">@dimen/dimen_10dp</item>
         <item name="android:buttonStyle">@style/Text.Button</item>
+        <item name="iconSize">@dimen/dimen_24dp</item>
         <item name="iconTint">?attr/colorPrimary</item>
         <item name="backgroundTint">?attr/colorOnPrimary</item>
     </style>

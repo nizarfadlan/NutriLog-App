@@ -52,6 +52,16 @@ fun getDaysInMonth(
     return daysInMonth
 }
 
+private fun getCalender(
+    day: Int,
+    month: Int,
+    year: Int,
+): Calendar {
+    val calendar = Calendar.getInstance()
+    calendar.set(year, month, day)
+    return calendar
+}
+
 /**
  * Get time in millis
  *
@@ -64,8 +74,7 @@ fun getTimeInMillis(
     month: Int,
     year: Int,
 ): Long {
-    val calendar = Calendar.getInstance()
-    calendar.set(year, month, day)
+    val calendar = getCalender(day, month, year)
     return calendar.timeInMillis
 }
 
@@ -74,9 +83,12 @@ fun getTimeToDate(
     month: Int,
     year: Int,
 ): Date {
-    val calendar = Calendar.getInstance()
-    calendar.set(year, month, day)
+    val calendar = getCalender(day, month, year)
     return calendar.time
+}
+
+fun Date.convertDateTimeToString(): String {
+    return SimpleDateFormat("dd/MM/yyyy | HH:mm", Locale.getDefault()).format(this)
 }
 
 fun String.convertStringToDate(): Date? {

@@ -1,6 +1,5 @@
 package com.nutrilog.app.presentation.ui.main.history.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,11 +10,14 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class HistoryAdapter(
-    private val onItemClickCallback: (String) -> Unit
-) : RecyclerView.Adapter<HistoryAdapter.HistoryDataViewHolder>(){
+    private val onItemClickCallback: (Nutrition) -> Unit,
+) : RecyclerView.Adapter<HistoryAdapter.HistoryDataViewHolder>() {
     private var historyDataList: List<Nutrition> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryDataViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): HistoryDataViewHolder {
         val binding =
             HistoryCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HistoryDataViewHolder(binding)
@@ -23,7 +25,10 @@ class HistoryAdapter(
 
     override fun getItemCount(): Int = historyDataList.size
 
-    override fun onBindViewHolder(holder: HistoryDataViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: HistoryDataViewHolder,
+        position: Int,
+    ) {
         val data = historyDataList[position]
         holder.bind(data)
     }
@@ -39,7 +44,7 @@ class HistoryAdapter(
     inner class HistoryDataViewHolder(
         val binding: HistoryCardBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind( nutrition: Nutrition ) {
+        fun bind(nutrition: Nutrition) {
             with(binding) {
                 val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
                 hourTV.text = dateFormat.format(nutrition.createdAt)
@@ -47,7 +52,7 @@ class HistoryAdapter(
                 foodNameTV.text = nutrition.foodName
 
                 root.setOnClickListener {
-                    onItemClickCallback(nutrition.id)
+                    onItemClickCallback(nutrition)
                 }
             }
         }
@@ -55,7 +60,7 @@ class HistoryAdapter(
 
     private class HistoryDiffCallback(
         private val oldList: List<Nutrition>,
-        private val newList: List<Nutrition>
+        private val newList: List<Nutrition>,
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
 

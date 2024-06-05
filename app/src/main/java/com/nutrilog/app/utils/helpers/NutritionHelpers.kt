@@ -15,3 +15,14 @@ fun convertListToNutritionLevel(list: List<Nutrition>): Map<NutritionOption, Dou
         }
     }
 }
+
+fun convertToNutritionLevel(list: Nutrition): Map<NutritionOption, Double> {
+    return NutritionOption.entries.associateWith { option ->
+        when (option) {
+            NutritionOption.CARBOHYDRATE -> list.carbohydrate.toDouble()
+            NutritionOption.PROTEIN -> list.proteins.toDouble()
+            NutritionOption.FAT -> list.fat.toDouble()
+            NutritionOption.CALORIES -> list.calories.toDouble()
+        }
+    }
+}
