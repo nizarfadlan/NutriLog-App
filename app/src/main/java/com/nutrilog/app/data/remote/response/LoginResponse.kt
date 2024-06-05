@@ -5,8 +5,8 @@ import com.nutrilog.app.domain.common.StatusResponse
 import com.nutrilog.app.domain.model.User
 
 data class LoginResponse(
-    @field:SerializedName("loginResult")
-    val loginResult: User,
+    @field:SerializedName("data")
+    val data: User,
     @field:SerializedName("status")
     val status: StatusResponse,
     @field:SerializedName("message")

@@ -6,7 +6,9 @@ import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.common.StatusResponse
 import com.nutrilog.app.domain.datasource.NutritionDataSource
 import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.domain.model.NutritionOption
 import com.nutrilog.app.utils.constant.AppConstant.MULTIPART_FILE_NAME
+import com.nutrilog.app.utils.helpers.convertListToNutritionLevel
 import com.nutrilog.app.utils.helpers.createResponse
 import com.nutrilog.app.utils.helpers.toMultipart
 import kotlinx.coroutines.flow.Flow
@@ -67,6 +69,12 @@ class NutritionDataSourceImpl(
             } catch (e: Exception) {
                 emit(ResultState.Error(e.createResponse()?.message ?: ""))
             }
+        }
+
+    override fun calculateNutritionByDate(date: Date): Flow<Map<NutritionOption, Double>> =
+        flow {
+            val list = database.getNutritionDao().getNutritionByDate(date)
+            emit(convertListToNutritionLevel(list))
         }
 
     companion object {

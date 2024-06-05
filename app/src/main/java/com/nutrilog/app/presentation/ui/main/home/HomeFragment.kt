@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nutrilog.app.databinding.FragmentHomeBinding
-import com.nutrilog.app.domain.common.ResultState
-import com.nutrilog.app.domain.model.Nutrition
 import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.presentation.ui.main.home.adapter.HomeAdapter
-import com.nutrilog.app.utils.helpers.convertListToNutritionLevel
 import com.nutrilog.app.utils.helpers.observe
-import com.nutrilog.app.utils.helpers.showSnackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
 
@@ -49,7 +45,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun initObserve() {
         val date = Date()
-        observe(homeViewModel.fetchNutrients(date), ::onListNutrientsResult)
+        observe(homeViewModel.calculateNutrients(date)) {
+            homeAdapter.setNutritionData(it)
+        }
     }
 
     private fun initAction() {
@@ -58,29 +56,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun onListNutrientsResult(result: ResultState<List<Nutrition>>) {
-        when (result) {
-            is ResultState.Loading -> {}
-            is ResultState.Success -> {
-                val convertData = convertListToNutritionLevel(result.data)
-                homeAdapter.setNutritionData(convertData)
-            }
-
-            is ResultState.Error -> {
-                binding.root.showSnackBar(result.message)
-            }
-        }
-    }
-
     private fun moveToAbout() {
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToAboutActivity(),
-        )
-    }
-
-    private fun moveToDetail(idString: String) {
-        findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToProfileFragment(idString),
         )
     }
 }

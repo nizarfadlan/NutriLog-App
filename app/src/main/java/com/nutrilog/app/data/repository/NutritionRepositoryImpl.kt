@@ -3,6 +3,7 @@ package com.nutrilog.app.data.repository
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.datasource.NutritionDataSource
 import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.domain.model.NutritionOption
 import com.nutrilog.app.domain.repository.NutritionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,11 @@ class NutritionRepositoryImpl(
 
     override suspend fun saveNutrition(image: File): Flow<ResultState<String>> =
         dataSource.saveNutrition(image).flowOn(
+            Dispatchers.IO,
+        )
+
+    override fun calculateNutritionByDate(date: Date): Flow<Map<NutritionOption, Double>> =
+        dataSource.calculateNutritionByDate(date).flowOn(
             Dispatchers.IO,
         )
 }

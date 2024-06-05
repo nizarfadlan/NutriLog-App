@@ -18,7 +18,7 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_BASE_URL", "\"https://nutrilog.app\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://nutrilog.nizarfadlan.dev/\"")
     }
 
     tasks.register("printVersionName") {

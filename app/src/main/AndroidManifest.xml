@@ -10,6 +10,7 @@
     <application
         android:name=".app.NutriLog"
         android:allowBackup="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -46,7 +47,7 @@
             Prompt Google Play services to install the backported photo picker module
             https://developer.android.com/training/data-storage/shared/photopicker#device-availability
         -->
-        <!-- suppress AndroidDomInspection -->
+        <!--suppress AndroidDomInspection -->
         <service
             android:name="com.google.android.gms.metadata.ModuleDependencies"
             android:enabled="false"

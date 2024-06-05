@@ -40,29 +40,15 @@ class AuthDataSourceImpl(
         flow {
             emit(ResultState.Loading)
             try {
-//            val response = service.login(request)
-//            if (response.status === StatusResponse.ERROR) {
-//                emit(ResultState.Error(response.message))
-//                return@flow
-//            }
-                val user = DataUser
-                if (user.email != request.email && user.password != request.password) {
-                    emit(ResultState.Error("Email or password is incorrect"))
+                val response = service.login(request)
+                if (response.status === StatusResponse.ERROR) {
+                    emit(ResultState.Error(response.message))
                     return@flow
                 }
 
-                val loginResult =
-                    User(
-                        id = user.id,
-                        name = user.name,
-                        email = user.email,
-                        token = user.token,
-                    )
-                pref.saveSession(loginResult)
-                emit(ResultState.Success("Login success"))
-//            pref.saveSession(response.loginResult)
+                pref.saveSession(response.data)
                 reloadModule()
-//            emit(ResultState.Success(response.message))
+                emit(ResultState.Success(response.message))
             } catch (e: Exception) {
                 emit(ResultState.Error(e.createResponse()?.message ?: ""))
             }
@@ -88,15 +74,5 @@ class AuthDataSourceImpl(
 
         unloadKoinModules(remoteModule)
         loadKoinModules(remoteModule)
-    }
-
-    companion object {
-        data object DataUser {
-            const val id: String = "1"
-            const val name: String = "nizar"
-            const val email: String = "nizar@email.com"
-            const val password: String = "nizar123"
-            const val token: String = "1234"
-        }
     }
 }

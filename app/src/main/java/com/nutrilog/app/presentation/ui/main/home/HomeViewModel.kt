@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.domain.model.NutritionOption
 import com.nutrilog.app.domain.repository.NutritionRepository
 import com.nutrilog.app.presentation.common.OperationLiveData
 import kotlinx.coroutines.launch
@@ -15,8 +16,10 @@ class HomeViewModel(private val repository: NutritionRepository) : ViewModel() {
             viewModelScope.launch { repository.fetchNutrients(date).collect { postValue(it) } }
         }
 
-    fun fetchNutrition(id: String) =
-        OperationLiveData<ResultState<Nutrition>> {
-            viewModelScope.launch { repository.fetchNutrition(id).collect { postValue(it) } }
+    fun calculateNutrients(date: Date) =
+        OperationLiveData<Map<NutritionOption, Double>> {
+            viewModelScope.launch {
+                repository.calculateNutritionByDate(date).collect { postValue(it) }
+            }
         }
 }

@@ -36,17 +36,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             bottomNavigation.setOnItemSelectedListener { item ->
                 when (item) {
                     R.id.homeFragment -> {
-                        navController.popBackStack()
+                        navController.popBackStack(R.id.homeFragment, false)
                         navController.navigate(R.id.homeFragment)
                     }
 
                     R.id.historyFragment -> {
-                        navController.popBackStack()
+                        navController.popBackStack(R.id.homeFragment, false)
                         navController.navigate(R.id.historyFragment)
                     }
 
                     R.id.profileFragment -> {
-                        navController.popBackStack()
+                        navController.popBackStack(R.id.homeFragment, false)
                         navController.navigate(R.id.profileFragment)
                     }
 
