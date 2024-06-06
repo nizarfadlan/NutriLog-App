@@ -11,21 +11,34 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.ActivityAnalysisBinding
+import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.domain.model.ResultNutrition
+import com.nutrilog.app.domain.model.User
+import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseActivity
+import com.nutrilog.app.presentation.ui.base.component.bottomSheet.nutrition.NutritionBottomSheet
 import com.nutrilog.app.presentation.ui.base.component.dialog.PhotoDialogFragment
 import com.nutrilog.app.presentation.ui.camera.CameraActivity
 import com.nutrilog.app.presentation.ui.camera.CameraActivity.Companion.CAMERAX_RESULT
 import com.nutrilog.app.utils.constant.AppConstant.REQUIRED_CAMERA_PERMISSION
 import com.nutrilog.app.utils.helpers.gone
+import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.reduceFileImage
 import com.nutrilog.app.utils.helpers.show
 import com.nutrilog.app.utils.helpers.showSnackBar
 import com.nutrilog.app.utils.helpers.uriToFile
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
+import java.util.Date
 
 class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
     private var imageFile: File? = null
     private var currentImageUri: Uri? = null
+    private lateinit var user: User
+
+    private val authViewModel: AuthViewModel by viewModel()
+    private val analysisViewModel: AnalysisViewModel by viewModel()
 
     override val bindingInflater: (LayoutInflater) -> ActivityAnalysisBinding =
         ActivityAnalysisBinding::inflate
@@ -34,7 +47,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
         registerForActivityResult(
             ActivityResultContracts.RequestPermission(),
         ) { isGranted: Boolean ->
-            if (!isGranted) binding.root.showSnackBar("Camera permission denied")
+            if (!isGranted) binding.root.showSnackBar(getString(R.string.message_permission_denied))
         }
 
     private fun allPermissionsGranted() =
@@ -46,6 +59,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
     override fun onViewBindingCreated(savedInstanceState: Bundle?) {
         super.onViewBindingCreated(savedInstanceState)
 
+        initObservers()
         initCheckPermission()
         initToolbar()
         initActions()
@@ -54,6 +68,12 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
 
     private fun initCheckPermission() {
         if (!allPermissionsGranted()) requestPermissionLauncher.launch(REQUIRED_CAMERA_PERMISSION)
+    }
+
+    private fun initObservers() {
+        observe(authViewModel.getSession()) {
+            user = it
+        }
     }
 
     private fun initView() {
@@ -98,7 +118,52 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
         currentImageUri?.let { uri ->
             imageFile = uri.uriToFile(this).reduceFileImage()
 
-            // Observe
+            // Analyze image to model
+            val dataNutrition =
+                ResultNutrition(
+                    foodName = "Nasi Goreng",
+                    carbohydrate = 10f,
+                    proteins = 10f,
+                    fat = 10f,
+                    calories = 10f,
+                )
+            showResult(dataNutrition)
+        }
+    }
+
+    private fun showResult(nutrition: ResultNutrition) {
+        val convertNutrition =
+            Nutrition(
+                // ID temporary
+                id = user.id + System.currentTimeMillis(),
+                userId = user.id,
+                foodName = nutrition.foodName,
+                carbohydrate = nutrition.carbohydrate,
+                proteins = nutrition.proteins,
+                fat = nutrition.fat,
+                calories = nutrition.calories,
+                createdAt = Date(),
+            )
+        convertNutrition.let { NutritionBottomSheet.newInstance(it, true, ::saveAnalyzingResult) }
+            .show(supportFragmentManager, NutritionBottomSheet.TAG)
+    }
+
+    private fun saveAnalyzingResult(result: Nutrition) {
+        val (_, _, foodName, carbohydrate, proteins, fat, calories) = result
+        observe(analysisViewModel.saveNutrition(foodName, carbohydrate, proteins, fat, calories)) {
+            when (it) {
+                is ResultState.Loading -> showLoading(true)
+                is ResultState.Success -> {
+                    showLoading(false)
+                    binding.root.showSnackBar(it.data)
+                    finish()
+                }
+
+                is ResultState.Error -> {
+                    showLoading(false)
+                    binding.root.showSnackBar(it.message)
+                }
+            }
         }
     }
 

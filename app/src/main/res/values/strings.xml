@@ -62,6 +62,7 @@
     <string name="label_name_guntur">Guntur</string>
     <string name="label_name_fauzan">Fauzan</string>
     <string name="label_name_gisella">Gisella</string>
+    <string name="label_name_bagja">Bagja</string>
 
     <!-- NutritionRepository Card -->
     <string name="label_nutrition">Nutrition</string>
@@ -94,26 +95,35 @@
     </string-array>
 
     <!-- Common -->
-    <string name="label_month">MONTH</string>
-    <string name="label_year">YEAR</string>
     <string name="validation_must_not_empty">Field cannot be empty</string>
-    <string name="label_loading">Loading…</string>
+
+    <string name="header_welcome">Hello,</string>
+
+    <string name="logoutbutton_content_desc">logoutButton</string>
+
+    <string name="language_content_desc">language iv</string>
+
     <string name="message_snackbar" translatable="false">This is a custom snackbar</string>
     <string name="message_signin_success">Sign in successful</string>
     <string name="message_signin_failed">Sign in failed. Please check your email and password again.</string>
-    <string name="header_welcome">Hello,</string>
-    <string name="logoutbutton_content_desc">logoutButton</string>
+
+    <string name="label_month">MONTH</string>
+    <string name="label_year">YEAR</string>
+    <string name="label_loading">Loading…</string>
     <string name="label_logout">Logout</string>
     <string name="label_language">Language</string>
-    <string name="language_content_desc">language iv</string>
     <string name="label_icon_gallery">Gallery</string>
     <string name="label_icon_camera">Camera</string>
-    <string name="label_name_bagja">Bagja</string>
 
     <!-- Bottom Sheet -->
     <string name="label_food_name">Food Name</string>
     <string name="label_date">Date</string>
     <string name="label_button_cancel">Cancel</string>
     <string name="label_button_save">Save</string>
+
+    <!-- Camera -->
+    <string name="message_failed_access_camera">Failed to show the camera</string>
+    <string name="message_failed_take_picture">Failed to take a picture</string>
+    <string name="message_permission_denied">Camera permission denied</string>
 
 </resources>

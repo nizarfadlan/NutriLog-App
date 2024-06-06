@@ -1,5 +1,6 @@
 package com.nutrilog.app.di.module
 
+import com.nutrilog.app.presentation.ui.analysis.AnalysisViewModel
 import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.main.history.HistoryViewModel
 import com.nutrilog.app.presentation.ui.main.home.HomeViewModel
@@ -13,4 +14,5 @@ val viewModelModule =
         viewModel { ProfileViewModel(get()) }
         viewModel { HomeViewModel(get()) }
         viewModel { HistoryViewModel(get()) }
+        viewModel { AnalysisViewModel(get()) }
     }

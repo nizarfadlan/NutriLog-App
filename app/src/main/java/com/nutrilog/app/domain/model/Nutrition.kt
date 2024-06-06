@@ -24,3 +24,12 @@ data class Nutrition(
     @ColumnInfo("created_at")
     val createdAt: Date,
 ) : Parcelable
+
+@Parcelize
+data class ResultNutrition(
+    val foodName: String,
+    val carbohydrate: Float,
+    val proteins: Float,
+    val fat: Float,
+    val calories: Float,
+) : Parcelable

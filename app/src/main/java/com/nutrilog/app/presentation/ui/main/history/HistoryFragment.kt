@@ -163,6 +163,6 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
 
     private fun showDetail(nutrition: Nutrition) {
         val bottomSheet = NutritionBottomSheet.newInstance(nutrition, false)
-        bottomSheet.show(parentFragmentManager, NutritionBottomSheet.TAG)
+        bottomSheet.show(childFragmentManager, NutritionBottomSheet.TAG)
     }
 }

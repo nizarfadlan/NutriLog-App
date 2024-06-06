@@ -17,7 +17,9 @@ import com.nutrilog.app.utils.helpers.dpToPx
 import com.nutrilog.app.utils.helpers.gone
 import com.nutrilog.app.utils.helpers.show
 
-class NutritionBottomSheet : BottomSheetDialogFragment() {
+class NutritionBottomSheet(
+    private val onActionSave: ((Nutrition) -> Unit)? = null,
+) : BottomSheetDialogFragment() {
     private var _binding: LayoutNutritionBottomSheetBinding? = null
     private val binding get() = _binding!!
     private val nutritionAdapter by lazy { NutritionBottomSheetAdapter() }
@@ -93,6 +95,14 @@ class NutritionBottomSheet : BottomSheetDialogFragment() {
 
             textFoodName.text = nutrition.foodName
             textDate.text = nutrition.createdAt.convertDateTimeToString()
+
+            if (isFooter) {
+                buttonCancel.setOnClickListener { dismiss() }
+                buttonSave.setOnClickListener {
+                    onActionSave?.invoke(nutrition)
+                    dismiss()
+                }
+            }
         }
     }
 
@@ -113,7 +123,8 @@ class NutritionBottomSheet : BottomSheetDialogFragment() {
         fun newInstance(
             nutrition: Nutrition,
             isFooter: Boolean = false,
-        ) = NutritionBottomSheet().apply {
+            onActionSave: ((Nutrition) -> Unit)? = null,
+        ) = NutritionBottomSheet(onActionSave).apply {
             arguments =
                 Bundle().apply {
                     putParcelable(ARG_NUTRITION, nutrition)

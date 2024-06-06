@@ -15,6 +15,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.nutrilog.app.R
 import com.nutrilog.app.databinding.ActivityCameraBinding
 import com.nutrilog.app.presentation.ui.base.BaseActivity
 import com.nutrilog.app.utils.helpers.createCustomTempFile
@@ -79,7 +80,10 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                     imageCapture,
                 )
             } catch (exc: Exception) {
-                binding.root.showSnackBar("Gagal memunculkan kamera.", Snackbar.LENGTH_SHORT)
+                binding.root.showSnackBar(
+                    getString(R.string.message_failed_access_camera),
+                    Snackbar.LENGTH_SHORT,
+                )
                 Timber.tag(TAG).e("startCamera: ${exc.message}")
             }
         }, ContextCompat.getMainExecutor(this))
@@ -104,7 +108,10 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                 }
 
                 override fun onError(exc: ImageCaptureException) {
-                    binding.root.showSnackBar("Gagal mengambil gambar.", Snackbar.LENGTH_SHORT)
+                    binding.root.showSnackBar(
+                        getString(R.string.message_failed_take_picture),
+                        Snackbar.LENGTH_SHORT,
+                    )
                     Timber.tag(TAG).e("onError: ${exc.message}")
                 }
             },

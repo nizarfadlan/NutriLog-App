@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/button_change_location"
+                    android:id="@+id/button_cancel"
                     style="@style/Button.Primary.Elevated"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -97,7 +97,7 @@
                     android:text="@string/label_button_cancel" />
 
                 <Button
-                    android:id="@+id/button_done_location"
+                    android:id="@+id/button_save"
                     style="@style/Button.Primary"
                     android:layout_width="0dp"
                     android:layout_weight="1"
