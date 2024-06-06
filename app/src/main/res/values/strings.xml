@@ -125,5 +125,7 @@
     <string name="message_failed_access_camera">Failed to show the camera</string>
     <string name="message_failed_take_picture">Failed to take a picture</string>
     <string name="message_permission_denied">Camera permission denied</string>
+    <string name="label_empty_1">When you add your food history</string>
+    <string name="label_empty_2">You\'ll see it here</string>
 
 </resources>

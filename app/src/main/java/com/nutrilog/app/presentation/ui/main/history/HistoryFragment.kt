@@ -107,7 +107,12 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
         when (result) {
             is ResultState.Loading -> {}
             is ResultState.Success -> {
-                listHistoryAdapter.setHistoryData(result.data)
+                if (result.data.isEmpty()) {
+                    showEmpty(true)
+                } else {
+                    showEmpty(false)
+                    listHistoryAdapter.setHistoryData(result.data)
+                }
             }
 
             is ResultState.Error -> {
@@ -164,5 +169,17 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
     private fun showDetail(nutrition: Nutrition) {
         val bottomSheet = NutritionBottomSheet.newInstance(nutrition, false)
         bottomSheet.show(childFragmentManager, NutritionBottomSheet.TAG)
+    }
+
+    private fun showEmpty(isEmpty: Boolean) {
+        binding.apply {
+            if (isEmpty) {
+                emptyLayout.root.visibility = View.VISIBLE
+                rvHistory.visibility = View.GONE
+            } else {
+                emptyLayout.root.visibility = View.GONE
+                rvHistory.visibility = View.VISIBLE
+            }
+        }
     }
 }

@@ -118,7 +118,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/authorPhotoTwo"
         app:layout_constraintTop_toTopOf="@id/authorPhotoTwo"
-        android:src="@drawable/welcome_icon_3" />
+        android:src="@drawable/profile_gisella" />
 
     <TextView
         android:id="@+id/authorNameThree"
