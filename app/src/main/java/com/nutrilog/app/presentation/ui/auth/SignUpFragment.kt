@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentSignUpBinding
 import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.utils.constant.AppConstant.PASSWORD_LENGTH
 import com.nutrilog.app.utils.helpers.gone
@@ -67,7 +68,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                     )
 
             else -> {
-                signUpProcess(name, email, password)
+                // TODO: Change gender and age
+                signUpProcess(name, email, password, Gender.OTHER, 0)
             }
         }
     }
@@ -76,8 +78,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
         name: String,
         email: String,
         password: String,
+        gender: Gender,
+        age: Int,
     ) {
-        observe(authViewModel.signUp(name, email, password), ::showResultSignUp)
+        observe(authViewModel.signUp(name, email, password, gender, age), ::showResultSignUp)
     }
 
     private fun showResultSignUp(result: ResultState<String>) {

@@ -1,6 +1,7 @@
 package com.nutrilog.app.domain.repository
 
 import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
@@ -9,6 +10,8 @@ interface AuthRepository {
         name: String,
         email: String,
         password: String,
+        gender: Gender,
+        age: Int,
     ): Flow<ResultState<String>>
 
     suspend fun signIn(

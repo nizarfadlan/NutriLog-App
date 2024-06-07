@@ -4,6 +4,7 @@ import com.nutrilog.app.data.remote.request.LoginRequest
 import com.nutrilog.app.data.remote.request.RegisterRequest
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.datasource.AuthDataSource
+import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.domain.model.User
 import com.nutrilog.app.domain.repository.AuthRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +18,10 @@ class AuthRepositoryImpl(
         name: String,
         email: String,
         password: String,
+        gender: Gender,
+        age: Int,
     ): Flow<ResultState<String>> {
-        val requestData = RegisterRequest(name, email, password)
+        val requestData = RegisterRequest(name, email, password, gender, age)
         return dataSource.signUp(requestData).flowOn(Dispatchers.IO)
     }
 

@@ -67,15 +67,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun setSwitchLanguage(language: Language) {
         binding.switchTranslate.apply {
             isChecked = language == Language.ENGLISH
-            trackDrawable =
+            thumbDrawable =
                 AppCompatResources.getDrawable(
                     context,
                     if (language == Language.ENGLISH) R.drawable.flag_gb else R.drawable.flag_id,
-                )
-            thumbIconTintList =
-                AppCompatResources.getColorStateList(
-                    context,
-                    if (language == Language.ENGLISH) R.color.md_theme_onPrimary else R.color.md_theme_onPrimary,
                 )
         }
     }
