@@ -53,7 +53,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
         ) {
             with(binding) {
                 nutritionTypeTV.text = nutritionOption.label
-                val nutritionLevel = determineNutritionLevel(amount)
+                val nutritionLevel = determineNutritionLevel(amount, nutritionOption.label)
                 nutritionLevelTV.text = nutritionLevel.label
 
                 val formattedAmount =
@@ -78,11 +78,39 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
             }
         }
 
-        private fun determineNutritionLevel(amount: Double): NutritionLevel {
-            return when {
-                amount >= 45 -> NutritionLevel.CLOSE
-                amount > 10 && amount < 45 -> NutritionLevel.OPTIMAL
-                else -> NutritionLevel.DEFICIENT
+        private fun determineNutritionLevel(amount: Double, type: String): NutritionLevel {
+            return when (type) {
+                "Carbohydrate" -> {
+                    when {
+                        amount >= 436.25 && amount < 487.5 -> NutritionLevel.CLOSE
+                        amount > 270 && amount < 436.25 -> NutritionLevel.OPTIMAL
+                        else -> NutritionLevel.DEFICIENT
+                    }
+                }
+
+                "Protein" -> {
+                    when {
+                        amount >= 211.75 && amount < 262.5 -> NutritionLevel.CLOSE
+                        amount > 120 && amount < 211.75 -> NutritionLevel.OPTIMAL
+                        else -> NutritionLevel.DEFICIENT
+                    }
+                }
+
+                "Fat" -> {
+                    when {
+                        amount >= 101.15 && amount < 116.7 -> NutritionLevel.CLOSE
+                        amount > 53.3 && amount < 101.15 -> NutritionLevel.OPTIMAL
+                        else -> NutritionLevel.DEFICIENT
+                    }
+                }
+
+                else -> {
+                    when {
+                        amount >= 2900 && amount < 3000 -> NutritionLevel.CLOSE
+                        amount > 2400 && amount < 2900 -> NutritionLevel.OPTIMAL
+                        else -> NutritionLevel.DEFICIENT
+                    }
+                }
             }
         }
 
