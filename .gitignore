@@ -16,3 +16,4 @@ local.properties
 apikey.properties
 keystore.properties
 nutrilog-release.keystore
+nutrilog-release.jks

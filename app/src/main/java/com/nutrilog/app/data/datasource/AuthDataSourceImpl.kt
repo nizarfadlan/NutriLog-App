@@ -25,6 +25,8 @@ class AuthDataSourceImpl(
             emit(ResultState.Loading)
             try {
                 val response = service.register(request)
+                print(response)
+                print(response.status === StatusResponse.ERROR)
                 if (response.status === StatusResponse.ERROR) {
                     emit(ResultState.Error(response.message))
                     return@flow

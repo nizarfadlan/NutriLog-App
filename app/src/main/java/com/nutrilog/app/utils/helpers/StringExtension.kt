@@ -1,6 +1,7 @@
 package com.nutrilog.app.utils.helpers
 
 import android.util.Patterns
+import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.utils.constant.AppConstant
 
 val String.isEmailCorrect: Boolean
@@ -11,3 +12,11 @@ val String.isFullNameCorrect: Boolean
 
 val String.isLengthPasswordCorrect: Boolean
     get() = this.length >= AppConstant.PASSWORD_LENGTH
+
+fun String.convertGender(): Gender {
+    return when (this.lowercase()) {
+        "male" -> Gender.MALE
+        "female" -> Gender.FEMALE
+        else -> throw IllegalArgumentException("Unknown gender: $this")
+    }
+}
