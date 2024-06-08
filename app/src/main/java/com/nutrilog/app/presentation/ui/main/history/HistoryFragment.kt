@@ -19,8 +19,10 @@ import com.nutrilog.app.utils.helpers.getCalender
 import com.nutrilog.app.utils.helpers.getDaysInMonth
 import com.nutrilog.app.utils.helpers.getTimeInMillis
 import com.nutrilog.app.utils.helpers.getTimeToDate
+import com.nutrilog.app.utils.helpers.gone
 import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.setMonth
+import com.nutrilog.app.utils.helpers.show
 import com.nutrilog.app.utils.helpers.showSnackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
@@ -105,8 +107,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
 
     private fun onListHistoryResult(result: ResultState<List<Nutrition>>) {
         when (result) {
-            is ResultState.Loading -> {}
+            is ResultState.Loading -> showLoading(true)
             is ResultState.Success -> {
+                showLoading(false)
                 if (result.data.isEmpty()) {
                     showEmpty(true)
                 } else {
@@ -114,8 +117,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
                     listHistoryAdapter.setHistoryData(result.data)
                 }
             }
-
             is ResultState.Error -> {
+                showLoading(false)
+                showEmpty(true)
                 binding.root.showSnackBar(result.message)
             }
         }
@@ -173,13 +177,18 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
 
     private fun showEmpty(isEmpty: Boolean) {
         binding.apply {
-            if (isEmpty) {
-                emptyLayout.root.visibility = View.VISIBLE
-                rvHistory.visibility = View.GONE
-            } else {
-                emptyLayout.root.visibility = View.GONE
-                rvHistory.visibility = View.VISIBLE
+            emptyLayout.root.apply {
+                if (isEmpty) show() else gone()
             }
+            rvHistory.apply {
+                if (isEmpty) gone() else show()
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.loadingLayout.root.apply {
+            if (isLoading) show() else gone()
         }
     }
 }

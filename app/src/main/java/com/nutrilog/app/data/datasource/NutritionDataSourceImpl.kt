@@ -21,7 +21,13 @@ class NutritionDataSourceImpl(
 ) : NutritionDataSource {
     override suspend fun fetchNutrients(date: Date): Flow<ResultState<List<Nutrition>>> =
         flow {
-            emit(ResultState.Loading)
+            val localData = database.getNutritionDao().getNutritionByDate(date)
+            if (localData.isNotEmpty()) {
+                emit(ResultState.Success(localData))
+            } else {
+                emit(ResultState.Loading)
+            }
+
             try {
                 val response = service.getNutrients(date.convertDateToString())
                 if (response.status === StatusResponse.ERROR) {

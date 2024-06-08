@@ -84,6 +84,7 @@ class NutritionBottomSheet(
     private fun behavior() {
         val behavior = BottomSheetBehavior.from(binding.nutritionBottomSheet)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior.isDraggable = false
     }
 
     private fun initViews() {

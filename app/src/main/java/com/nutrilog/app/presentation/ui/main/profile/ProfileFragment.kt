@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentProfileBinding
 import com.nutrilog.app.domain.common.ResultState
@@ -66,12 +65,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun setSwitchLanguage(language: Language) {
         binding.switchTranslate.apply {
-            isChecked = language == Language.ENGLISH
-            thumbDrawable =
-                AppCompatResources.getDrawable(
-                    context,
-                    if (language == Language.ENGLISH) R.drawable.flag_gb else R.drawable.flag_id,
-                )
+            isChecked = language != Language.ENGLISH
         }
     }
 

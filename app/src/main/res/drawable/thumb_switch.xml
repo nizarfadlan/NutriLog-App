@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true">
-        <shape android:shape="oval">
-            <solid android:color="@android:color/white" />
-        </shape>
-    </item>
-    <item>
-        <shape android:shape="oval">
-            <solid android:color="@android:color/white" />
-        </shape>
-    </item>
+    <item android:id="@+id/checked" android:drawable="@drawable/ic_thumb_id" android:state_checked="true" />
+
+    <item android:id="@+id/unchecked" android:state_checked="false" android:drawable="@drawable/ic_thumb_en" />
 </selector>
