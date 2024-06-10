@@ -16,6 +16,8 @@ import com.nutrilog.app.domain.model.NutritionOption
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() {
     private var nutritionDataList: List<Pair<NutritionOption, Double>> = listOf()
+    private var userAge: Int = 0
+    private var userGender: String = ""
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -41,6 +43,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
         val diffResult = DiffUtil.calculateDiff(NutritionDiffCallback(nutritionDataList, newList))
         nutritionDataList = newList
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun setUserData(age: Int, gender: String){
+        userAge = age
+        userGender = gender
     }
 
     inner class NutritionDataViewHolder(

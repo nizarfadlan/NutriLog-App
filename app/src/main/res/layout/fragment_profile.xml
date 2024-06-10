@@ -127,13 +127,81 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/logoutSection"
+                android:id="@+id/activityLevelSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/languageSection">
+
+                <ImageView
+                    android:id="@+id/activityLevelIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:layout_marginVertical="@dimen/dimen_16dp"
+                    android:contentDescription="@string/language_content_desc"
+                    android:src="@drawable/ic_language_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp" />
+
+                <TextView
+                    android:id="@+id/activityLevelTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp"
+                    style="@style/Text.Body1"
+                    android:text="@string/label_action_level"
+                    app:layout_constraintTop_toTopOf="@id/activityLevelIv"
+                    app:layout_constraintBottom_toBottomOf="@id/activityLevelIv"
+                    app:layout_constraintStart_toEndOf="@id/activityLevelIv"
+                    app:layout_constraintEnd_toStartOf="@id/select_action_level" />
+
+                <com.skydoves.powerspinner.PowerSpinnerView
+                    android:id="@+id/select_action_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_spinner"
+                    android:gravity="center"
+                    android:hint="@string/label_select_active_level"
+                    android:paddingHorizontal="@dimen/dimen_16dp"
+                    android:paddingVertical="@dimen/dimen_12dp"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textColorHint="?attr/colorOnBackground"
+                    android:textSize="@dimen/font_caption"
+                    android:fontFamily="@font/sailec_bold"
+                    app:spinner_arrow_drawable="@drawable/ic_chevron_down_24"
+                    app:spinner_arrow_animate="true"
+                    app:spinner_arrow_animate_duration="100"
+                    app:spinner_arrow_gravity="end"
+                    app:spinner_arrow_padding="@dimen/dimen_2dp"
+                    app:spinner_arrow_show="true"
+                    app:spinner_item_array="@array/ActLevel"
+                    app:spinner_item_height="46dp"
+                    app:spinner_selected_item_background="@drawable/bg_selected_item"
+                    app:spinner_popup_animation="dropdown"
+                    app:spinner_popup_max_height="@dimen/dimen_230dp"
+                    app:spinner_popup_width="@dimen/dimen_170dp"
+                    app:spinner_popup_background="@drawable/bg_popup_spinner"
+                    app:spinner_popup_padding="5dp"
+                    app:spinner_popup_elevation="@dimen/dimen_14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/activityLevelTv"
+                    app:layout_constraintBottom_toBottomOf="@id/activityLevelTv"
+                    app:layout_constraintStart_toEndOf="@id/activityLevelTv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logoutSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activityLevelSection">
 
                 <ImageView
                     android:id="@+id/logoutIv"

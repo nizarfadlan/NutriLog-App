@@ -21,6 +21,8 @@
     <string name="header_signup_title">Create an account</string>
     <string name="header_signup_subtitle">Let’s start your healthy day</string>
 
+    <string name="label_select_active_level">Active Level</string>
+
     <string name="label_full_name">Full Name</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
@@ -94,6 +96,13 @@
         <item>December</item>
     </string-array>
 
+    <!-- Activity Level -->
+    <string-array name="ActLevel">
+        <item>Active</item>
+        <item>Moderately Active</item>
+        <item>Sedentary</item>
+    </string-array>
+
     <!-- Common -->
     <string name="validation_must_not_empty">Field cannot be empty</string>
 
@@ -127,5 +136,6 @@
     <string name="message_permission_denied">Camera permission denied</string>
     <string name="label_empty_1">When you add your food history</string>
     <string name="label_empty_2">You\'ll see it here</string>
+    <string name="label_action_level">Action Level</string>
 
 </resources>

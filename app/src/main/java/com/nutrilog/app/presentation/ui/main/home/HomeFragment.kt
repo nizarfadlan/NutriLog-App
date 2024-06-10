@@ -48,6 +48,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         observe(homeViewModel.calculateNutrients(date)) {
             homeAdapter.setNutritionData(it)
         }
+
+        observe(authViewModel.getSession()) {
+            homeAdapter.setUserData(
+                it.age,
+                it.gender.label
+            )
+        }
     }
 
     private fun initAction() {
