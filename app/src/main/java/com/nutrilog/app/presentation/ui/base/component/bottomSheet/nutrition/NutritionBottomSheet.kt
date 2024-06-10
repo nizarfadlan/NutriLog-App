@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nutrilog.app.databinding.LayoutNutritionBottomSheetBinding
 import com.nutrilog.app.domain.model.Nutrition
 import com.nutrilog.app.utils.GridSpacingItemDecoration
-import com.nutrilog.app.utils.helpers.convertDateTimeToString
+import com.nutrilog.app.utils.helpers.convertDateTimeLocaleToString
 import com.nutrilog.app.utils.helpers.convertToNutritionLevel
 import com.nutrilog.app.utils.helpers.dpToPx
 import com.nutrilog.app.utils.helpers.gone
@@ -95,7 +95,7 @@ class NutritionBottomSheet(
             }
 
             textFoodName.text = nutrition.foodName
-            textDate.text = nutrition.createdAt.convertDateTimeToString()
+            textDate.text = nutrition.createdAt.convertDateTimeLocaleToString()
 
             if (isFooter) {
                 buttonCancel.setOnClickListener { dismiss() }

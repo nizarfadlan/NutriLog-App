@@ -2,24 +2,37 @@ package com.nutrilog.app.presentation.ui.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentSignUpBinding
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.utils.constant.AppConstant.PASSWORD_LENGTH
+import com.nutrilog.app.utils.helpers.convertDateLocaleToString
+import com.nutrilog.app.utils.helpers.convertStringLocaleToDate
+import com.nutrilog.app.utils.helpers.getCalender
+import com.nutrilog.app.utils.helpers.getTimeInMillis
 import com.nutrilog.app.utils.helpers.gone
 import com.nutrilog.app.utils.helpers.isLengthPasswordCorrect
+import com.nutrilog.app.utils.helpers.isValidateGender
 import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.show
 import com.nutrilog.app.utils.helpers.showSnackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Calendar
+import java.util.Date
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
     private val authViewModel: AuthViewModel by viewModel()
+
+    private var selectDate: Long? = null
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSignUpBinding =
         FragmentSignUpBinding::inflate
@@ -38,13 +51,60 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             btnSignup.setOnClickListener {
                 signUpRequest()
             }
+
+            edRegisterDateBirth.apply {
+                keyListener = null
+                setOnTouchListener { _, motionEvent ->
+                    when (motionEvent.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            openDatePicker()
+                        }
+
+                        MotionEvent.ACTION_UP -> {
+                            view.performClick()
+                        }
+                    }
+                    true
+                }
+                setOnClickListener { openDatePicker() }
+            }
         }
+    }
+
+    private fun openDatePicker() {
+        val dateObject = selectDate?.let { Date(it) } ?: Date()
+        val (day, month, year) = dateObject.getCalender(locale)
+        val dateMilliseconds = getTimeInMillis(day, month, year)
+
+        val constraints =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.before(Calendar.getInstance().timeInMillis))
+                .build()
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date of birth")
+                .setSelection(dateMilliseconds)
+                .setCalendarConstraints(constraints)
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            selectDate = selection
+            val date = Date(selection)
+            val format = date.convertDateLocaleToString()
+            binding.edRegisterDateBirth.setText(format)
+        }
+
+        datePicker.show(parentFragmentManager, "datePicker")
     }
 
     private fun signUpRequest() {
         val name = binding.edRegisterName.text.toString()
         val email = binding.edRegisterEmail.text.toString()
         val password = binding.edRegisterPassword.text.toString()
+        val gender = binding.edRegisterGender.text.toString()
+        val dateOfBirth = binding.edRegisterDateBirth.text.toString()
+
         when {
             name.isEmpty() ->
                 binding.edRegisterName.error =
@@ -67,9 +127,23 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                         PASSWORD_LENGTH,
                     )
 
+            gender.isEmpty() ->
+                binding.edRegisterGender.error =
+                    getString(R.string.validation_must_not_empty)
+
+            !gender.isValidateGender ->
+                binding.edRegisterGender.error =
+                    getString(R.string.validation_gender)
+
+            dateOfBirth.isEmpty() ->
+                binding.edRegisterDateBirth.error =
+                    getString(R.string.validation_must_not_empty)
+
             else -> {
-                // TODO: Change gender and age
-                signUpProcess(name, email, password, Gender.OTHER, 0)
+                val genderEnum = Gender.valueOf(gender)
+                val convertDOB = dateOfBirth.convertStringLocaleToDate()
+
+                signUpProcess(name, email, password, genderEnum, convertDOB)
             }
         }
     }
@@ -79,9 +153,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
         email: String,
         password: String,
         gender: Gender,
-        age: Int,
+        dateOfBirth: Date,
     ) {
-        observe(authViewModel.signUp(name, email, password, gender, age), ::showResultSignUp)
+        observe(
+            authViewModel.signUp(name, email, password, gender, dateOfBirth),
+            ::showResultSignUp,
+        )
     }
 
     private fun showResultSignUp(result: ResultState<String>) {

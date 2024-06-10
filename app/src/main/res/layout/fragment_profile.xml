@@ -141,7 +141,7 @@
                     android:layout_height="@dimen/dimen_36dp"
                     android:layout_marginVertical="@dimen/dimen_16dp"
                     android:contentDescription="@string/language_content_desc"
-                    android:src="@drawable/ic_language_24"
+                    android:src="@drawable/ic_activity_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

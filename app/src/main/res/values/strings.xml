@@ -15,6 +15,8 @@
     <string name="hint_full_name">Enter your full name</string>
     <string name="hint_email">Enter your email</string>
     <string name="hint_password">Enter your password</string>
+    <string name="hint_gender">Select your gender</string>
+    <string name="hint_date_birth">Enter your date birth</string>
 
     <string name="header_signin_title">Welcome back,</string>
     <string name="header_signin_subtitle">You’ve been missed!</string>
@@ -26,6 +28,8 @@
     <string name="label_full_name">Full Name</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
+    <string name="label_gender">Gender</string>
+    <string name="label_date_birth">Date of birth</string>
 
     <string name="label_signin_here">Already have an account?</string>
     <string name="label_signin">Sign In</string>
@@ -35,6 +39,7 @@
     <string name="validation_full_name">Full name can only be characters</string>
     <string name="validation_email">Your email format is not correct</string>
     <string name="validation_password">Minimum of %d characters</string>
+    <string name="validation_gender">Unknown gender</string>
 
     <!-- Analysis -->
     <string name="label_photo">Photo</string>
@@ -103,6 +108,12 @@
         <item>Sedentary</item>
     </string-array>
 
+    <!-- Gender -->
+    <string-array name="Gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
     <!-- Common -->
     <string name="validation_must_not_empty">Field cannot be empty</string>
 
@@ -123,6 +134,9 @@
     <string name="label_language">Language</string>
     <string name="label_icon_gallery">Gallery</string>
     <string name="label_icon_camera">Camera</string>
+    <string name="label_empty_1">When you add your food history</string>
+    <string name="label_empty_2">You\'ll see it here</string>
+    <string name="label_action_level">Action Level</string>
 
     <!-- Bottom Sheet -->
     <string name="label_food_name">Food Name</string>
@@ -134,8 +148,5 @@
     <string name="message_failed_access_camera">Failed to show the camera</string>
     <string name="message_failed_take_picture">Failed to take a picture</string>
     <string name="message_permission_denied">Camera permission denied</string>
-    <string name="label_empty_1">When you add your food history</string>
-    <string name="label_empty_2">You\'ll see it here</string>
-    <string name="label_action_level">Action Level</string>
 
 </resources>

@@ -7,6 +7,16 @@ import java.util.Locale
 
 data class DayInfo(val dayOfWeek: String, val dayOfMonth: Int)
 
+object DateFormatUtil {
+    fun getDateFormatForLocale(locale: Locale): String {
+        return if (locale.language == "id") {
+            "dd/MM/yyyy"
+        } else {
+            "MM/dd/yyyy"
+        }
+    }
+}
+
 /**
  * Get calender from date
  *
@@ -52,6 +62,19 @@ fun getDaysInMonth(
     return daysInMonth
 }
 
+fun Date.getAgeFromBirthDate(): Int {
+    val birthCalendar = Calendar.getInstance().apply { time = this@getAgeFromBirthDate }
+    val currentCalendar = Calendar.getInstance()
+
+    var age = currentCalendar.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
+
+    if (currentCalendar.get(Calendar.DAY_OF_YEAR) < birthCalendar.get(Calendar.DAY_OF_YEAR)) {
+        age--
+    }
+
+    return age
+}
+
 private fun getCalender(
     day: Int,
     month: Int,
@@ -87,8 +110,25 @@ fun getTimeToDate(
     return calendar.time
 }
 
-fun Date.convertDateTimeToString(): String {
-    return SimpleDateFormat("dd/MM/yyyy | HH:mm", Locale.getDefault()).format(this)
+fun Date.convertDateTimeLocaleToString(): String {
+    val currentLocale = Locale.getDefault()
+    val dateFormat = DateFormatUtil.getDateFormatForLocale(currentLocale)
+    val timeFormat = "HH:mm"
+    val dateTimeFormat = "$dateFormat | $timeFormat"
+
+    return SimpleDateFormat(dateTimeFormat, currentLocale).format(this)
+}
+
+fun Date.convertDateLocaleToString(): String {
+    val currentLocale = Locale.getDefault()
+    val dateFormat = DateFormatUtil.getDateFormatForLocale(currentLocale)
+    return SimpleDateFormat(dateFormat, currentLocale).format(this)
+}
+
+fun String.convertStringLocaleToDate(): Date {
+    val currentLocale = Locale.getDefault()
+    val dateFormat = DateFormatUtil.getDateFormatForLocale(currentLocale)
+    return SimpleDateFormat(dateFormat, currentLocale).parse(this)!!
 }
 
 fun String.convertStringToDate(): Date? {

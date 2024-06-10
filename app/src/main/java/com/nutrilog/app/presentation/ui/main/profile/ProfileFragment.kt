@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentProfileBinding
 import com.nutrilog.app.domain.common.ResultState
+import com.nutrilog.app.domain.model.ActiveLevel
 import com.nutrilog.app.domain.model.Language
 import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseFragment
@@ -42,6 +43,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun initObserver() {
         observe(profileViewModel.getLanguage(), ::handleLanguageChange)
+        observe(profileViewModel.getActiveLevel(), ::handleActionLevel)
     }
 
     private fun initUI() {
@@ -54,6 +56,28 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
             logoutSection.setOnClickListener {
                 observe(authViewModel.signOut, ::onSignOutResult)
+            }
+
+            selectActionLevel.setOnSpinnerItemSelectedListener<String> { oldIndex, _, newIndex, _ ->
+                if (oldIndex != newIndex) {
+                    val level =
+                        when (newIndex) {
+                            0 -> ActiveLevel.ACTIVE
+                            1 -> ActiveLevel.MODERATELY
+                            else -> ActiveLevel.SEDENTARY
+                        }
+                    profileViewModel.saveActiveLevelSetting(level)
+                }
+            }
+        }
+    }
+
+    private fun handleActionLevel(level: ActiveLevel) {
+        binding.selectActionLevel.apply {
+            when (level) {
+                ActiveLevel.ACTIVE -> selectItemByIndex(0)
+                ActiveLevel.MODERATELY -> selectItemByIndex(1)
+                ActiveLevel.SEDENTARY -> selectItemByIndex(2)
             }
         }
     }

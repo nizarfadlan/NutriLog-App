@@ -20,3 +20,6 @@ fun String.convertGender(): Gender {
         else -> throw IllegalArgumentException("Unknown gender: $this")
     }
 }
+
+val String.isValidateGender: Boolean
+    get() = this.lowercase() == Gender.MALE.label || this.lowercase() == Gender.FEMALE.label
