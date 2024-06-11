@@ -10,12 +10,14 @@ import com.nutrilog.app.databinding.FragmentHomeBinding
 import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.presentation.ui.main.home.adapter.HomeAdapter
+import com.nutrilog.app.presentation.ui.main.profile.ProfileViewModel
 import com.nutrilog.app.utils.helpers.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val authViewModel: AuthViewModel by viewModel()
+    private val profileViewModel: ProfileViewModel by viewModel()
     private val homeViewModel: HomeViewModel by viewModel()
     private val homeAdapter by lazy { HomeAdapter() }
 
@@ -53,6 +55,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             homeAdapter.setUserData(
                 it.age,
                 it.gender.label
+            )
+        }
+
+        observe(profileViewModel.getActiveLevel()) {
+            homeAdapter.setActiveLevel(
+                it
             )
         }
     }
