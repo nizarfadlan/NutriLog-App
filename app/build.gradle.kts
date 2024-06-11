@@ -62,6 +62,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        mlModelBinding = true
     }
 }
 
@@ -118,6 +119,12 @@ dependencies {
 
     // Image
     implementation(libs.androidx.exifinterface)
+
+    // ML
+    implementation("org.tensorflow:tensorflow-lite:2.4.0")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.9.0")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
 
     // Test
     testImplementation(libs.junit)

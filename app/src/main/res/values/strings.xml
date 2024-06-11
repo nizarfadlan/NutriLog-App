@@ -52,6 +52,10 @@
 
     <string name="actions_analysis">Submit</string>
 
+    <string name="message_error_analyze">Analyze image failed to initialize. See the error log for details</string>
+    <string name="message_error_nutrition">Failed to get nutrition data. Please try again later</string>
+    <string name="message_empty_image_warning">Please insert the image file first</string>
+
 
     <!-- About Us -->
     <string name="header_about_title">About Us</string>

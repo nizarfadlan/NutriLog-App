@@ -22,6 +22,7 @@ import com.nutrilog.app.presentation.ui.base.component.dialog.PhotoDialogFragmen
 import com.nutrilog.app.presentation.ui.camera.CameraActivity
 import com.nutrilog.app.presentation.ui.camera.CameraActivity.Companion.CAMERAX_RESULT
 import com.nutrilog.app.utils.constant.AppConstant.REQUIRED_CAMERA_PERMISSION
+import com.nutrilog.app.utils.helpers.ImageClassifierHelper
 import com.nutrilog.app.utils.helpers.gone
 import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.reduceFileImage
@@ -117,18 +118,44 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
     private fun uploadAnalysisProcess() {
         currentImageUri?.let { uri ->
             imageFile = uri.uriToFile(this).reduceFileImage()
+            val imageClassifier =
+                ImageClassifierHelper(
+                    context = this,
+                    classifierListener =
+                        object : ImageClassifierHelper.ClassifierListener {
+                            override fun onError(error: String) {
+                                binding.root.showSnackBar(error)
+                            }
 
-            // Analyze image to model
-            val dataNutrition =
-                ResultNutrition(
-                    foodName = "Nasi Goreng",
-                    carbohydrate = 10f,
-                    proteins = 10f,
-                    fat = 10f,
-                    calories = 10f,
+                            override fun onResults(results: ImageClassifierHelper.ClassifierResult?) {
+                                results?.let { analyze ->
+                                    if (analyze.label.isNotEmpty() && analyze.index != -1) {
+                                        val nutrition = getNutrition(analyze.label)
+                                        println(nutrition)
+                                        println(analyze.label)
+//                                        showResult(nutrition)
+                                    } else {
+                                        binding.root.showSnackBar(getString(R.string.message_error_analyze))
+                                    }
+                                }
+                            }
+                        },
                 )
-            showResult(dataNutrition)
-        }
+            imageClassifier.classifyStaticImage(uri)
+        } ?: binding.root.showSnackBar(getString(R.string.message_empty_image_warning))
+    }
+
+    private fun getNutrition(foodName: String): ResultNutrition {
+        // TODO: Replace with real data
+        val dataNutrition =
+            ResultNutrition(
+                foodName,
+                carbohydrate = 10f,
+                proteins = 10f,
+                fat = 10f,
+                calories = 10f,
+            )
+        return dataNutrition
     }
 
     private fun showResult(nutrition: ResultNutrition) {

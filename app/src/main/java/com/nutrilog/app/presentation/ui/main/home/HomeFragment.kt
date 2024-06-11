@@ -54,12 +54,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         observe(authViewModel.getSession()) { user ->
-            val dateStringToDate = user.dateOfBirth.convertStringToDate()
-            dateStringToDate.takeIf { it != null }?.let { dateOfBirth ->
-                homeAdapter.setUserData(
-                    dateOfBirth.getAgeFromBirthDate(),
-                    user.gender.label,
-                )
+            user.dateOfBirth.takeIf { it != "" }?.let {
+                val dateStringToDate = user.dateOfBirth.convertStringToDate()
+                dateStringToDate.takeIf { it != null }?.let { dateOfBirth ->
+                    homeAdapter.setUserData(
+                        dateOfBirth.getAgeFromBirthDate(),
+                        user.gender.label,
+                    )
+                }
             }
         }
 
