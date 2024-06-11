@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.nutrilog.app.domain.model.Gender
@@ -24,7 +23,7 @@ class UserSessionPreference(context: Context) {
     private val nameKey = stringPreferencesKey("name")
     private val emailKey = stringPreferencesKey("email")
     private val genderKey = stringPreferencesKey("gender")
-    private val ageKey = intPreferencesKey("age")
+    private val dateOfBirthKey = stringPreferencesKey("dateOfBirth")
     private val tokenKey = stringPreferencesKey("token")
 
     suspend fun saveSession(user: User) {
@@ -33,7 +32,7 @@ class UserSessionPreference(context: Context) {
             preferences[nameKey] = user.name
             preferences[emailKey] = user.email
             preferences[genderKey] = user.gender.label
-            preferences[ageKey] = user.age
+            preferences[dateOfBirthKey] = user.dateOfBirth
             preferences[tokenKey] = user.token
         }
     }
@@ -45,7 +44,7 @@ class UserSessionPreference(context: Context) {
                 preferences[nameKey] ?: "",
                 preferences[emailKey] ?: "",
                 preferences[genderKey]?.convertGender() ?: Gender.OTHER,
-                preferences[ageKey] ?: 0,
+                preferences[dateOfBirthKey] ?: "",
                 preferences[tokenKey] ?: "",
             )
         }

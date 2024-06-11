@@ -4,6 +4,7 @@ import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.domain.model.User
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 interface AuthRepository {
     suspend fun signUp(
@@ -11,7 +12,7 @@ interface AuthRepository {
         email: String,
         password: String,
         gender: Gender,
-        age: Int,
+        dateOfBirth: Date,
     ): Flow<ResultState<String>>
 
     suspend fun signIn(

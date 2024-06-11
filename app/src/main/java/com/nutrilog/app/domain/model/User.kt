@@ -1,11 +1,14 @@
 package com.nutrilog.app.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
     val id: String,
     val name: String,
     val email: String,
     val gender: Gender,
-    val age: Int,
+    @field:SerializedName("date_of_birth")
+    val dateOfBirth: String,
     val token: String,
 )
 

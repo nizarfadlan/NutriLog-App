@@ -9,7 +9,6 @@ import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.domain.model.User
 import com.nutrilog.app.domain.repository.AuthRepository
 import com.nutrilog.app.presentation.common.OperationLiveData
-import com.nutrilog.app.utils.helpers.getAgeFromBirthDate
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -35,12 +34,9 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
         gender: Gender,
         dateOfBirth: Date,
     ): LiveData<ResultState<String>> {
-        val age = dateOfBirth.getAgeFromBirthDate()
-
-        // TODO: Implement dateOfBirth After CC fix API
         return OperationLiveData<ResultState<String>> {
             viewModelScope.launch {
-                repository.signUp(name, email, password, gender, age)
+                repository.signUp(name, email, password, gender, dateOfBirth)
                     .collect {
                         postValue(it)
                     }

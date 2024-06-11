@@ -11,6 +11,8 @@ import com.nutrilog.app.presentation.ui.auth.AuthViewModel
 import com.nutrilog.app.presentation.ui.base.BaseFragment
 import com.nutrilog.app.presentation.ui.main.home.adapter.HomeAdapter
 import com.nutrilog.app.presentation.ui.main.profile.ProfileViewModel
+import com.nutrilog.app.utils.helpers.convertStringToDate
+import com.nutrilog.app.utils.helpers.getAgeFromBirthDate
 import com.nutrilog.app.utils.helpers.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
@@ -51,16 +53,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             homeAdapter.setNutritionData(it)
         }
 
-        observe(authViewModel.getSession()) {
-            homeAdapter.setUserData(
-                it.age,
-                it.gender.label
-            )
+        observe(authViewModel.getSession()) { user ->
+            val dateStringToDate = user.dateOfBirth.convertStringToDate()
+            dateStringToDate.takeIf { it != null }?.let { dateOfBirth ->
+                homeAdapter.setUserData(
+                    dateOfBirth.getAgeFromBirthDate(),
+                    user.gender.label,
+                )
+            }
         }
 
         observe(profileViewModel.getActiveLevel()) {
             homeAdapter.setActiveLevel(
-                it
+                it,
             )
         }
     }

@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.chip.navigation.bar)
     implementation(libs.powerspinner)
     implementation(libs.circleimageview)
+    implementation("com.github.AAChartModel:AAChartCore-Kotlin:7.2.1")
 
     // Kotlin
     implementation(libs.androidx.core.ktx)

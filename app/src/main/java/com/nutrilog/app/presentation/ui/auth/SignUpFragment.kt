@@ -140,7 +140,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                     getString(R.string.validation_must_not_empty)
 
             else -> {
-                val genderEnum = Gender.valueOf(gender)
+                val genderEnum =
+                    Gender.entries.find { it.label == gender.lowercase() }
+                        ?: throw IllegalArgumentException("No enum constant for gender: $gender")
                 val convertDOB = dateOfBirth.convertStringLocaleToDate()
 
                 signUpProcess(name, email, password, genderEnum, convertDOB)

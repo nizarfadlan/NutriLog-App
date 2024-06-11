@@ -7,9 +7,11 @@ import com.nutrilog.app.domain.datasource.AuthDataSource
 import com.nutrilog.app.domain.model.Gender
 import com.nutrilog.app.domain.model.User
 import com.nutrilog.app.domain.repository.AuthRepository
+import com.nutrilog.app.utils.helpers.convertDateToString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import java.util.Date
 
 class AuthRepositoryImpl(
     private val dataSource: AuthDataSource,
@@ -19,9 +21,10 @@ class AuthRepositoryImpl(
         email: String,
         password: String,
         gender: Gender,
-        age: Int,
+        dateOfBirth: Date,
     ): Flow<ResultState<String>> {
-        val requestData = RegisterRequest(name, email, password, gender, age)
+        val convertDateToString = dateOfBirth.convertDateToString()
+        val requestData = RegisterRequest(name, email, password, gender.label, convertDateToString)
         return dataSource.signUp(requestData).flowOn(Dispatchers.IO)
     }
 
