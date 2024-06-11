@@ -131,9 +131,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                                 results?.let { analyze ->
                                     if (analyze.label.isNotEmpty() && analyze.index != -1) {
                                         val nutrition = getNutrition(analyze.label)
-                                        println(nutrition)
-                                        println(analyze.label)
-//                                        showResult(nutrition)
+                                        showResult(nutrition)
                                     } else {
                                         binding.root.showSnackBar(getString(R.string.message_error_analyze))
                                     }
@@ -147,6 +145,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
 
     private fun getNutrition(foodName: String): ResultNutrition {
         // TODO: Replace with real data
+        // Use observer to get data from API
         val dataNutrition =
             ResultNutrition(
                 foodName,

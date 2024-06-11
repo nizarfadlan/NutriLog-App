@@ -1,10 +1,15 @@
 package com.nutrilog.app.di.module
 
+import com.google.gson.GsonBuilder
 import com.nutrilog.app.BuildConfig
 import com.nutrilog.app.data.pref.UserSessionPreference
+import com.nutrilog.app.data.remote.GenderAdapter
 import com.nutrilog.app.data.remote.HeaderInterceptor
+import com.nutrilog.app.data.remote.ResponseStatusAdapter
 import com.nutrilog.app.data.remote.service.AuthService
 import com.nutrilog.app.data.remote.service.NutritionService
+import com.nutrilog.app.domain.common.StatusResponse
+import com.nutrilog.app.domain.model.Gender
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -31,10 +36,16 @@ fun provideHttpClient(userSessionPreference: UserSessionPreference): OkHttpClien
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    val gson =
+        GsonBuilder()
+            .registerTypeAdapter(Gender::class.java, GenderAdapter())
+            .registerTypeAdapter(StatusResponse::class.java, ResponseStatusAdapter())
+            .create()
+
     return Retrofit.Builder()
         .baseUrl(BuildConfig.API_BASE_URL)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 }
 

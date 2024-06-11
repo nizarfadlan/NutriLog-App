@@ -60,7 +60,6 @@ class NutritionDataSourceImpl(
             emit(ResultState.Loading)
             try {
                 val response = service.analyze(request)
-
                 if (response.status === StatusResponse.ERROR) {
                     emit(ResultState.Error(response.message))
                     return@flow

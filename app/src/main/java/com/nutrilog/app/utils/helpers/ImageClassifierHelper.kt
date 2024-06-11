@@ -8,11 +8,7 @@ import android.os.Build
 import android.provider.MediaStore
 import com.nutrilog.app.R
 import com.nutrilog.app.ml.Model
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.common.ops.CastOp
-import org.tensorflow.lite.support.image.ImageProcessor
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
+import com.nutrilog.app.utils.ImageProcessor
 import timber.log.Timber
 
 class ImageClassifierHelper(
@@ -47,11 +43,7 @@ class ImageClassifierHelper(
             setupModel()
         }
 
-        val imageProcessor =
-            ImageProcessor.Builder()
-                .add(ResizeOp(IMAGE_SIZE, IMAGE_SIZE, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
-                .add(CastOp(DataType.FLOAT32))
-                .build()
+        val imageProcessor = ImageProcessor()
 
         val contentResolver = context.contentResolver
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -60,8 +52,8 @@ class ImageClassifierHelper(
         } else {
             MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
         }.copy(Bitmap.Config.ARGB_8888, true)?.let { bitmap ->
-            val tensorImage = imageProcessor.process(TensorImage.fromBitmap(bitmap))
-            val outputs = model?.process(tensorImage.tensorBuffer)
+            val tensorImage = imageProcessor.preprocess(bitmap)
+            val outputs = model?.process(tensorImage)
             val outputBuffer = outputs?.outputFeature0AsTensorBuffer
             val valueMax = outputBuffer?.let { getMax(it.floatArray) }
 
