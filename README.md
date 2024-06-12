@@ -45,8 +45,3 @@ com.nutrilog.app
 ## 🤗 Credits
 
 - 🤓 Icons are from [tablericons.com](https://tablericons.com)   
-
-
-## Todo
-
-- [ ] Implement model tensorflow lite
