@@ -9,6 +9,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.ActivityAnalysisBinding
 import com.nutrilog.app.domain.common.ResultState
@@ -29,9 +30,13 @@ import com.nutrilog.app.utils.helpers.reduceFileImage
 import com.nutrilog.app.utils.helpers.show
 import com.nutrilog.app.utils.helpers.showSnackBar
 import com.nutrilog.app.utils.helpers.uriToFile
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.util.Date
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
     private var imageFile: File? = null
@@ -117,6 +122,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
 
     private fun uploadAnalysisProcess() {
         currentImageUri?.let { uri ->
+            showLoading(true)
             imageFile = uri.uriToFile(this).reduceFileImage()
             val imageClassifier =
                 ImageClassifierHelper(
@@ -125,13 +131,19 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                         object : ImageClassifierHelper.ClassifierListener {
                             override fun onError(error: String) {
                                 binding.root.showSnackBar(error)
+                                showLoading(false)
                             }
 
-                            override fun onResults(results: ImageClassifierHelper.ClassifierResult?) {
+                            override suspend fun onResults(results: ImageClassifierHelper.ClassifierResult?) {
                                 results?.let { analyze ->
                                     if (analyze.label.isNotEmpty() && analyze.index != -1) {
-                                        val nutrition = getNutrition(analyze.label)
-                                        showResult(nutrition)
+                                        showLoading(true)
+                                        val nutrition =
+                                            lifecycleScope.async {
+                                                getNutrition(analyze.label)
+                                            }.await()
+                                        nutrition?.let { showResult(it) }
+                                        showLoading(false)
                                     } else {
                                         binding.root.showSnackBar(getString(R.string.message_error_analyze))
                                     }
@@ -139,22 +151,38 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                             }
                         },
                 )
-            imageClassifier.classifyStaticImage(uri)
+            lifecycleScope.launch {
+                imageClassifier.classifyStaticImage(uri)
+            }
         } ?: binding.root.showSnackBar(getString(R.string.message_empty_image_warning))
     }
 
-    private fun getNutrition(foodName: String): ResultNutrition {
-        // TODO: Replace with real data
-        // Use observer to get data from API
-        val dataNutrition =
-            ResultNutrition(
-                foodName,
-                carbohydrate = 10f,
-                proteins = 10f,
-                fat = 10f,
-                calories = 10f,
-            )
-        return dataNutrition
+    private suspend fun getNutrition(foodName: String): ResultNutrition? {
+        return suspendCoroutine { continuation ->
+            observe(analysisViewModel.fetchNutritionFood(foodName)) { result ->
+                when (result) {
+                    is ResultState.Loading -> showLoading(true)
+                    is ResultState.Success -> {
+                        showLoading(false)
+                        val nutritionFood = result.data
+                        val dataNutrition =
+                            ResultNutrition(
+                                foodName,
+                                carbohydrate = nutritionFood.carbohydrates,
+                                proteins = nutritionFood.protein,
+                                fat = nutritionFood.fat,
+                                calories = nutritionFood.calories,
+                            )
+                        continuation.resume(dataNutrition)
+                    }
+
+                    is ResultState.Error -> {
+                        showLoading(false)
+                        binding.root.showSnackBar(result.message)
+                    }
+                }
+            }
+        }
     }
 
     private fun showResult(nutrition: ResultNutrition) {

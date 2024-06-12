@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nutrilog.app.databinding.HistoryCardBinding
 import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.utils.helpers.capitalizeWords
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -49,7 +50,7 @@ class HistoryAdapter(
                 val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
                 hourTV.text = dateFormat.format(nutrition.createdAt)
 
-                foodNameTV.text = nutrition.foodName
+                foodNameTV.text = nutrition.foodName.capitalizeWords()
 
                 root.setOnClickListener {
                     onItemClickCallback(nutrition)

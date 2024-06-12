@@ -48,6 +48,9 @@ jobs:
           VERSION_NAME=$(${{github.workspace}}/gradlew -q printVersionName)
           echo "version_name=${VERSION_NAME}" >> $GITHUB_OUTPUT
 
+      - name: Download Models
+        run: ./gradlew downloadModelFile
+
   lint:
     needs: [ setup ]
     name: Perform Lint
@@ -69,6 +72,9 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
 
       - name: Run lint
         run: ./gradlew lintDebug

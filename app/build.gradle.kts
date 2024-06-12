@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.devToolsKsp)
     id("androidx.navigation.safeargs")
     id("kotlin-parcelize")
+    id("de.undercouch.download")
 }
 
 android {
@@ -42,7 +43,7 @@ android {
 
         release {
             isDebuggable = false
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -68,6 +69,12 @@ android {
     androidResources {
         noCompress.add("tflite")
     }
+}
+
+val ML_DIR by extra("$projectDir/src/main/ml")
+
+apply {
+    from("download_models.gradle")
 }
 
 dependencies {

@@ -1,0 +1,4 @@
+task downloadModelFile(type: Download) {
+    src "https://storage.googleapis.com/model_nutrilog/food_classifier_model.tflite "
+    dest project.ext.ML_DIR + "/food_classifier_model.tflite"
+}

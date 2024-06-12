@@ -1,12 +1,14 @@
 package com.nutrilog.app.data.datasource
 
 import com.nutrilog.app.data.local.room.NutrilogDatabase
+import com.nutrilog.app.data.remote.request.NutritionFoodRequest
 import com.nutrilog.app.data.remote.request.SaveNutritionRequest
 import com.nutrilog.app.data.remote.service.NutritionService
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.common.StatusResponse
 import com.nutrilog.app.domain.datasource.NutritionDataSource
 import com.nutrilog.app.domain.model.Nutrition
+import com.nutrilog.app.domain.model.NutritionFood
 import com.nutrilog.app.domain.model.NutritionOption
 import com.nutrilog.app.utils.helpers.convertDateToString
 import com.nutrilog.app.utils.helpers.convertListToNutritionLevel
@@ -36,6 +38,7 @@ class NutritionDataSourceImpl(
                 }
 
                 val data = response.data
+
                 database.getNutritionDao().insertAllNutrition(data)
                 emit(ResultState.Success(data))
             } catch (e: Exception) {
@@ -50,6 +53,23 @@ class NutritionDataSourceImpl(
                 val response = database.getNutritionDao().getNutrition(id)
 
                 emit(ResultState.Success(response))
+            } catch (e: Exception) {
+                emit(ResultState.Error(e.createResponse()?.message ?: ""))
+            }
+        }
+
+    override suspend fun fetchNutritionFood(request: NutritionFoodRequest): Flow<ResultState<NutritionFood>> =
+        flow {
+            emit(ResultState.Loading)
+
+            try {
+                val response = service.getNutritionFood(request)
+                if (response.status === StatusResponse.ERROR) {
+                    emit(ResultState.Error(response.message))
+                    return@flow
+                }
+
+                emit(ResultState.Success(response.data))
             } catch (e: Exception) {
                 emit(ResultState.Error(e.createResponse()?.message ?: ""))
             }

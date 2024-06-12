@@ -40,12 +40,27 @@ fun convertToNutritionLevel(list: Nutrition): Map<NutritionOption, Double> {
     }
 }
 
-fun getNutritionLimit(age: Int, activeLvl: ActiveLevel, type: NutritionOption): List<Double> {
-    return when(age) {
+fun convertListToNutritionLevelList(list: List<Nutrition>): Map<NutritionOption, List<Double>> {
+    return NutritionOption.entries.associateWith { option ->
+        when (option) {
+            NutritionOption.CARBOHYDRATE -> list.map { it.carbohydrate.toDouble() }
+            NutritionOption.PROTEIN -> list.map { it.proteins.toDouble() }
+            NutritionOption.FAT -> list.map { it.fat.toDouble() }
+            NutritionOption.CALORIES -> list.map { it.calories.toDouble() }
+        }
+    }
+}
+
+fun getNutritionLimit(
+    age: Int,
+    activeLvl: ActiveLevel,
+    type: NutritionOption,
+): List<Double> {
+    return when (age) {
         in 2..8 -> {
-            when(type) {
+            when (type) {
                 NutritionOption.PROTEIN -> {
-                    when(activeLvl) {
+                    when (activeLvl) {
                         ActiveLevel.ACTIVE -> ProteinActiveLimit.CHILDREN.proteinLimit
                         ActiveLevel.MODERATELY -> ProteinModerateLimit.CHILDREN.proteinLimit
                         else -> ProteinSedentaryLimit.CHILDREN.proteinLimit
@@ -74,10 +89,11 @@ fun getNutritionLimit(age: Int, activeLvl: ActiveLevel, type: NutritionOption): 
                 }
             }
         }
-        in 9 .. 18 -> {
-            when(type) {
+
+        in 9..18 -> {
+            when (type) {
                 NutritionOption.PROTEIN -> {
-                    when(activeLvl) {
+                    when (activeLvl) {
                         ActiveLevel.ACTIVE -> ProteinActiveLimit.ADOLESCENTS.proteinLimit
                         ActiveLevel.MODERATELY -> ProteinModerateLimit.ADOLESCENTS.proteinLimit
                         else -> ProteinSedentaryLimit.ADOLESCENTS.proteinLimit
@@ -107,9 +123,9 @@ fun getNutritionLimit(age: Int, activeLvl: ActiveLevel, type: NutritionOption): 
             }
         }
         in 19..30 -> {
-            when(type) {
+            when (type) {
                 NutritionOption.PROTEIN -> {
-                    when(activeLvl) {
+                    when (activeLvl) {
                         ActiveLevel.ACTIVE -> ProteinActiveLimit.ADULTS.proteinLimit
                         ActiveLevel.MODERATELY -> ProteinModerateLimit.ADULTS.proteinLimit
                         else -> ProteinSedentaryLimit.ADULTS.proteinLimit
@@ -139,9 +155,9 @@ fun getNutritionLimit(age: Int, activeLvl: ActiveLevel, type: NutritionOption): 
             }
         }
         in 31..50 -> {
-            when(type) {
+            when (type) {
                 NutritionOption.PROTEIN -> {
-                    when(activeLvl) {
+                    when (activeLvl) {
                         ActiveLevel.ACTIVE -> ProteinActiveLimit.MATURE.proteinLimit
                         ActiveLevel.MODERATELY -> ProteinModerateLimit.MATURE.proteinLimit
                         else -> ProteinSedentaryLimit.MATURE.proteinLimit
@@ -171,9 +187,9 @@ fun getNutritionLimit(age: Int, activeLvl: ActiveLevel, type: NutritionOption): 
             }
         }
         else -> {
-            when(type) {
+            when (type) {
                 NutritionOption.PROTEIN -> {
-                    when(activeLvl) {
+                    when (activeLvl) {
                         ActiveLevel.ACTIVE -> ProteinActiveLimit.ELDER.proteinLimit
                         ActiveLevel.MODERATELY -> ProteinModerateLimit.ELDER.proteinLimit
                         else -> ProteinSedentaryLimit.ELDER.proteinLimit

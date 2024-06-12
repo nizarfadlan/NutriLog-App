@@ -1,6 +1,8 @@
 package com.nutrilog.app.data.remote.service
 
+import com.nutrilog.app.data.remote.request.NutritionFoodRequest
 import com.nutrilog.app.data.remote.request.SaveNutritionRequest
+import com.nutrilog.app.data.remote.response.FoodResponse
 import com.nutrilog.app.data.remote.response.NutritionResponse
 import com.nutrilog.app.data.remote.response.PredictResponse
 import retrofit2.http.Body
@@ -18,4 +20,9 @@ interface NutritionService {
     suspend fun analyze(
         @Body request: SaveNutritionRequest,
     ): PredictResponse
+
+    @POST("details")
+    suspend fun getNutritionFood(
+        @Body request: NutritionFoodRequest,
+    ): FoodResponse
 }

@@ -9,6 +9,8 @@ import android.provider.MediaStore
 import com.nutrilog.app.R
 import com.nutrilog.app.ml.FoodClassifierModel
 import com.nutrilog.app.utils.ImageProcessor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.model.Model
 import timber.log.Timber
@@ -49,33 +51,35 @@ class ImageClassifierHelper(
         listLabel = inputString.split("\n")
     }
 
-    fun classifyStaticImage(imageUri: Uri) {
-        if (model == null) {
-            setupModel()
-        }
+    suspend fun classifyStaticImage(imageUri: Uri) {
+        withContext(Dispatchers.Default) {
+            if (model == null) {
+                setupModel()
+            }
 
-        val imageProcessor = ImageProcessor()
+            val imageProcessor = ImageProcessor()
 
-        val contentResolver = context.contentResolver
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val source = ImageDecoder.createSource(contentResolver, imageUri)
-            ImageDecoder.decodeBitmap(source)
-        } else {
-            MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-        }.copy(Bitmap.Config.ARGB_8888, true)?.let { bitmap ->
-            val tensorImage = imageProcessor.preprocess(bitmap)
-            val outputs = model?.process(tensorImage)
-            val outputBuffer = outputs?.outputFeature0AsTensorBuffer
-            val valueMax = outputBuffer?.let { getMax(it.floatArray) }
+            val contentResolver = context.contentResolver
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                val source = ImageDecoder.createSource(contentResolver, imageUri)
+                ImageDecoder.decodeBitmap(source)
+            } else {
+                MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+            }.copy(Bitmap.Config.ARGB_8888, true)?.let { bitmap ->
+                val tensorImage = imageProcessor.preprocess(bitmap)
+                val outputs = model?.process(tensorImage)
+                val outputBuffer = outputs?.outputFeature0AsTensorBuffer
+                val valueMax = outputBuffer?.let { getMax(it.floatArray) }
 
-            val label = listLabel?.get(valueMax ?: 0)
+                val label = listLabel?.get(valueMax ?: 0)
 
-            classifierListener?.onResults(
-                ClassifierResult(
-                    label ?: "Unknown",
-                    valueMax ?: -1,
-                ),
-            )
+                classifierListener?.onResults(
+                    ClassifierResult(
+                        label ?: "Unknown",
+                        valueMax ?: -1,
+                    ),
+                )
+            }
         }
     }
 
@@ -99,7 +103,7 @@ class ImageClassifierHelper(
     interface ClassifierListener {
         fun onError(error: String)
 
-        fun onResults(results: ClassifierResult?)
+        suspend fun onResults(results: ClassifierResult?)
     }
 
     data class ClassifierResult(
