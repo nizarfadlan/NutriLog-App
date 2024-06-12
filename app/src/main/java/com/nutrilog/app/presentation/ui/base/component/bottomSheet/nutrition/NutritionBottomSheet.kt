@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nutrilog.app.databinding.LayoutNutritionBottomSheetBinding
 import com.nutrilog.app.domain.model.Nutrition
 import com.nutrilog.app.utils.GridSpacingItemDecoration
+import com.nutrilog.app.utils.helpers.capitalizeWords
 import com.nutrilog.app.utils.helpers.convertDateTimeLocaleToString
 import com.nutrilog.app.utils.helpers.convertToNutritionLevel
 import com.nutrilog.app.utils.helpers.dpToPx
@@ -84,6 +85,7 @@ class NutritionBottomSheet(
     private fun behavior() {
         val behavior = BottomSheetBehavior.from(binding.nutritionBottomSheet)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior.saveFlags = BottomSheetBehavior.SAVE_FIT_TO_CONTENTS
         behavior.isDraggable = false
     }
 
@@ -94,7 +96,7 @@ class NutritionBottomSheet(
                 if (isFooter) show() else gone()
             }
 
-            textFoodName.text = nutrition.foodName
+            textFoodName.text = nutrition.foodName.capitalizeWords()
             textDate.text = nutrition.createdAt.convertDateTimeLocaleToString()
 
             if (isFooter) {

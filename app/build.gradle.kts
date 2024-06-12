@@ -64,6 +64,10 @@ android {
         buildConfig = true
         mlModelBinding = true
     }
+
+    androidResources {
+        noCompress.add("tflite")
+    }
 }
 
 dependencies {

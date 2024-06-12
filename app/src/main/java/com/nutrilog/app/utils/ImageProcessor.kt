@@ -31,6 +31,6 @@ class ImageProcessor {
     }
 
     companion object {
-        private const val IMAGE_SIZE = 150
+        private const val IMAGE_SIZE = 256
     }
 }

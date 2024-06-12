@@ -7,8 +7,10 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import com.nutrilog.app.R
-import com.nutrilog.app.ml.Model
+import com.nutrilog.app.ml.FoodClassifierModel
 import com.nutrilog.app.utils.ImageProcessor
+import org.tensorflow.lite.gpu.CompatibilityList
+import org.tensorflow.lite.support.model.Model
 import timber.log.Timber
 
 class ImageClassifierHelper(
@@ -16,7 +18,7 @@ class ImageClassifierHelper(
     private val classifierListener: ClassifierListener?,
 ) {
     private var listLabel: List<String>? = null
-    private var model: Model? = null
+    private var model: FoodClassifierModel? = null
 
     init {
         initLabel()
@@ -25,7 +27,16 @@ class ImageClassifierHelper(
 
     private fun setupModel() {
         try {
-            model = Model.newInstance(context)
+            val compatList = CompatibilityList()
+
+            val options =
+                if (compatList.isDelegateSupportedOnThisDevice) {
+                    Model.Options.Builder().setDevice(Model.Device.GPU).build()
+                } else {
+                    Model.Options.Builder().setNumThreads(4).build()
+                }
+
+            model = FoodClassifierModel.newInstance(context, options)
         } catch (e: Exception) {
             classifierListener?.onError(context.getString(R.string.message_error_analyze))
             Timber.tag(TAG).e(e.message.toString())
@@ -98,6 +109,5 @@ class ImageClassifierHelper(
 
     companion object {
         private const val TAG = "ImageClassifierHelper"
-        private const val IMAGE_SIZE = 150
     }
 }

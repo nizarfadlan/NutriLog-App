@@ -21,5 +21,11 @@ fun String.convertGender(): Gender {
     }
 }
 
+fun String.capitalizeWords(delimiter: String = " ") =
+    split(delimiter).joinToString(delimiter) { word ->
+        val smallCaseWord = word.lowercase()
+        smallCaseWord.replaceFirstChar(Char::titlecaseChar)
+    }
+
 val String.isValidateGender: Boolean
     get() = this.lowercase() == Gender.MALE.label || this.lowercase() == Gender.FEMALE.label
