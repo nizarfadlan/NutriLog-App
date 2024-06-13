@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nutrilog.app.R
 import com.nutrilog.app.databinding.NutritionCardSquareBinding
 import com.nutrilog.app.domain.model.NutritionOption
+import com.nutrilog.app.utils.helpers.roundToDecimalPlaces
 
 class NutritionBottomSheetAdapter :
     RecyclerView.Adapter<NutritionBottomSheetAdapter.NutritionDataViewHolder>() {
@@ -62,7 +63,7 @@ class NutritionBottomSheetAdapter :
                 val formattedAmount =
                     context.getString(
                         R.string.label_amount_of_nutrition,
-                        amount.toString(),
+                        amount.roundToDecimalPlaces(1),
                     )
 
                 val spannableString = SpannableString(formattedAmount)

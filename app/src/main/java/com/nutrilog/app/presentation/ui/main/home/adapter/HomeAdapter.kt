@@ -15,6 +15,7 @@ import com.nutrilog.app.domain.model.ActiveLevel
 import com.nutrilog.app.domain.model.NutritionLevel
 import com.nutrilog.app.domain.model.NutritionOption
 import com.nutrilog.app.utils.helpers.getNutritionLimit
+import com.nutrilog.app.utils.helpers.roundToDecimalPlaces
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() {
     private var nutritionDataList: List<Pair<NutritionOption, Double>> = listOf()
@@ -48,12 +49,15 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
         diffResult.dispatchUpdatesTo(this)
     }
 
-    fun setUserData(age: Int, gender: String){
+    fun setUserData(
+        age: Int,
+        gender: String,
+    ) {
         userAge = age
         userGender = gender
     }
 
-    fun setActiveLevel(activeLevel: ActiveLevel){
+    fun setActiveLevel(activeLevel: ActiveLevel) {
         userActiveLevel = activeLevel
     }
 
@@ -74,7 +78,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
                 val formattedAmount =
                     context.getString(
                         R.string.label_amount_of_nutrition,
-                        amount.toString(),
+                        amount.roundToDecimalPlaces(1),
                     )
 
                 val spannableString = SpannableString(formattedAmount)
@@ -93,7 +97,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
             }
         }
 
-        private fun determineNutritionLevel(amount: Double, limit: List<Double>): NutritionLevel {
+        private fun determineNutritionLevel(
+            amount: Double,
+            limit: List<Double>,
+        ): NutritionLevel {
             return when {
                 amount >= limit[1] && amount < limit[2] -> NutritionLevel.CLOSE
                 amount > limit[0] && amount < limit[1] -> NutritionLevel.OPTIMAL

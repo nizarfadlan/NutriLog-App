@@ -6,7 +6,6 @@ import com.nutrilog.app.data.pref.UserSessionPreference
 import com.nutrilog.app.data.remote.DateAdapter
 import com.nutrilog.app.data.remote.GenderAdapter
 import com.nutrilog.app.data.remote.HeaderInterceptor
-import com.nutrilog.app.data.remote.IntToFloatAdapter
 import com.nutrilog.app.data.remote.ResponseStatusAdapter
 import com.nutrilog.app.data.remote.service.AuthService
 import com.nutrilog.app.data.remote.service.NutritionService
@@ -43,7 +42,6 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         GsonBuilder()
             .registerTypeAdapter(Gender::class.java, GenderAdapter())
             .registerTypeAdapter(Date::class.java, DateAdapter())
-            .registerTypeAdapter(Float::class.java, IntToFloatAdapter())
             .registerTypeAdapter(StatusResponse::class.java, ResponseStatusAdapter())
             .create()
 

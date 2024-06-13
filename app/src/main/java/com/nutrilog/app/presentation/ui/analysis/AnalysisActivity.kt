@@ -165,6 +165,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                     is ResultState.Success -> {
                         showLoading(false)
                         val nutritionFood = result.data
+                        println("Data: $nutritionFood")
                         val dataNutrition =
                             ResultNutrition(
                                 foodName,
@@ -173,6 +174,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                                 fat = nutritionFood.fat,
                                 calories = nutritionFood.calories,
                             )
+                        println("Data Nutrition: $dataNutrition")
                         continuation.resume(dataNutrition)
                     }
 
@@ -203,7 +205,7 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
     }
 
     private fun saveAnalyzingResult(result: Nutrition) {
-        val (_, _, foodName, carbohydrate, proteins, fat, calories) = result
+        val (_, _, foodName, calories, proteins, carbohydrate, fat) = result
         observe(analysisViewModel.saveNutrition(foodName, carbohydrate, proteins, fat, calories)) {
             when (it) {
                 is ResultState.Loading -> showLoading(true)

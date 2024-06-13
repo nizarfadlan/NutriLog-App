@@ -21,6 +21,10 @@ fun String.convertGender(): Gender {
     }
 }
 
+fun Double.roundToDecimalPlaces(decimalPlaces: Int): String {
+    return "%.${decimalPlaces}f".format(this).toString()
+}
+
 fun String.capitalizeWords(delimiter: String = " ") =
     split(delimiter).joinToString(delimiter) { word ->
         val smallCaseWord = word.lowercase()
