@@ -78,11 +78,15 @@
             android:id="@+id/rvNutrients"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
             android:isScrollContainer="true"
+            android:paddingBottom="@dimen/dimen_16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userHeader"
+            app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/nutrition_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
