@@ -40,6 +40,10 @@ fun convertToNutritionLevel(list: Nutrition): Map<NutritionOption, Double> {
     }
 }
 
+fun sortNutritionByCreatedAt(nutritionList: List<Nutrition>): List<Nutrition> {
+    return nutritionList.sortedByDescending { it.createdAt }
+}
+
 fun convertListToNutritionLevelList(list: List<Nutrition>): Map<NutritionOption, List<Double>> {
     return NutritionOption.entries.associateWith { option ->
         when (option) {

@@ -165,7 +165,6 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                     is ResultState.Success -> {
                         showLoading(false)
                         val nutritionFood = result.data
-                        println("Data: $nutritionFood")
                         val dataNutrition =
                             ResultNutrition(
                                 foodName,
@@ -174,7 +173,6 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>() {
                                 fat = nutritionFood.fat,
                                 calories = nutritionFood.calories,
                             )
-                        println("Data Nutrition: $dataNutrition")
                         continuation.resume(dataNutrition)
                     }
 

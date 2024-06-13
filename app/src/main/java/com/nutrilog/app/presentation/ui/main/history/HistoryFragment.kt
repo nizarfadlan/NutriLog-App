@@ -21,7 +21,7 @@ import com.nutrilog.app.presentation.ui.main.history.adapter.DatesAdapter
 import com.nutrilog.app.presentation.ui.main.history.adapter.HistoryAdapter
 import com.nutrilog.app.utils.helpers.DayInfo
 import com.nutrilog.app.utils.helpers.capitalizeWords
-import com.nutrilog.app.utils.helpers.convertListToNutritionLevelList
+import com.nutrilog.app.utils.helpers.convertListToNutritionLevel
 import com.nutrilog.app.utils.helpers.getCalender
 import com.nutrilog.app.utils.helpers.getDaysInMonth
 import com.nutrilog.app.utils.helpers.getTimeInMillis
@@ -31,6 +31,7 @@ import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.setMonth
 import com.nutrilog.app.utils.helpers.show
 import com.nutrilog.app.utils.helpers.showSnackBar
+import com.nutrilog.app.utils.helpers.sortNutritionByCreatedAt
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -131,8 +132,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
                     showEmpty(true)
                 } else {
                     showEmpty(false)
-                    listHistoryAdapter.setHistoryData(result.data)
-                    setChart(result.data)
+                    val data = sortNutritionByCreatedAt(result.data)
+                    listHistoryAdapter.setHistoryData(data)
+                    setChart(data)
                 }
             }
             is ResultState.Error -> {
@@ -166,13 +168,13 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
 
     private fun setChart(data: List<Nutrition>) {
         val dateFormat = SimpleDateFormat("HH:mm", locale)
-        val nutritionLevels = convertListToNutritionLevelList(data)
+        val nutritionLevels = convertListToNutritionLevel(data)
         val seriesChart =
             nutritionLevels.map { (option, value) ->
                 AASeriesElement()
                     .name(option.label)
                     .step(true)
-                    .data(value.toTypedArray())
+                    .data(arrayOf(value))
             }
 
         val chartModel =
