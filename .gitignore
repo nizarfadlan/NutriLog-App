@@ -19,3 +19,4 @@ nutrilog-release.keystore
 nutrilog-release.jks
 
 /app/src/main/ml/*.tflite
+/app/src/main/assets/*.txt

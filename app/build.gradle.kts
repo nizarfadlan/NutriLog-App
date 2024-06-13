@@ -72,6 +72,7 @@ android {
 }
 
 val ML_DIR by extra("$projectDir/src/main/ml")
+val ASSETS_DIR by extra("$projectDir/src/main/assets")
 
 apply {
     from("download_models.gradle")
