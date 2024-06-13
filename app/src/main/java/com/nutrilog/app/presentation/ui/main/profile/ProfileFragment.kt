@@ -51,7 +51,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             tvTitleProfile.text = getString(R.string.header_about_title)
 
             switchTranslate.setOnCheckedChangeListener { _, isChecked ->
-                applyLanguage(isChecked)
+                applyLanguage(!isChecked)
             }
 
             logoutSection.setOnClickListener {

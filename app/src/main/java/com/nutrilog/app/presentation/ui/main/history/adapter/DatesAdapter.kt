@@ -41,7 +41,7 @@ class DatesAdapter(
             val payload = payloads[0] as? Bundle
             payload?.let {
                 if (it.containsKey("KEY_ACTIVE_DAY")) {
-                    holder.updateBackground(it.getBoolean("KEY_ACTIVE_DAY"))
+                    holder.bind(listDates[position])
                 }
             }
         }

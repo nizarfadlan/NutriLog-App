@@ -105,11 +105,19 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
 
             getDays(month, year)
             binding.selectMonth.setMonth(month)
-            listDatesAdapter.updateActiveDay(date)
-            dateMilliseconds = getTimeInMillis(date, month, year)
-            smoothScrollToActiveItem(date - 1)
 
-            val selectedDate = getTimeToDate(date, month, year)
+            val dateNow =
+                if (date > dates.size) {
+                    updateActiveDate(1)
+                    1
+                } else {
+                    date
+                }
+            listDatesAdapter.updateActiveDay(dateNow)
+            dateMilliseconds = getTimeInMillis(dateNow, month, year)
+            smoothScrollToActiveItem(dateNow - 1)
+
+            val selectedDate = getTimeToDate(dateNow, month, year)
             observe(historyViewModel.fetchNutrients(selectedDate), ::onListHistoryResult)
         }
     }
