@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.model.Model
 import timber.log.Timber
+import kotlin.coroutines.coroutineContext
 
 class ImageClassifierHelper(
     private val context: Context,
@@ -24,24 +25,26 @@ class ImageClassifierHelper(
 
     init {
         initLabel()
-        setupModel()
     }
 
-    private fun setupModel() {
-        try {
-            val compatList = CompatibilityList()
+    private suspend fun setupModelIfNeeded() {
+        if (model == null) {
+            try {
+                val compatList = CompatibilityList()
+                val options =
+                    if (compatList.isDelegateSupportedOnThisDevice) {
+                        Model.Options.Builder().setDevice(Model.Device.GPU).build()
+                    } else {
+                        Model.Options.Builder().setNumThreads(4).build()
+                    }
 
-            val options =
-                if (compatList.isDelegateSupportedOnThisDevice) {
-                    Model.Options.Builder().setDevice(Model.Device.GPU).build()
-                } else {
-                    Model.Options.Builder().setNumThreads(4).build()
+                model = FoodClassifierModel.newInstance(context, options)
+            } catch (e: Exception) {
+                withContext(coroutineContext) {
+                    classifierListener?.onError(context.getString(R.string.message_error_analyze))
                 }
-
-            model = FoodClassifierModel.newInstance(context, options)
-        } catch (e: Exception) {
-            classifierListener?.onError(context.getString(R.string.message_error_analyze))
-            Timber.tag(TAG).e(e.message.toString())
+                Timber.tag(TAG).e(e.message.toString())
+            }
         }
     }
 
@@ -53,9 +56,7 @@ class ImageClassifierHelper(
 
     suspend fun classifyStaticImage(imageUri: Uri) {
         withContext(Dispatchers.Default) {
-            if (model == null) {
-                setupModel()
-            }
+            setupModelIfNeeded()
 
             val imageProcessor = ImageProcessor()
 
