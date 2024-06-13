@@ -55,28 +55,6 @@ class DateAdapter : JsonDeserializer<Date>, JsonSerializer<Date> {
     }
 }
 
-class IntToFloatAdapter : JsonDeserializer<Float>, JsonSerializer<Float> {
-    override fun deserialize(
-        json: JsonElement,
-        typeOfT: Type,
-        context: JsonDeserializationContext,
-    ): Float {
-        return try {
-            json.asInt.toFloat()
-        } catch (e: Exception) {
-            json.asFloat
-        }
-    }
-
-    override fun serialize(
-        src: Float,
-        typeOfSrc: Type,
-        context: JsonSerializationContext,
-    ): JsonElement {
-        return JsonPrimitive(src)
-    }
-}
-
 class ResponseStatusAdapter : JsonDeserializer<StatusResponse>, JsonSerializer<StatusResponse> {
     override fun deserialize(
         json: JsonElement,

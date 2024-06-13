@@ -1,9 +1,6 @@
 package com.nutrilog.app.presentation.ui.main.home.adapter
 
 import android.content.Context
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -14,8 +11,8 @@ import com.nutrilog.app.databinding.NutritionCardBinding
 import com.nutrilog.app.domain.model.ActiveLevel
 import com.nutrilog.app.domain.model.NutritionLevel
 import com.nutrilog.app.domain.model.NutritionOption
+import com.nutrilog.app.utils.helpers.formatNutritionAmount
 import com.nutrilog.app.utils.helpers.getNutritionLimit
-import com.nutrilog.app.utils.helpers.roundToDecimalPlaces
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() {
     private var nutritionDataList: List<Pair<NutritionOption, Double>> = listOf()
@@ -75,23 +72,8 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
                 val nutritionLevel = determineNutritionLevel(amount, nutritionLimit)
                 nutritionLevelTV.text = nutritionLevel.label
 
-                val formattedAmount =
-                    context.getString(
-                        R.string.label_amount_of_nutrition,
-                        amount.roundToDecimalPlaces(1),
-                    )
-
-                val spannableString = SpannableString(formattedAmount)
-                val start = formattedAmount.indexOf('g')
-                val end = start + 1
-
-                spannableString.setSpan(
-                    RelativeSizeSpan(0.7f),
-                    start,
-                    end,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
-                )
-                totalNutritionTV.text = spannableString
+                totalNutritionTV.text =
+                    formatNutritionAmount(context, amount, nutritionOption.label == "Calories")
 
                 setBgCard(nutritionLevel)
             }

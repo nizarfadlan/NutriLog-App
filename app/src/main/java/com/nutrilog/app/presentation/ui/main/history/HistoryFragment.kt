@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartAnimationType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.nutrilog.app.R
 import com.nutrilog.app.databinding.FragmentHistoryBinding
 import com.nutrilog.app.domain.common.ResultState
 import com.nutrilog.app.domain.model.Nutrition
@@ -31,9 +33,8 @@ import com.nutrilog.app.utils.helpers.observe
 import com.nutrilog.app.utils.helpers.setMonth
 import com.nutrilog.app.utils.helpers.show
 import com.nutrilog.app.utils.helpers.showSnackBar
-import com.nutrilog.app.utils.helpers.sortNutritionByCreatedAt
+import com.nutrilog.app.utils.helpers.sortNutritionByCreatedAtDescending
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.Date
 
 class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
@@ -132,7 +133,7 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
                     showEmpty(true)
                 } else {
                     showEmpty(false)
-                    val data = sortNutritionByCreatedAt(result.data)
+                    val data = sortNutritionByCreatedAtDescending(result.data)
                     listHistoryAdapter.setHistoryData(data)
                     setChart(data)
                 }
@@ -160,6 +161,14 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
                 .subtitle("Chart history nutrition")
                 .dataLabelsEnabled(false)
                 .markerRadius(8f)
+                .categories(
+                    arrayOf(
+                        ContextCompat.getString(
+                            requireContext(),
+                            R.string.category_chart_total,
+                        ),
+                    ),
+                )
                 .animationType(AAChartAnimationType.Elastic)
                 .series(initSeries.toTypedArray())
 
@@ -167,7 +176,6 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
     }
 
     private fun setChart(data: List<Nutrition>) {
-        val dateFormat = SimpleDateFormat("HH:mm", locale)
         val nutritionLevels = convertListToNutritionLevel(data)
         val seriesChart =
             nutritionLevels.map { (option, value) ->
@@ -175,20 +183,12 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>() {
                     .name(option.label)
                     .step(true)
                     .data(arrayOf(value))
-            }
+            }.toTypedArray()
 
-        val chartModel =
-            AAChartModel()
-                .chartType(AAChartType.Column)
-                .title("Chart")
-                .subtitle("Chart history nutrition")
-                .dataLabelsEnabled(false)
-                .markerRadius(8f)
-                .categories(data.map { dateFormat.format(it.createdAt) }.toTypedArray())
-                .animationType(AAChartAnimationType.Elastic)
-                .series(seriesChart.toTypedArray())
-
-        binding.chartHistory.aa_refreshChartWithChartModel(chartModel)
+        binding.chartHistory.aa_onlyRefreshTheChartDataWithChartOptionsSeriesArray(
+            seriesChart,
+            true,
+        )
     }
 
     private fun smoothScrollToActiveItem(position: Int) {

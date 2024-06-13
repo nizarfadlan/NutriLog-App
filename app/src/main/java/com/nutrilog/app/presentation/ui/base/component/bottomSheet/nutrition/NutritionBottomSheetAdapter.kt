@@ -1,17 +1,13 @@
 package com.nutrilog.app.presentation.ui.base.component.bottomSheet.nutrition
 
 import android.content.Context
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.nutrilog.app.R
 import com.nutrilog.app.databinding.NutritionCardSquareBinding
 import com.nutrilog.app.domain.model.NutritionOption
-import com.nutrilog.app.utils.helpers.roundToDecimalPlaces
+import com.nutrilog.app.utils.helpers.formatNutritionAmount
 
 class NutritionBottomSheetAdapter :
     RecyclerView.Adapter<NutritionBottomSheetAdapter.NutritionDataViewHolder>() {
@@ -59,24 +55,8 @@ class NutritionBottomSheetAdapter :
         ) {
             with(binding) {
                 nutritionTypeTV.text = nutritionOption.label
-
-                val formattedAmount =
-                    context.getString(
-                        R.string.label_amount_of_nutrition,
-                        amount.roundToDecimalPlaces(1),
-                    )
-
-                val spannableString = SpannableString(formattedAmount)
-                val start = formattedAmount.indexOf('g')
-                val end = start + 1
-
-                spannableString.setSpan(
-                    RelativeSizeSpan(0.7f),
-                    start,
-                    end,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
-                )
-                totalNutritionTV.text = spannableString
+                totalNutritionTV.text =
+                    formatNutritionAmount(context, amount, nutritionOption.label == "Calories")
             }
         }
     }

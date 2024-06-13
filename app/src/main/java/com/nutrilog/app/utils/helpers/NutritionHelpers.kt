@@ -1,5 +1,10 @@
 package com.nutrilog.app.utils.helpers
 
+import android.content.Context
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.RelativeSizeSpan
+import com.nutrilog.app.R
 import com.nutrilog.app.domain.model.ActiveLevel
 import com.nutrilog.app.domain.model.CalorieActiveLimit
 import com.nutrilog.app.domain.model.CalorieModerateLimit
@@ -40,8 +45,25 @@ fun convertToNutritionLevel(list: Nutrition): Map<NutritionOption, Double> {
     }
 }
 
-fun sortNutritionByCreatedAt(nutritionList: List<Nutrition>): List<Nutrition> {
+fun sortNutritionByCreatedAtDescending(nutritionList: List<Nutrition>): List<Nutrition> {
     return nutritionList.sortedByDescending { it.createdAt }
+}
+
+fun formatNutritionAmount(
+    context: Context,
+    amount: Double,
+    isCalories: Boolean,
+): SpannableString {
+    val unit = if (isCalories) "kcal" else "g"
+    val stringId =
+        if (isCalories) R.string.label_amount_of_nutrition_calories else R.string.label_amount_of_nutrition
+    val formattedAmount = context.getString(stringId, amount.roundToDecimalPlaces(1))
+    val spannableString = SpannableString(formattedAmount)
+    val start = formattedAmount.indexOf(unit)
+    val end = start + unit.length
+    spannableString.setSpan(RelativeSizeSpan(0.7f), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+    return spannableString
 }
 
 fun convertListToNutritionLevelList(list: List<Nutrition>): Map<NutritionOption, List<Double>> {
