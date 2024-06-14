@@ -10,7 +10,8 @@ enum class NutritionOption(val label: String) {
 enum class NutritionLevel(val label: String) {
     OPTIMAL("Optimal"),
     CLOSE("Close to limit"),
-    DEFICIENT("Deficient")
+    DEFICIENT("Deficient"),
+    OVER("Excessively high")
 }
 
 enum class ProteinSedentaryLimit(val proteinLimit: List<Double>) {

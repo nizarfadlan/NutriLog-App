@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">NutriLog</string>
+
+    <!-- Welcome -->
+    <string name="text_button_next">Selanjutnya</string>
+    <string name="text_start_welcome">Mari kita mulai</string>
+    <string name="text_title_welcome_1">SELAMAT DATANG!</string>
+    <string name="text_subtitle_welcome_1">Memulai kehidupan yang sehat terkadang menjadi hal yang sulit. Tapi dengan aplikasi kami, melacak makanan Anda menjadi mudah.</string>
+    <string name="text_title_welcome_2">MEMPERMUDAH GAYA HIDUP SEHAT</string>
+    <string name="text_subtitle_welcome_2">Dengan aplikasi kami, Anda tidak perlu repot-repot mencatat makanan, sehingga Anda bisa menghabiskan lebih sedikit waktu untuk mendokumentasikan dan lebih banyak waktu untuk hidup lebih sehat.</string>
+    <string name="text_title_welcome_3">MENCATAT KONSUMSIMU</string>
+    <string name="text_subtitle_welcome_3">Buka pengetahuan yang berharga dengan menganalisis data nutrisi Anda untuk memahami kebutuhan tubuh Anda serta bagaimana pilihan makanan dapat mempengaruhi nutrisimu.</string>
+
+    <!-- Auth -->
+    <string name="hint_full_name">Masukkan nama lengkap Anda</string>
+    <string name="hint_email">Masukkan email Anda</string>
+    <string name="hint_password">Masukkan kata sandi Anda</string>
+    <string name="hint_gender">Pilih jenis kelamin Anda</string>
+    <string name="hint_date_birth">Masukkan tanggal lahir Anda</string>
+
+    <string name="header_signin_title">Selamat datang kembali,</string>
+    <string name="header_signin_subtitle">Kami merindukanmu!</string>
+    <string name="header_signup_title">Buat akun</string>
+    <string name="header_signup_subtitle">Ayo mulai hari sehatmu</string>
+
+    <string name="label_select_active_level">Tingkat Aktivitas</string>
+
+    <string name="label_full_name">Nama Lengkap</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Kata Sandi</string>
+    <string name="label_gender">Jenis Kelamin</string>
+    <string name="label_date_birth">Tanggal Lahir</string>
+
+    <string name="label_signin_here">Sudah punya akun?</string>
+    <string name="label_signin">Masuk</string>
+    <string name="label_signup_here">Belum punya akun?</string>
+    <string name="label_signup">Daftar</string>
+
+    <string name="validation_full_name">Nama lengkap hanya boleh berupa huruf</string>
+    <string name="validation_email">Format email Anda tidak benar</string>
+    <string name="validation_password">Minimal %d karakter</string>
+    <string name="validation_gender">Jenis kelamin tidak diketahui</string>
+
+    <!-- Analysis -->
+    <string name="label_photo">Foto</string>
+    <string name="label_change_photo">Ubah Foto</string>
+    <string name="header_analysis_title">Analisis</string>
+
+    <string name="hint_photo">Pilih foto makanan Anda</string>
+
+    <string name="validation_photo_empty">Silakan pilih foto</string>
+
+    <string name="actions_analysis">Kirim</string>
+
+    <string name="message_error_analyze">Analisis gambar gagal dimulai. Lihat log error untuk detail</string>
+    <string name="message_error_nutrition">Gagal mendapatkan data nutrisi. Silakan coba lagi nanti</string>
+    <string name="message_empty_image_warning">Silakan masukkan file gambar terlebih dahulu</string>
+
+
+    <!-- About Us -->
+    <string name="header_about_title">Tentang Kami</string>
+    <string name="content_desc_app_logo">Logo Aplikasi</string>
+    <string name="content_desc_photo_member">foto anggota tim</string>
+
+    <string name="label_made_by">Dibuat oleh Tim Produk Capstone Bangkit</string>
+    <string name="label_nickname">Nama Panggilan</string>
+
+    <string name="text_about_us_description">Lebih dari sekadar pencatatan makanan, NutriLog dapat membuka pemahaman yang lebih dalam tentang nutrisi Anda. Aplikasi kami memanfaatkan pembelajaran mesin yang canggih untuk menganalisis asupan harian Anda, serta memberikan wawasan untuk membuat pilihan yang tepat tentang kesehatan Anda.</string>
+
+    <string name="label_name_nizar">Nizar</string>
+    <string name="label_name_rafi">Rafi</string>
+    <string name="label_name_israk">Israk</string>
+    <string name="label_name_guntur">Guntur</string>
+    <string name="label_name_fauzan">Fauzan</string>
+    <string name="label_name_gisella">Gisella</string>
+    <string name="label_name_bagja">Bagja</string>
+
+    <!-- NutritionRepository Card -->
+    <string name="label_nutrition">Nutrisi</string>
+    <string name="label_nutrition_level">Tingkat Nutrisi</string>
+    <string name="label_amount_of_nutrition">%s g</string>
+    <string name="label_amount_of_nutrition_calories">%s kcal</string>
+
+
+    <!-- Navigation -->
+    <string name="label_nav_home">Beranda</string>
+    <string name="label_nav_history">Riwayat</string>
+    <string name="label_nav_analysis">Analisis</string>
+    <string name="label_nav_profile">Profil</string>
+
+    <!-- History -->
+    <string name="label_select_month">Bulan</string>
+    <string name="category_chart_total">Total</string>
+
+    <!-- Month -->
+    <string-array name="Months">
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
+
+    <!-- Activity Level -->
+    <string-array name="ActLevel">
+        <item>Aktif</item>
+        <item>Cukup Aktif</item>
+        <item>Sedentari</item>
+    </string-array>
+
+    <!-- Gender -->
+    <string-array name="Gender">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
+    <!-- Nutrition Option -->
+    <string name="label_nutrition_carbs">"Karbohidrat"</string>
+    <string name="label_nutrition_protein">"Protein"</string>
+    <string name="label_nutrition_fat">"Lemak"</string>
+    <string name="label_nutrition_calories">"Kalori"</string>
+
+    <!-- Nutrition Level -->
+    <string name="label_level_deficient">Kurang</string>
+    <string name="label_level_optimal">Optimal</string>
+    <string name="label_level_close">Mendekati batas</string>
+    <string name="label_level_over">Sangat tinggi</string>
+
+    <!-- Common -->
+    <string name="validation_must_not_empty">Kolom tidak boleh kosong</string>
+
+    <string name="header_welcome">Halo,</string>
+
+    <string name="logoutbutton_content_desc">tombol logout</string>
+
+    <string name="language_content_desc">iv bahasa</string>
+
+    <string name="message_snackbar" translatable="false">Ini adalah custom snackbar</string>
+    <string name="message_signin_success">Berhasil masuk</string>
+    <string name="message_signin_failed">Gagal masuk. Silakan periksa email dan kata sandi Anda lagi.</string>
+
+    <string name="label_month">BULAN</string>
+    <string name="label_year">TAHUN</string>
+    <string name="label_loading">Memuat…</string>
+    <string name="label_logout">Keluar</string>
+    <string name="label_language">Bahasa</string>
+    <string name="label_icon_gallery">Galeri</string>
+    <string name="label_icon_camera">Kamera</string>
+    <string name="label_empty_1">Riwayat akan terlihat disini</string>
+    <string name="label_empty_2">Setelah anda menambahkan data</string>
+    <string name="label_action_level">Tingkat keaktifan</string>
+
+    <!-- Bottom Sheet -->
+    <string name="label_food_name">Nama Makanan</string>
+    <string name="label_date">Tanggal</string>
+    <string name="label_button_cancel">Batal</string>
+    <string name="label_button_save">Simpan</string>
+
+    <!-- Camera -->
+    <string name="message_failed_access_camera">Gagal menampilkan kamera</string>
+    <string name="message_failed_take_picture">Gagak=l mengambil gambar</string>
+    <string name="message_permission_denied">Izin kamera ditolak</string>
+</resources>

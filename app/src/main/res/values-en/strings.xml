@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">NutriLog</string>
+
     <!-- Welcome -->
     <string name="text_button_next">Next</string>
     <string name="text_start_welcome">Let\'s get started</string>
@@ -61,10 +62,10 @@
     <string name="content_desc_app_logo">App Logo</string>
     <string name="content_desc_photo_member">team member photo</string>
 
-    <string name="label_made_by">Made by Bangkit Capstone Project Team</string>
+    <string name="label_made_by">Made by Bangkit Product Capstone Team</string>
     <string name="label_nickname">Nickname</string>
 
-    <string name="text_about_us_description">Go beyond basic food logging and unlock a deeper understanding of your nutrition with NutriLog. Our app leverages cutting-edge machine learning to analyze your daily intake, providing personalized insights and recommendations that empower you to make informed choices about your health.</string>
+    <string name="text_about_us_description">Go beyond basic food logging and unlock a deeper understanding of your nutrition with NutriLog. Our app leverages cutting-edge machine learning to analyze your daily intake and providing personalized insights that empower you to make informed choices about your health.</string>
 
     <string name="label_name_nizar">Nizar</string>
     <string name="label_name_rafi">Rafi</string>
@@ -118,6 +119,18 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
+    <!-- Nutrition Option -->
+    <string name="label_nutrition_carbs">"Carbohydrate"</string>
+    <string name="label_nutrition_protein">"Protein"</string>
+    <string name="label_nutrition_fat">"Fat"</string>
+    <string name="label_nutrition_calories">"Calories"</string>
+
+    <!-- Nutrition Level -->
+    <string name="label_level_deficient">Deficient</string>
+    <string name="label_level_optimal">Optimal</string>
+    <string name="label_level_close">Close to limit</string>
+    <string name="label_level_over">Excessively high</string>
 
     <!-- Common -->
     <string name="validation_must_not_empty">Field cannot be empty</string>

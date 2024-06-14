@@ -48,7 +48,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun initUI() {
         binding.apply {
-            tvTitleProfile.text = getString(R.string.header_about_title)
+            tvTitleProfile.text = getString(R.string.label_nav_profile)
 
             switchTranslate.setOnCheckedChangeListener { _, isChecked ->
                 applyLanguage(!isChecked)
