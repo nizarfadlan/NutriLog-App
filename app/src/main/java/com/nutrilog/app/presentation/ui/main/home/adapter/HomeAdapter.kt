@@ -18,6 +18,7 @@ import com.nutrilog.app.utils.helpers.formatNutritionAmount
 import com.nutrilog.app.utils.helpers.getBMR
 import com.nutrilog.app.utils.helpers.getCalorieLimit
 import com.nutrilog.app.utils.helpers.getLimitNutrition
+import timber.log.Timber
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() {
     private var nutritionDataList: List<Pair<NutritionOption, Double>> = listOf()
@@ -90,10 +91,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
                 }
 
                 val getBMR = getBMR(userAge, userWeight, userHeight, userGender)
-                val getCalorieLimit = getCalorieLimit(getBMR, userActiveLevel)
-                val nutritionLimit = getLimitNutrition(nutritionOption, getCalorieLimit)
+                val getLimitCalorie = getCalorieLimit(getBMR, userActiveLevel)
+                val nutritionLimit = getLimitNutrition(nutritionOption, getLimitCalorie)
                 val nutritionLevel = determineNutritionLevel(amount, nutritionLimit)
-
 
                 nutritionLevelTV.text = when(nutritionLevel.label) {
                     "Deficient" -> context.getString(R.string.label_level_deficient)
@@ -111,13 +111,13 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
 
         private fun determineNutritionLevel(
             amount: Double,
-            limit: Map<String, Double>,
+            limit: List<Double>,
         ): NutritionLevel {
             return when {
-                amount > limit["maximal"]!! -> NutritionLevel.OVER
-                amount > limit["optimal"]!! -> NutritionLevel.CLOSE
-                amount > limit["minimal"]!! && amount <= limit["optimal"]!! -> NutritionLevel.OPTIMAL
-                else -> NutritionLevel.DEFICIENT
+                amount < limit[0] -> NutritionLevel.DEFICIENT
+                amount > limit[1] -> NutritionLevel.CLOSE
+                amount >= limit[0] && amount <= limit[1] -> NutritionLevel.OPTIMAL
+                else -> NutritionLevel.OVER
             }
         }
 

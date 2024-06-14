@@ -67,9 +67,9 @@ fun convertListToNutritionLevelList(list: List<Nutrition>): Map<NutritionOption,
 }
 
 fun getBMR(age: Int, weight: Double, height: Double, gender: String): Double {
-    return when(gender){
-        "male" -> (10.0 * weight) + (6.25 * height) - (5.0 * age.toDouble()) + 5
-        else -> (10.0 * weight) + (6.25 * height) - (5.0 * age.toDouble()) - 161
+    return when(gender) {
+        "male" -> (10.0 * weight) + (6.25 * height) - (5.0 * age.toDouble()) + 5.0
+        else -> (10.0 * weight) + (6.25 * height) - (5.0 * age.toDouble()) - 161.0
     }
 }
 
@@ -81,7 +81,7 @@ fun getCalorieLimit(bmr: Double, activeLvl: ActiveLevel): Double {
     }
 }
 
-fun getLimitNutrition(nutritionOption: NutritionOption, calories: Double): Map<String, Double> {
+fun getLimitNutrition(nutritionOption: NutritionOption, calories: Double): List<Double> {
     val caloriesMin = calories - 200.0
     val caloriesMax = calories + 200.0
 
@@ -106,15 +106,15 @@ fun getLimitNutrition(nutritionOption: NutritionOption, calories: Double): Map<S
     val gramNutritionMaximal = (kcalNutritionMaximal) / kcalToGrams
 
     return when(nutritionOption.label) {
-        "Calories" -> mapOf(
-            "minimal" to caloriesMin,
-            "optimal" to calories,
-            "maximal" to caloriesMax
+        "Calories" -> listOf(
+            caloriesMin,
+            calories,
+            caloriesMax
         )
-        else -> mapOf(
-            "minimal" to gramNutritionMinimal,
-            "optimal" to gramNutritionOptimal,
-            "maximal" to gramNutritionMaximal
+        else -> listOf(
+            gramNutritionMinimal,
+            gramNutritionOptimal,
+            gramNutritionMaximal
         )
     }
 }
