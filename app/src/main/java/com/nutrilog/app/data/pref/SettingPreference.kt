@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.nutrilog.app.domain.model.ActiveLevel
@@ -18,6 +19,8 @@ class SettingPreference(context: Context) {
     private val dataStore = context.dataStoreSetting
     private val languageKey = stringPreferencesKey("language_setting")
     private val activeLevelKey = stringPreferencesKey("level_setting")
+    private val heightKey = intPreferencesKey("height_setting")
+    private val weightKey = intPreferencesKey("weight_setting")
 
     fun getLanguageSetting(): Flow<Language> {
         return dataStore.data.map { preferences ->
@@ -42,6 +45,30 @@ class SettingPreference(context: Context) {
     suspend fun setActiveLevelSetting(level: ActiveLevel) {
         dataStore.edit { preferences ->
             preferences[activeLevelKey] = level.name
+        }
+    }
+
+    fun getHeightUser(): Flow<Int> {
+        return dataStore.data.map { preferences ->
+            preferences[heightKey] ?: 170
+        }
+    }
+
+    suspend fun setHeightUser(height: Int) {
+        dataStore.edit { preferences ->
+            preferences[heightKey] = height
+        }
+    }
+
+    fun getWeightUser(): Flow<Int> {
+        return dataStore.data.map { preferences ->
+            preferences[weightKey] ?: 60
+        }
+    }
+
+    suspend fun setWeightUser(height: Int) {
+        dataStore.edit { preferences ->
+            preferences[weightKey] = height
         }
     }
 }

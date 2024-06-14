@@ -122,6 +122,12 @@
         <item>Perempuan</item>
     </string-array>
 
+    <!-- Height & Weight -->
+    <string name="label_height">Tinggi Badan</string>
+    <string name="label_weight">Berat Badan</string>
+    <string name="label_value_height">%s cm</string>
+    <string name="label_value_weight">%s kg</string>
+
     <!-- Nutrition Option -->
     <string name="label_nutrition_carbs">"Karbohidrat"</string>
     <string name="label_nutrition_protein">"Protein"</string>
@@ -142,6 +148,7 @@
     <string name="logoutbutton_content_desc">tombol logout</string>
 
     <string name="language_content_desc">iv bahasa</string>
+    <string name="icon_content_desc">Ikon</string>
 
     <string name="message_snackbar" translatable="false">Ini adalah custom snackbar</string>
     <string name="message_signin_success">Berhasil masuk</string>

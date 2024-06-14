@@ -44,6 +44,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun initObserver() {
         observe(profileViewModel.getLanguage(), ::handleLanguageChange)
         observe(profileViewModel.getActiveLevel(), ::handleActionLevel)
+        observe(profileViewModel.getUserHeight(), ::showHeight)
+        observe(profileViewModel.getUserWeight(), ::showWeight)
     }
 
     private fun initUI() {
@@ -99,6 +101,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         } else {
             profileViewModel.saveLanguageSetting(Language.INDONESIA)
         }
+    }
+
+    private fun showHeight(height: Int) {
+        binding.userHeightTv.text = getString(R.string.label_value_height, height.toString())
+    }
+
+    private fun showWeight(weight: Int) {
+        binding.userWeightTv.text = getString(R.string.label_value_weight, weight.toString())
     }
 
     private fun onSignOutResult(result: ResultState<String>) {

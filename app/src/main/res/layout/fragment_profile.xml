@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimen_36dp"
                     android:layout_marginVertical="@dimen/dimen_16dp"
-                    android:contentDescription="@string/language_content_desc"
+                    android:contentDescription="@string/icon_content_desc"
                     android:src="@drawable/ic_language_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -195,13 +195,131 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/logoutSection"
+                android:id="@+id/activityHeightSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activityLevelSection">
+
+                <ImageView
+                    android:id="@+id/heightIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:layout_marginVertical="@dimen/dimen_16dp"
+                    android:contentDescription="@string/language_content_desc"
+                    android:src="@drawable/ic_activity_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp" />
+
+                <TextView
+                    android:id="@+id/labelHeightTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp"
+                    style="@style/Text.Body1"
+                    android:text="@string/label_height"
+                    app:layout_constraintTop_toTopOf="@id/heightIv"
+                    app:layout_constraintBottom_toBottomOf="@id/heightIv"
+                    app:layout_constraintStart_toEndOf="@id/heightIv"
+                    app:layout_constraintEnd_toStartOf="@id/userHeightTv" />
+
+                <TextView
+                    android:id="@+id/userHeightTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_value_height"
+                    app:layout_constraintEnd_toEndOf="@id/editHeightIv"
+                    app:layout_constraintTop_toTopOf="@id/labelHeightTv"
+                    app:layout_constraintBottom_toBottomOf="@id/labelHeightTv"
+                    app:layout_constraintStart_toEndOf="@id/labelHeightTv"
+                    />
+
+                <ImageView
+                    android:id="@+id/editHeightIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp"
+                    android:contentDescription="@string/icon_content_desc"
+                    android:src="@drawable/ic_edit_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/userHeightTv"
+                    app:layout_constraintBottom_toBottomOf="@id/userHeightTv"
+                    app:layout_constraintStart_toEndOf="@id/userHeightTv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activityWeightSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activityHeightSection">
+
+                <ImageView
+                    android:id="@+id/weightIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:layout_marginVertical="@dimen/dimen_16dp"
+                    android:contentDescription="@string/language_content_desc"
+                    android:src="@drawable/ic_activity_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp" />
+
+                <TextView
+                    android:id="@+id/labelWeightTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp"
+                    style="@style/Text.Body1"
+                    android:text="@string/label_weight"
+                    app:layout_constraintTop_toTopOf="@id/weightIv"
+                    app:layout_constraintBottom_toBottomOf="@id/weightIv"
+                    app:layout_constraintStart_toEndOf="@id/weightIv"
+                    app:layout_constraintEnd_toStartOf="@id/userWeightTv" />
+
+                <TextView
+                    android:id="@+id/userWeightTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_value_weight"
+                    app:layout_constraintEnd_toEndOf="@id/editWeightIv"
+                    app:layout_constraintTop_toTopOf="@id/labelWeightTv"
+                    app:layout_constraintBottom_toBottomOf="@id/labelWeightTv"
+                    app:layout_constraintStart_toEndOf="@id/labelWeightTv"
+                    />
+
+                <ImageView
+                    android:id="@+id/editWeightIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_16dp"
+                    android:contentDescription="@string/icon_content_desc"
+                    android:src="@drawable/ic_edit_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/userWeightTv"
+                    app:layout_constraintBottom_toBottomOf="@id/userWeightTv"
+                    app:layout_constraintStart_toEndOf="@id/userWeightTv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logoutSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activityWeightSection">
 
                 <ImageView
                     android:id="@+id/logoutIv"

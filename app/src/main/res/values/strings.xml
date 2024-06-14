@@ -120,6 +120,12 @@
         <item>Female</item>
     </string-array>
 
+    <!-- Height & Weight -->
+    <string name="label_height">Height</string>
+    <string name="label_weight">Weight</string>
+    <string name="label_value_height">%s cm</string>
+    <string name="label_value_weight">%s kg</string>
+
     <!-- Nutrition Option -->
     <string name="label_nutrition_carbs">"Carbohydrate"</string>
     <string name="label_nutrition_protein">"Protein"</string>
@@ -140,6 +146,7 @@
     <string name="logoutbutton_content_desc">logoutButton</string>
 
     <string name="language_content_desc">language iv</string>
+    <string name="icon_content_desc">Icon</string>
 
     <string name="message_snackbar" translatable="false">This is a custom snackbar</string>
     <string name="message_signin_success">Sign in successful</string>

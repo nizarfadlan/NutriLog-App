@@ -1,5 +1,6 @@
 package com.nutrilog.app.presentation.ui.main.profile
 
+import androidx.camera.core.processing.SurfaceProcessorNode.In
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -14,6 +15,10 @@ class ProfileViewModel(private val preference: SettingPreference): ViewModel() {
 
     fun getActiveLevel():LiveData<ActiveLevel> = preference.getActiveLevelSetting().asLiveData()
 
+    fun getUserWeight():LiveData<Int> = preference.getWeightUser().asLiveData()
+
+    fun getUserHeight():LiveData<Int> = preference.getHeightUser().asLiveData()
+
     fun saveLanguageSetting(language: Language) {
         viewModelScope.launch {
             preference.saveLanguageSetting(language)
@@ -23,6 +28,18 @@ class ProfileViewModel(private val preference: SettingPreference): ViewModel() {
     fun saveActiveLevelSetting(activeLevel: ActiveLevel) {
         viewModelScope.launch {
             preference.setActiveLevelSetting(activeLevel)
+        }
+    }
+
+    fun saveUserWeight(weight: Int) {
+        viewModelScope.launch {
+            preference.setWeightUser(weight)
+        }
+    }
+
+    fun saveUserHeight(height: Int) {
+        viewModelScope.launch {
+            preference.setHeightUser(height)
         }
     }
 }
