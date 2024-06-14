@@ -103,11 +103,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
     }
 
-    private fun showHeight(height: Int) {
+    private fun showHeight(height: Double) {
         binding.userHeightTv.text = getString(R.string.label_value_height, height.toString())
     }
 
-    private fun showWeight(weight: Int) {
+    private fun showWeight(weight: Double) {
         binding.userWeightTv.text = getString(R.string.label_value_weight, weight.toString())
     }
 

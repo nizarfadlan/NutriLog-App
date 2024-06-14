@@ -3,8 +3,8 @@ package com.nutrilog.app.data.pref
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.nutrilog.app.domain.model.ActiveLevel
@@ -19,8 +19,8 @@ class SettingPreference(context: Context) {
     private val dataStore = context.dataStoreSetting
     private val languageKey = stringPreferencesKey("language_setting")
     private val activeLevelKey = stringPreferencesKey("level_setting")
-    private val heightKey = intPreferencesKey("height_setting")
-    private val weightKey = intPreferencesKey("weight_setting")
+    private val heightKey = doublePreferencesKey("height_setting")
+    private val weightKey = doublePreferencesKey("weight_setting")
 
     fun getLanguageSetting(): Flow<Language> {
         return dataStore.data.map { preferences ->
@@ -48,25 +48,25 @@ class SettingPreference(context: Context) {
         }
     }
 
-    fun getHeightUser(): Flow<Int> {
+    fun getHeightUser(): Flow<Double> {
         return dataStore.data.map { preferences ->
-            preferences[heightKey] ?: 170
+            preferences[heightKey] ?: 170.0
         }
     }
 
-    suspend fun setHeightUser(height: Int) {
+    suspend fun setHeightUser(height: Double) {
         dataStore.edit { preferences ->
             preferences[heightKey] = height
         }
     }
 
-    fun getWeightUser(): Flow<Int> {
+    fun getWeightUser(): Flow<Double> {
         return dataStore.data.map { preferences ->
-            preferences[weightKey] ?: 60
+            preferences[weightKey] ?: 60.0
         }
     }
 
-    suspend fun setWeightUser(height: Int) {
+    suspend fun setWeightUser(height: Double) {
         dataStore.edit { preferences ->
             preferences[weightKey] = height
         }

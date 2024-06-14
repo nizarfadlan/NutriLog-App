@@ -15,9 +15,9 @@ class ProfileViewModel(private val preference: SettingPreference): ViewModel() {
 
     fun getActiveLevel():LiveData<ActiveLevel> = preference.getActiveLevelSetting().asLiveData()
 
-    fun getUserWeight():LiveData<Int> = preference.getWeightUser().asLiveData()
+    fun getUserWeight():LiveData<Double> = preference.getWeightUser().asLiveData()
 
-    fun getUserHeight():LiveData<Int> = preference.getHeightUser().asLiveData()
+    fun getUserHeight():LiveData<Double> = preference.getHeightUser().asLiveData()
 
     fun saveLanguageSetting(language: Language) {
         viewModelScope.launch {
@@ -31,13 +31,13 @@ class ProfileViewModel(private val preference: SettingPreference): ViewModel() {
         }
     }
 
-    fun saveUserWeight(weight: Int) {
+    fun saveUserWeight(weight: Double) {
         viewModelScope.launch {
             preference.setWeightUser(weight)
         }
     }
 
-    fun saveUserHeight(height: Int) {
+    fun saveUserHeight(height: Double) {
         viewModelScope.launch {
             preference.setHeightUser(height)
         }

@@ -70,6 +70,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 it,
             )
         }
+
+        observe(profileViewModel.getUserWeight()) {
+            homeAdapter.setWeight(
+                it,
+            )
+        }
+
+        observe(profileViewModel.getUserHeight()) {
+            homeAdapter.setHeight(
+                it,
+            )
+        }
     }
 
     private fun initAction() {

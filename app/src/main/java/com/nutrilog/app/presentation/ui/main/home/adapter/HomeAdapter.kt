@@ -15,12 +15,15 @@ import com.nutrilog.app.domain.model.ActiveLevel
 import com.nutrilog.app.domain.model.NutritionLevel
 import com.nutrilog.app.domain.model.NutritionOption
 import com.nutrilog.app.utils.helpers.formatNutritionAmount
-import com.nutrilog.app.utils.helpers.getNutritionLimit
-import com.nutrilog.app.utils.helpers.roundToDecimalPlaces
+import com.nutrilog.app.utils.helpers.getBMR
+import com.nutrilog.app.utils.helpers.getCalorieLimit
+import com.nutrilog.app.utils.helpers.getLimitNutrition
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() {
     private var nutritionDataList: List<Pair<NutritionOption, Double>> = listOf()
     private var userAge: Int = 0
+    private var userWeight: Double = 0.0
+    private var userHeight: Double = 0.0
     private lateinit var userGender: String
     private lateinit var userActiveLevel: ActiveLevel
 
@@ -62,6 +65,14 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
         userActiveLevel = activeLevel
     }
 
+    fun setWeight(weight: Double) {
+        userWeight = weight
+    }
+
+    fun setHeight(height: Double) {
+        userWeight = height
+    }
+
     inner class NutritionDataViewHolder(
         val binding: NutritionCardBinding,
         private val context: Context,
@@ -77,8 +88,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
                     "Fat" -> context.getString(R.string.label_nutrition_fat)
                     else -> context.getString(R.string.label_nutrition_carbs)
                 }
-                val nutritionLimit = getNutritionLimit(userAge, userActiveLevel, nutritionOption)
+
+                val getBMR = getBMR(userAge, userWeight, userHeight, userGender)
+                val getCalorieLimit = getCalorieLimit(getBMR, userActiveLevel)
+                val nutritionLimit = getLimitNutrition(nutritionOption, getCalorieLimit)
                 val nutritionLevel = determineNutritionLevel(amount, nutritionLimit)
+
 
                 nutritionLevelTV.text = when(nutritionLevel.label) {
                     "Deficient" -> context.getString(R.string.label_level_deficient)
@@ -96,12 +111,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.NutritionDataViewHolder>() 
 
         private fun determineNutritionLevel(
             amount: Double,
-            limit: List<Double>,
+            limit: Map<String, Double>,
         ): NutritionLevel {
             return when {
-                amount > limit[2] -> NutritionLevel.OVER
-                amount >= limit[1] -> NutritionLevel.CLOSE
-                amount > limit[0] && amount < limit[1] -> NutritionLevel.OPTIMAL
+                amount > limit["maximal"]!! -> NutritionLevel.OVER
+                amount > limit["optimal"]!! -> NutritionLevel.CLOSE
+                amount > limit["minimal"]!! && amount <= limit["optimal"]!! -> NutritionLevel.OPTIMAL
                 else -> NutritionLevel.DEFICIENT
             }
         }
